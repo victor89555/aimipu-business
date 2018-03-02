@@ -1,0 +1,39 @@
+.wrapper {
+  background-color: #eeeeee;
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  .abs-center {
+    overflow: auto;
+    margin: auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.width-lg {
+  width: 320px !important;
+}
+
+.mt-lg {
+  margin-top: 24px !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.ant-col-24 {
+  display: grid;
+  width: 100%;
+}
+
+.text-right {
+  -ms-text-align-last: right;
+  text-align-last: right;
+}

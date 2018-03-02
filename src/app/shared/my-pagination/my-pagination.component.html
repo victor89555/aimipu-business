@@ -1,0 +1,28 @@
+<div class="page-box">
+  <h3>共{{total<0?0:total}}条信息</h3>
+  <nav class="m-page m-page-rt m-page-sr">
+    <a href="javascript:void (0);" class="pageprv" (click)="prev()" [class.z-dis]="!hasPrev()"></a>
+    <a  href="javascript:void (0);" (click)="onpageNoChange(1)" [class.z-crt]="pageNo==1">1</a>
+    <span *ngIf="totalPage>5&&pageNo>3">
+      <i>...</i>
+    </span>
+    <span *ngIf="totalPage<=5">
+      <a  href="javascript:void (0);" *ngIf="totalPage>=2" (click)="onpageNoChange(2)" [class.z-crt]="pageNo==2">2</a>
+      <a  href="javascript:void (0);" *ngIf="totalPage>=3" (click)="onpageNoChange(3)" [class.z-crt]="pageNo==3">3</a>
+      <a  href="javascript:void (0);" *ngIf="totalPage>=4" (click)="onpageNoChange(4)" [class.z-crt]="pageNo==4">4</a>
+    </span>
+    <span *ngIf="totalPage>5">
+      <a  href="javascript:void (0);"  *ngIf="pageNo>2" (click)="onpageNoChange(pageNo-1)" >{{pageNo-1}}</a>
+      <a  href="javascript:void (0);" *ngIf="pageNo>1&&pageNo<totalPage" (click)="onpageNoChange(pageNo)" class="z-crt">{{pageNo}}</a>
+      <a  href="javascript:void (0);"  *ngIf="pageNo<totalPage-1" (click)="onpageNoChange(pageNo+1)">{{pageNo+1}}</a>
+    </span>
+    <span *ngIf="totalPage>5&&pageNo<=totalPage-3">
+      <i>...</i>
+    </span>
+    <a  href="javascript:void (0);" *ngIf="totalPage>=5" (click)="onpageNoChange(totalPage)" [class.z-crt]="pageNo==totalPage">{{totalPage}}</a>
+    <a  href="javascript:void (0);"  class="pagenxt" (click)="next()" [class.z-dis]="!hasNext()"></a>
+    <i>跳转：</i>
+    <input type="number" [(ngModel)]="goPageNo" class="ipt" style="height: 29px !important;" min="1"/>
+    <a  href="javascript:void (0);" (click)="gotoPageNo(goPageNo)">GO</a>
+  </nav>
+</div>

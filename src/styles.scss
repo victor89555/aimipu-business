@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+.ant-card__primary{
+  .ant-card-head {
+    background-color: #108ee9 !important;
+  }
+}
+//列表中 头部右侧按钮
+nav.right-nav{
+  display: inline;
+  .right-btn{
+    position: relative;
+    float: right;
+    margin: 0 2px;
+  }
+}
+
+.left-back:hover{
+  color:#108ee9;
+}
