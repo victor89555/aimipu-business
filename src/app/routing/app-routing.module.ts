@@ -30,10 +30,10 @@ const routes: Routes = [
         path: 'users',
         loadChildren: 'app/modules/users/users.module#UsersModule',
       },
-      // {
-      //   path: 'help',
-      //   loadChildren: 'app/modules/help/help.module#HelpModule',
-      // },
+      {
+        path: 'activity',
+        loadChildren: 'app/modules/activity/activity.module#ActivityModule',
+      },
     ]
   }
 ];

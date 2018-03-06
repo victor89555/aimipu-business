@@ -1,45 +1,79 @@
-
-<nz-layout>
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <div class="logo">
-      <span style="color: #fff;text-align: center;    padding: 0 22px;">金美相官网管理</span>
-    </div>
-
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'" >
-      <li nz-menu-item  routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/auth-guard" ><span><i class="anticon anticon-home"></i><span class="nav-text">首页</span></span></a></li>
-      <!--<li nz-menu-item routerLinkActive="ant-menu-item-selected"><a routerLink="/auth-guard/users/list" ><span title><i class="anticon anticon-user"></i><span class="nav-text">主管管理</span></span></a></li>-->
-      <!--<li nz-submenu routerLinkActive="ant-menu-submenu-selected">-->
-        <!--<span title><i class="anticon anticon-copy"></i><span class="nav-text">文章管理</span></span>-->
-        <!--<ul>-->
-          <!--<li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/auth-guard/article/article-type" ><span title><span class="nav-text">主题管理</span></span></a></li>-->
-        <!--</ul>-->
-      <!--</li>-->
-      <!--<li nz-menu-item routerLinkActive="ant-menu-item-selected"><a routerLink="/auth-guard/help/list" ><span title><i class="anticon anticon-question-circle-o"></i><span class="nav-text">帮助中心</span></span></a></li>-->
-      <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/auth-guard/users/user-info" ><span title><i class="anticon anticon-setting"></i><span class="nav-text">个人设置</span></span></a></li>
+<nz-layout class="layout">
+  <nz-header>
+    <div class="logo">爱米瀑商户平台</div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" nzClickActive="false" style="line-height: 64px; float: right;">
+      <li nz-menu-item>
+        <nz-badge nzCount="">
+          <ng-template #content><i class="anticon anticon-notification" style="margin-right: 0px;"></i></ng-template>
+        </nz-badge>
+      </li>
+      <li nz-menu-item>
+        <nz-badge nzCount="5">
+          <ng-template #content><i class="anticon anticon-mail" style="margin-right: 0px;"></i></ng-template>
+        </nz-badge>
+      </li>
+      <li nz-submenu>
+        <span title>
+          <nz-badge nzCount="0">
+            <ng-template #content><nz-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar></ng-template>
+          </nz-badge>
+        </span>
+        <ul>
+          <li nz-menu-group>
+            <span title>个人中心</span>
+            <ul>
+              <li nz-menu-item><a routerLink="/auth-guard/users/user-info">个人设置</a></li>
+              <li nz-menu-item>修改密码</li>
+            </ul>
+          </li>
+          <li nz-menu-group>
+            <span title>系统</span>
+            <ul>
+              <li nz-menu-item>系统设置</li>
+              <li nz-menu-item><a routerLink="/login">退出登录</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
     </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header style="background: #fff; padding:0;position: sticky;top: 0;z-index: 999">
-      <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsedRight" [class.anticon-menu-unfold]="isCollapsedRight" (click)="isCollapsedRight=!isCollapsedRight"></i>
-      <ul class="anticon trigger" style="position: absolute;right: 50px;" nz-menu [nzMode]="'horizontal'">
-        <li nz-submenu>
-          <span title>{{currUser.nickName}}</span>
+  </nz-header>
+  <nz-layout style="background: white;">
+    <nz-sider nzWidth="200" style="background:#fff">
+      <ul nz-menu nzMode="inline" style="height:100%">
+        <li nz-menu-item>
+          <a title routerLink="/auth-guard"><i class="anticon anticon-home"></i>首页</a>
+        </li>
+        <li nz-submenu nzOpen="true">
+          <span title><i class="anticon anticon-laptop"></i>试用活动管理</span>
           <ul>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/auth-guard/users/user-info" ><span title><i class="anticon anticon-info-circle"></i><span class="nav-text">个人设置</span></span></a></li>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/login" ><span title><i class="anticon anticon-logout"></i><span class="nav-text">退出</span></span></a></li>
+            <li nz-menu-item><a routerLink="/auth-guard/activity/activity-detail">发布试用活动</a></li>
+            <li nz-menu-item><a routerLink="/auth-guard/activity/activity-management">发布活动管理</a></li>
+          </ul>
+        </li>
+        <li nz-submenu nzOpen="true">
+          <span title><i class="anticon anticon-laptop"></i>试用报告管理</span>
+          <ul>
+            <li nz-menu-item>活动报告</li>
+            <li nz-menu-item>使用用户</li>
+          </ul>
+        </li>
+        <li nz-submenu nzOpen="true">
+          <span title><i class="anticon anticon-user"></i>账户管理</span>
+          <ul>
+            <li nz-menu-item>店铺管理</li>
+            <li nz-menu-item>账户安全</li>
+            <li nz-menu-item><a routerLink="/auth-guard/users/user-info">个人资料</a></li>
+          </ul>
+        </li>
+        <li nz-submenu nzOpen="true">
+          <span title><i class="anticon anticon-notification"></i>财务管理</span>
+          <ul>
+            <li nz-menu-item>财务对账</li>
+            <li nz-menu-item>账户充值</li>
           </ul>
         </li>
       </ul>
-    </nz-header>
-    <nz-content style="margin:0 16px;">
-      <nz-breadcrumb style="margin:12px 0;">
-        <!--<nz-breadcrumb-item>User</nz-breadcrumb-item>-->
-        <!--<nz-breadcrumb-item>Bill</nz-breadcrumb-item>-->
-      </nz-breadcrumb>
-      <div style="padding:24px; background: #fff; min-height: 360px;">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-    <nz-footer style="text-align: center;">云迁信息科技有限公司 ©2017</nz-footer>
+    </nz-sider>
+    <div style="width: 100%;"><router-outlet></router-outlet></div>
   </nz-layout>
 </nz-layout>

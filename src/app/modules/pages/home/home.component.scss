@@ -1,0 +1,36 @@
+.notifys {
+
+  margin-bottom: 20px;
+
+  &>div {
+    &:nth-child(1){
+      .notify-item {
+        background-color: #0090e8;
+      }
+    }
+    &:nth-child(2){
+      .notify-item {
+        background-color: #119a55;
+      }
+    }
+    &:nth-child(3){
+      .notify-item {
+        background-color: #fbae00;
+      }
+    }
+    &:nth-child(4){
+      .notify-item {
+        background-color: #ff4e5b;
+      }
+    }
+    .notify-item {
+      text-align: center;
+      height: 60px;
+      line-height: 60px;
+      font-size: 20px;
+      color: #ffffff;
+    }
+  }
+
+}
+

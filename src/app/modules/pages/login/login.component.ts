@@ -51,36 +51,36 @@ export class LoginComponent implements OnInit{
     this.currUserService.setCurrUser(currUser);
     this.router.navigate(['/auth-guard']);
 
-    if (this.valForm1.valid) {
-      this.isLoading = true;
-      this.loginService.login(this.user).then((resp)=>{
-        if(resp.code == "SUCCESS"){
-          let user = resp.data;
-          console.log(user);
-          //登录成功
-          this.cacheService.setCurrUserInfo(user);
-          let currUser = new CurrUserModel(user.id,user.nickName,user.role);
-          this.currUserService.setCurrUser(currUser);
-          this.router.navigate(['/auth-guard']);
-        }else {
-          this.message.error(resp.message);
-        }
-        this.isLoading = false;
-      },(error)=>{//后台验证错误再根据具体错误指定 control dialog
-        console.log("登录户出错",error);
-        this.isLoading = false;
-        let jsonResult = JSON.parse(error._body)
-        if(jsonResult.errCode=="SERVICE/ERR_PASSWORD_INCORRECT"||jsonResult.errCode=="SERVICE/ERR_SYS_USER_NOT_EXIST"){
-          this.message.error("用户名或密码不正确！");
-        }else {
-          this.message.error("登录出错："+jsonResult.msg);
-        }
-      })
-    }else {
-      for (const i in this.valForm1.controls) {
-        this.valForm1.controls[i].markAsDirty();
-      }
-    }
+    // if (this.valForm1.valid) {
+    //   this.isLoading = true;
+    //   this.loginService.login(this.user).then((resp)=>{
+    //     if(resp.code == "SUCCESS"){
+    //       let user = resp.data;
+    //       console.log(user);
+    //       //登录成功
+    //       this.cacheService.setCurrUserInfo(user);
+    //       let currUser = new CurrUserModel(user.id,user.nickName,user.role);
+    //       this.currUserService.setCurrUser(currUser);
+    //       this.router.navigate(['/auth-guard']);
+    //     }else {
+    //       this.message.error(resp.message);
+    //     }
+    //     this.isLoading = false;
+    //   },(error)=>{//后台验证错误再根据具体错误指定 control dialog
+    //     console.log("登录户出错",error);
+    //     this.isLoading = false;
+    //     let jsonResult = JSON.parse(error._body)
+    //     if(jsonResult.errCode=="SERVICE/ERR_PASSWORD_INCORRECT"||jsonResult.errCode=="SERVICE/ERR_SYS_USER_NOT_EXIST"){
+    //       this.message.error("用户名或密码不正确！");
+    //     }else {
+    //       this.message.error("登录出错："+jsonResult.msg);
+    //     }
+    //   })
+    // }else {
+    //   for (const i in this.valForm1.controls) {
+    //     this.valForm1.controls[i].markAsDirty();
+    //   }
+    // }
   }
 
   logout(){

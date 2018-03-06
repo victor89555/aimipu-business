@@ -1,0 +1,47 @@
+<form nz-form style="margin-bottom: 20px;" [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+  <div nz-form-item>
+    <div nz-form-control>
+      <nz-input formControlName="userName" [nzPlaceHolder]="'商品名称'" [nzSize]="'large'"></nz-input>
+    </div>
+  </div>
+  <div nz-form-item>
+    <div nz-form-control style="min-width: 100px;">
+      <nz-select formControlName="select" [nzSize]="'large'">
+        <nz-option [nzLabel]="'淘宝11111111111'" [nzValue]="1"></nz-option>
+        <nz-option [nzLabel]="'京东'" [nzValue]="2"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div nz-form-item>
+    <div nz-form-control style="min-width: 100px;">
+      <nz-select formControlName="select" [nzSize]="'large'">
+        <nz-option [nzLabel]="'淘宝'" [nzValue]="1"></nz-option>
+        <nz-option [nzLabel]="'京东'" [nzValue]="2"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+</form>
+<nz-table #nzTable [nzDataSource]="data" [nzPageSize]="10">
+  <thead nz-thead>
+  <tr>
+    <th nz-th><span>商品标题</span></th>
+    <th nz-th><span>商品来源</span></th>
+    <th nz-th><span>店铺名称</span></th>
+    <th nz-th><span>发放数量</span></th>
+    <th nz-th><span>活动时间</span></th>
+    <th nz-th><span>试用申请/审核通过/提交报告/报告通过</span></th>
+    <th nz-th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody nz-tbody>
+  <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+    <td nz-td>{{data.title}} <i class="anticon anticon-picture"></i></td>
+    <td nz-td>{{data.source}}</td>
+    <td nz-td>{{data.shopname}}</td>
+    <td nz-td>{{data.issuedQuantity}}</td>
+    <td nz-td>{{data.activityTime}}</td>
+    <td nz-td>{{data.totalNum}}</td>
+    <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
+  </tr>
+  </tbody>
+</nz-table>

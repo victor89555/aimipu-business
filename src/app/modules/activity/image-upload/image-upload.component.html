@@ -1,0 +1,8 @@
+<div nz-row>
+  <div nz-col [nzSpan]="24">
+    <div class="activity-image" *ngFor="let img of imageData">
+      <a href="javascript:;"><img src={{img.src}}></a>
+    </div>
+    <div class="activity-image addbtn" (click)="toSelectImage()"><input id="activity-image" style="display: none;" type="file" accept=".jpg,.png,.jpeg"></div>
+  </div>
+</div>

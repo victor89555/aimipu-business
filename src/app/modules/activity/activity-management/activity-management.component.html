@@ -1,0 +1,16 @@
+<div nz-content style="padding: 20px 24px 24px;">
+  <nz-tabset [nzType]="'card'">
+    <nz-tab>
+      <ng-template #nzTabHeading>已发布活动</ng-template>
+      <app-activity-management-published></app-activity-management-published>
+    </nz-tab>
+    <nz-tab>
+      <ng-template #nzTabHeading>待审核活动</ng-template>
+      <app-activity-management-pending></app-activity-management-pending>
+    </nz-tab>
+    <nz-tab>
+      <ng-template #nzTabHeading>已结束活动</ng-template>
+      <app-activity-management-over></app-activity-management-over>
+    </nz-tab>
+  </nz-tabset>
+</div>
