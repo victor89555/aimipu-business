@@ -17,3 +17,64 @@ nav.right-nav{
 .left-back:hover{
   color:#108ee9;
 }
+
+.detail-info-side {
+  &>div {
+    margin-bottom: 10px;
+
+    &>h2 {
+      height: 39px;
+      line-height: 39px;
+      background-color: #f7f7f7;
+      color: #666666;
+      border: 1px solid #eeeeee;
+      border-left: 4px solid #6b7681;
+      padding: 0 20px 0 16px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    &>ul>li {
+      line-height: 15px;
+      padding: 15px 20px;
+      border: 1px solid #efefef;
+      border-top: none;
+      font-size: 12px;
+      display: flex;
+      &>span.title {
+        color: #888888;
+      }
+      &>span.content {
+        color: #333333;
+        flex: 1;
+      }
+    }
+  }
+
+  &.right-bar{
+    display: none;
+    position: fixed;
+    width: 400px;
+    top: 64px;
+    right: -430px;
+    bottom: 0px;
+    background-color: #ffffff;
+    padding: 15px;
+    border: 1px solid #dddddd;
+    box-shadow: 0px 0px 20px #888888;
+
+    &>div {
+      &>ul {
+        padding: 15px 20px;
+        border: 1px solid #efefef;
+        border-top: none;
+        &>li {
+          padding: 0px;
+          border: none;
+          line-height: 20px;
+        }
+      }
+    }
+
+  }
+}
