@@ -18,7 +18,7 @@
           <ul>
             <li><span class="title">标题：</span><span class="content">祛痘前五强精华去痘印痘疤凹洞</span></li>
             <li><span class="title">图片：</span><span class="content"></span></li>
-            <li><span class="title">类型：</span><span class="contWent">XX类</span></li>
+            <li><span class="title">类型：</span><span class="content">XX类</span></li>
             <li><span class="title">淘宝id：</span><span class="content">559999455666</span></li>
             <li><span class="title">价格：</span><span class="content">50元</span></li>
           </ul>
@@ -28,7 +28,7 @@
     <div nz-col [nzMd]="16" [nzXs]="24">
       <nz-tabset [nzType]="'card'">
         <nz-tab>
-          <ng-template #nzTabHeading>全部（120）</ng-template>
+          <ng-template #nzTabHeading>全部（60）</ng-template>
           <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm">
             <div nz-form-item>
               <div nz-form-control>
@@ -43,7 +43,8 @@
               <th nz-th><span>用户</span></th>
               <th nz-th><span>手机号码</span></th>
               <th nz-th><span>申请时间</span></th>
-              <th nz-th><span>审核状态</span></th>
+              <th nz-th><span>审核时间</span></th>
+              <th nz-th><span>提交时间</span></th>
               <th nz-th><span>操作</span></th>
             </tr>
             </thead>
@@ -52,14 +53,15 @@
               <td nz-td><a (click)="open($event)">{{data.user}} <i class="anticon anticon-picture"></i></a></td>
               <td nz-td>{{data.phone}}</td>
               <td nz-td>{{data.appTime}}</td>
-              <td nz-td>{{data.status}}</td>
+              <td nz-td>{{data.auditTime}}</td>
+              <td nz-td>{{data.submitTime}}</td>
               <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
             </tr>
             </tbody>
           </nz-table>
         </nz-tab>
         <nz-tab>
-          <ng-template #nzTabHeading>待审核（20）</ng-template>
+          <ng-template #nzTabHeading>待提交（18）</ng-template>
           <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm">
             <div nz-form-item>
               <div nz-form-control>
@@ -74,7 +76,7 @@
               <th nz-th><span>用户</span></th>
               <th nz-th><span>手机号码</span></th>
               <th nz-th><span>申请时间</span></th>
-              <th nz-th><span>操作</span></th>
+              <th nz-th><span>审核时间</span></th>
             </tr>
             </thead>
             <tbody nz-tbody>
@@ -82,13 +84,13 @@
               <td nz-td><a (click)="open($event)">{{data.user}} <i class="anticon anticon-picture"></i></a></td>
               <td nz-td>{{data.phone}}</td>
               <td nz-td>{{data.appTime}}</td>
-              <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
+              <td nz-td>{{data.auditTime}}</td>
             </tr>
             </tbody>
           </nz-table>
         </nz-tab>
         <nz-tab>
-          <ng-template #nzTabHeading>通过（50）</ng-template>
+          <ng-template #nzTabHeading>待确认（20）</ng-template>
           <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm">
             <div nz-form-item>
               <div nz-form-control>
@@ -104,6 +106,9 @@
               <th nz-th><span>手机号码</span></th>
               <th nz-th><span>申请时间</span></th>
               <th nz-th><span>审核时间</span></th>
+              <th nz-th><span>提交时间</span></th>
+              <th nz-th><span>淘宝id</span></th>
+              <th nz-th><span>订单号</span></th>
               <th nz-th><span>操作</span></th>
             </tr>
             </thead>
@@ -113,13 +118,16 @@
               <td nz-td>{{data.phone}}</td>
               <td nz-td>{{data.appTime}}</td>
               <td nz-td>{{data.auditTime}}</td>
-              <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
+              <td nz-td>{{data.submitTime}}</td>
+              <td nz-td>{{data.id}}</td>
+              <td nz-td>{{data.orderNum}}</td>
+              <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="openReportDetail($event)">查看报告</button></td>
             </tr>
             </tbody>
           </nz-table>
         </nz-tab>
         <nz-tab>
-          <ng-template #nzTabHeading>不通过（50）</ng-template>
+          <ng-template #nzTabHeading>待修改（10）</ng-template>
           <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm">
             <div nz-form-item>
               <div nz-form-control>
@@ -135,7 +143,8 @@
               <th nz-th><span>手机号码</span></th>
               <th nz-th><span>申请时间</span></th>
               <th nz-th><span>审核时间</span></th>
-              <th nz-th><span>操作</span></th>
+              <th nz-th><span>提交时间</span></th>
+              <th nz-th><span>修改时间</span></th>
             </tr>
             </thead>
             <tbody nz-tbody>
@@ -144,7 +153,82 @@
               <td nz-td>{{data.phone}}</td>
               <td nz-td>{{data.appTime}}</td>
               <td nz-td>{{data.auditTime}}</td>
-              <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
+              <td nz-td>{{data.submitTime}}</td>
+              <td nz-td>{{data.modifyTime}}</td>
+            </tr>
+            </tbody>
+          </nz-table>
+        </nz-tab>
+        <nz-tab>
+          <ng-template #nzTabHeading>已完成（10）</ng-template>
+          <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm">
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input formControlName="userName" [nzSize]="'large'"></nz-input>
+              </div>
+            </div>
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'">搜索</button>
+          </form>
+          <nz-table #nzTable3 [nzDataSource]="data" [nzPageSize]="10">
+            <thead nz-thead>
+            <tr>
+              <th nz-th><span>用户</span></th>
+              <th nz-th><span>手机号码</span></th>
+              <th nz-th><span>申请时间</span></th>
+              <th nz-th><span>审核时间</span></th>
+              <th nz-th><span>提交时间</span></th>
+              <th nz-th><span>完成时间</span></th>
+              <th nz-th><span>淘宝id</span></th>
+              <th nz-th><span>订单号</span></th>
+            </tr>
+            </thead>
+            <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+              <td nz-td><a (click)="open($event)">{{data.user}} <i class="anticon anticon-picture"></i></a></td>
+              <td nz-td>{{data.phone}}</td>
+              <td nz-td>{{data.appTime}}</td>
+              <td nz-td>{{data.auditTime}}</td>
+              <td nz-td>{{data.submitTime}}</td>
+              <td nz-td>{{data.completeTime}}</td>
+              <td nz-td>{{data.id}}</td>
+              <td nz-td>{{data.orderNum}}</td>
+            </tr>
+            </tbody>
+          </nz-table>
+        </nz-tab>
+        <nz-tab>
+          <ng-template #nzTabHeading>试用终止（2）</ng-template>
+          <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm">
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input formControlName="userName" [nzSize]="'large'"></nz-input>
+              </div>
+            </div>
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'">搜索</button>
+          </form>
+          <nz-table #nzTable3 [nzDataSource]="data" [nzPageSize]="10">
+            <thead nz-thead>
+            <tr>
+              <th nz-th><span>用户</span></th>
+              <th nz-th><span>手机号码</span></th>
+              <th nz-th><span>申请时间</span></th>
+              <th nz-th><span>审核时间</span></th>
+              <th nz-th><span>提交时间</span></th>
+              <th nz-th><span>终止时间</span></th>
+              <th nz-th><span>淘宝id</span></th>
+              <th nz-th><span>订单号</span></th>
+            </tr>
+            </thead>
+            <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+              <td nz-td><a (click)="open($event)">{{data.user}} <i class="anticon anticon-picture"></i></a></td>
+              <td nz-td>{{data.phone}}</td>
+              <td nz-td>{{data.appTime}}</td>
+              <td nz-td>{{data.auditTime}}</td>
+              <td nz-td>{{data.submitTime}}</td>
+              <td nz-td>{{data.terminateTime}}</td>
+              <td nz-td>{{data.id}}</td>
+              <td nz-td>{{data.orderNum}}</td>
             </tr>
             </tbody>
           </nz-table>
@@ -153,9 +237,10 @@
     </div>
   </div>
 
-  <div nz-row class="detail-info-side right-bar">
+
+  <div nz-row class="detail-info-side right-bar" id="detail_info_side">
     <button aria-label="Close" class="ant-modal-close ng-star-inserted">
-      <span class="ant-modal-close-x"></span>
+      <span class="ant-modal-close-x" (click)="handleCancel($event)"></span>
     </button>
     <div nz-col [nzXs]="24">
       <h2>用户详细信息</h2>
@@ -204,4 +289,47 @@
       </ul>
     </div>
   </div>
+
+  <nz-modal [nzStyle]="style" [nzVisible]="isVisibleDetail" [nzContent]="modalContent2"
+            (nzOnCancel)="handleCancelDetail($event)" (nzOnOk)="handleOkDetail($event)">
+    <ng-template #modalContent2>
+      <div nz-row>
+        <div nz-col [nzXs]="18">
+          <h2>报告截图</h2>
+          <div>
+            <p>用户淘宝号：<span>休息休息</span></p>
+            <p>订单号：<span>1234566699</span></p>
+          </div>
+        </div>
+        <div nz-col [nzXs]="6">
+          <div style="text-align: right; padding-right: 20px;padding-bottom: 10px;">
+            <button nz-button [nzType]="'primary'">
+              <span>通过</span>
+            </button>
+          </div>
+          <div style="text-align: right; padding-right: 20px;padding-bottom: 10px;">
+            <button nz-button [nzType]="'default'">
+              <span>提交修改</span>
+            </button>
+          </div>
+          <div style="text-align: right; padding-right: 20px;padding-bottom: 10px;">
+            <button nz-button [nzType]="'danger'">
+              <span>试用终止</span>
+            </button>
+          </div>
+        </div>
+        <div class="imgList" nz-col [nzXs]="24">
+          <a href="javascript:;"><img src="../../../../assets/img/default-image.jpg"></a>
+          <a href="javascript:;"><img src="../../../../assets/img/default-image.jpg"></a>
+          <a href="javascript:;"><img src="../../../../assets/img/default-image.jpg"></a>
+          <a href="javascript:;"><img src="../../../../assets/img/default-image.jpg"></a>
+          <a href="javascript:;"><img src="../../../../assets/img/default-image.jpg"></a>
+          <a href="javascript:;"><img src="../../../../assets/img/default-image.jpg"></a>
+          <a href="javascript:;"><img src="../../../../assets/img/default-image.jpg"></a>
+          <a href="javascript:;"><img src="../../../../assets/img/default-image.jpg"></a>
+        </div>
+      </div>
+    </ng-template>
+  </nz-modal>
+
 </div>

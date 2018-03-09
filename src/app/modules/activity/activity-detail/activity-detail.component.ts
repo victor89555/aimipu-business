@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-activity-detail',
+  selector: 'activity-detail',
   templateUrl: './activity-detail.component.html',
   styleUrls: ['./activity-detail.component.scss']
 })

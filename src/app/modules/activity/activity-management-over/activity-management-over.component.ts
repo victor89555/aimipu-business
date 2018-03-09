@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-activity-management-pending',
-  templateUrl: './activity-management-pending.component.html',
-  styleUrls: ['./activity-management-pending.component.scss']
+  selector: 'activity-management-over',
+  templateUrl: './activity-management-over.component.html',
+  styleUrls: ['./activity-management-over.component.scss']
 })
-export class ActivityManagementPendingComponent implements OnInit {
+export class ActivityManagementOverComponent implements OnInit {
 
   data = [
     {

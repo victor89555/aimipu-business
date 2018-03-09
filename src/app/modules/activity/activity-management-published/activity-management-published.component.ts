@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-activity-management-published',
+  selector: 'activity-management-published',
   templateUrl: './activity-management-published.component.html',
   styleUrls: ['./activity-management-published.component.scss']
 })
