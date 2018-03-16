@@ -34,6 +34,14 @@ const routes: Routes = [
         path: 'activity',
         loadChildren: 'app/modules/activity/activity.module#ActivityModule',
       },
+      {
+        path: 'finance',
+        loadChildren: 'app/modules/finance/finance.module#FinanceModule',
+      },
+      {
+        path: 'report',
+        loadChildren: 'app/modules/report/report.module#ReportModule',
+      },
     ]
   }
 ];

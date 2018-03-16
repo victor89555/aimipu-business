@@ -8,6 +8,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ActivityDetailComponent implements OnInit {
 
+  title = '发布试用活动'
   validateForm: FormGroup;
   content:any= '';
   callBack(e){

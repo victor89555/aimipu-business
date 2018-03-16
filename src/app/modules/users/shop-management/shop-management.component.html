@@ -1,0 +1,52 @@
+<div class="page-title">{{title}}</div>
+<form nz-form style="margin-bottom: 20px;" [nzLayout]="'inline'" [formGroup]="validateForm">
+  <div nz-form-item>
+    <div nz-form-control style="min-width: 300px;">
+      <nz-input formControlName="textInput" [nzPlaceHolder]="'店铺名'" [nzSize]="'large'"></nz-input>
+    </div>
+  </div>
+  <div nz-form-item>
+    <nz-select style="width: 120px;" [nzSize]="'large'" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedOption" nzAllowClear>
+      <nz-option
+        *ngFor="let option of options"
+        [nzLabel]="option.label"
+        [nzValue]="option"
+        [nzDisabled]="option.disabled">
+      </nz-option>
+    </nz-select>
+  </div>
+  <div nz-form-item>
+    <div nz-form-control>
+      <nz-datepicker (ngModelChange)="_startDate=$event" [ngModel]="_startDate"  [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzSize]="'large'" [nzPlaceHolder]="'开始时间'" [ngModelOptions]="{standalone: true}"></nz-datepicker>
+    </div>
+  </div>
+  <div nz-form-item>
+    <div nz-form-control>
+      <nz-datepicker (ngModelChange)="_endDate=$event" [ngModel]="_endDate"  [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzSize]="'large'" [nzPlaceHolder]="'结束时间'" [ngModelOptions]="{standalone: true}"></nz-datepicker>
+    </div>
+  </div>
+  <button nz-button [nzType]="'primary'" [nzSize]="'large'">搜索</button>
+  <button nz-button [nzType]="'primary'" [nzSize]="'large'" style="position:  absolute;right: 25px;">添加店铺</button>
+</form>
+<nz-table #nzTable [nzDataSource]="data" [nzPageSize]="10">
+  <thead nz-thead>
+  <tr>
+    <th nz-th><span>序号</span></th>
+    <th nz-th><span>店铺来源</span></th>
+    <th nz-th><span>淘宝店铺</span></th>
+    <th nz-th><span>店铺地址</span></th>
+    <th nz-th><span>审核状态</span></th>
+    <th nz-th><span>审核时间</span></th>
+  </tr>
+  </thead>
+  <tbody nz-tbody>
+  <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+    <td nz-td>{{data.userId}}</td>
+    <td nz-td>{{data.source}}</td>
+    <td nz-td>{{data.shopName}}</td>
+    <td nz-td>{{data.webSrc}}</td>
+    <td nz-td>{{data.status}}</td>
+    <td nz-td>{{data.auditTime}}</td>
+  </tr>
+  </tbody>
+</nz-table>

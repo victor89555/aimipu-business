@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class ActivityManagementPublishedComponent implements OnInit {
 
+  title = '已发布活动'
   data = [
     {
       title: '商品标题',

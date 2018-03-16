@@ -1,0 +1,39 @@
+.activity-image {
+  float: left;
+  width: 90px;
+  height: 60px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #dddddd;
+  position: relative;
+  &.addbtn {
+    background-image: url("../../../../../assets/img/add-image-btn.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 80px 50px;
+    cursor: pointer;
+  }
+  img {
+    width: 80px;
+    height: 50px;
+  }
+  &>.v-close{
+    display: none;
+    width: 25px;
+    height: 25px;
+    background-image: url("../../../../../assets/img/close.png");
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+
+  &:hover {
+    &>.v-close {
+      display: block;
+    }
+  }
+}

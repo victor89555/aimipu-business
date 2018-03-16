@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageUploadComponent } from './image-upload.component';
+import { AccountSecurityComponent } from './account-security.component';
 
-describe('ImageUploadComponent', () => {
-  let component: ImageUploadComponent;
-  let fixture: ComponentFixture<ImageUploadComponent>;
+describe('AccountSecurityComponent', () => {
+  let component: AccountSecurityComponent;
+  let fixture: ComponentFixture<AccountSecurityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageUploadComponent ]
+      declarations: [ AccountSecurityComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageUploadComponent);
+    fixture = TestBed.createComponent(AccountSecurityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

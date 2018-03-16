@@ -18,21 +18,14 @@ import {mobileValidate} from '../../../shared/util/formControl-validate-utils';
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
-  styles:[`
-      .ant-avatar-lg {
-        width: 52px;
-        height: 52px;
-        line-height: 52px;
-        border-radius: 26px;
-        margin-left: 10px;
-      }
-    `],
+  styleUrls: ['./user-info.component.scss'],
   providers:[
     UsersService, QiniuUploadService, FileValidationService
   ]
 })
 export class UserInfoComponent implements OnInit {
 
+  title = '个人资料'
   isLoading:boolean = false;
   user: any={};
   qiniuDomain=QINIU_DOMAIN;

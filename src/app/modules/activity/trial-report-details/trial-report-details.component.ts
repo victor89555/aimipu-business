@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class TrialReportDetailsComponent implements OnInit {
 
+  title = '试用申请详情'
   data:any[] = []
   validateForm: FormGroup
   $detail_info_side = document.getElementById('detail_info_side')

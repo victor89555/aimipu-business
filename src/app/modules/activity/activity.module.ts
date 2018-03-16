@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 import {SharedModule} from '../../shared/shared.module';
-import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { TrialReportDetailsComponent } from './trial-report-details/trial-report-details.component';
 import { TrialApplicationDetailsComponent } from './trial-application-details/trial-application-details.component';
 import {TrialReportDetailsModule} from './trial-report-details/trial-report-details.module';
 import {ActivityManagementOverComponent} from './activity-management-over/activity-management-over.component';
 import {ActivityManagementPublishedComponent} from './activity-management-published/activity-management-published.component';
 import {ActivityManagementPendingComponent} from './activity-management-pending/activity-management-pending.component';
+import {ImageUploadModule} from './image-upload/image-upload.module';
 
 const routes: Routes = [
   { path: 'activity-detail', component: ActivityDetailComponent },
@@ -23,6 +23,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     TrialReportDetailsModule,
+    ImageUploadModule,
     RouterModule.forChild(routes),
   ],
   exports:[
@@ -31,7 +32,6 @@ const routes: Routes = [
   entryComponents:[],
   declarations: [
     ActivityDetailComponent,
-    ImageUploadComponent,
     ActivityManagementPublishedComponent,
     ActivityManagementPendingComponent,
     ActivityManagementOverComponent,
@@ -39,4 +39,5 @@ const routes: Routes = [
     TrialApplicationDetailsComponent
   ]
 })
+
 export class ActivityModule { }

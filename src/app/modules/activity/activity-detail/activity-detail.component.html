@@ -1,3 +1,4 @@
+<div class="page-title">{{title}}</div>
 <div nz-content>
   <div nz-row>
     <div nz-col>
@@ -24,8 +25,7 @@
             <label nz-form-item-required>商品名称</label>
           </div>
           <div nz-form-control nz-col [nzMd]="9" [nzSm]="14" [nzXs]="24">
-            <nz-select formControlName="name" [nzSize]="'large'">
-              <nz-option [nzLabel]="'--请选择商品名称--'" [nzValue]="null"></nz-option>
+            <nz-select formControlName="name" [nzPlaceHolder]="'--请选择商品名称--'" [nzSize]="'large'">
               <nz-option [nzLabel]="'海洋诗韵海泥专卖店'" [nzValue]="'1'"></nz-option>
               <nz-option [nzLabel]="'海洋诗韵海泥专卖店'" [nzValue]="'2'"></nz-option>
             </nz-select>
@@ -73,8 +73,7 @@
             <label nz-form-item-required>商品类型</label>
           </div>
           <div nz-form-control nz-col [nzMd]="9" [nzSm]="14" [nzXs]="24">
-            <nz-select formControlName="type" [nzSize]="'large'">
-              <nz-option [nzLabel]="'--商品类型--'" [nzValue]="null"></nz-option>
+            <nz-select formControlName="type" [nzPlaceHolder]="'--商品类型--'" [nzSize]="'large'">
               <nz-option [nzLabel]="'A类'" [nzValue]="'1'"></nz-option>
               <nz-option [nzLabel]="'B类'" [nzValue]="'2'"></nz-option>
             </nz-select>
@@ -86,7 +85,7 @@
             <label nz-form-item-required>试用标题图片</label>
           </div>
           <div nz-form-control nz-col [nzMd]="9" [nzSm]="14" [nzXs]="24">
-            <image-upload></image-upload>
+            <!--<img-upload></img-upload>-->
           </div>
         </div>
         <div nz-form-item nz-row>
