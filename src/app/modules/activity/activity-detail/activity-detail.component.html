@@ -1,4 +1,8 @@
-<div class="page-title">{{title}}</div>
+<nz-tabset>
+  <nz-tab >
+    <ng-template #nzTabHeading>
+      {{title}}
+    </ng-template>
 <div nz-content>
   <div nz-row>
     <div nz-col>
@@ -85,7 +89,7 @@
             <label nz-form-item-required>试用标题图片</label>
           </div>
           <div nz-form-control nz-col [nzMd]="9" [nzSm]="14" [nzXs]="24">
-            <!--<img-upload></img-upload>-->
+            <image-upload [max]="3"></image-upload>
           </div>
         </div>
         <div nz-form-item nz-row>
@@ -137,3 +141,5 @@
     </div>
   </div>
 </div>
+  </nz-tab>
+</nz-tabset>

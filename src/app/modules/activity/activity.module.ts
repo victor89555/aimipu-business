@@ -8,7 +8,6 @@ import {TrialReportDetailsModule} from './trial-report-details/trial-report-deta
 import {ActivityManagementOverComponent} from './activity-management-over/activity-management-over.component';
 import {ActivityManagementPublishedComponent} from './activity-management-published/activity-management-published.component';
 import {ActivityManagementPendingComponent} from './activity-management-pending/activity-management-pending.component';
-import {ImageUploadModule} from './image-upload/image-upload.module';
 
 const routes: Routes = [
   { path: 'activity-detail', component: ActivityDetailComponent },
@@ -23,7 +22,6 @@ const routes: Routes = [
   imports: [
     SharedModule,
     TrialReportDetailsModule,
-    ImageUploadModule,
     RouterModule.forChild(routes),
   ],
   exports:[

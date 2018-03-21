@@ -6,6 +6,7 @@ import { CommonModule }        from '@angular/common';
 import { FormsModule }         from '@angular/forms';
 import {MyMinLengthDirective} from "./my-min-length.directive";
 import {MobileValidateDirective} from "./mobile-validate.directive";
+import {FileDropDirective} from '../../modules/activity/image-upload/file-drop.directive';
 @NgModule({
   imports:[
     CommonModule,
@@ -13,11 +14,13 @@ import {MobileValidateDirective} from "./mobile-validate.directive";
   ],
   declarations: [
     MyMinLengthDirective,
-    MobileValidateDirective
+    MobileValidateDirective,
+    FileDropDirective
   ],
   exports:[
     MyMinLengthDirective,
-    MobileValidateDirective
+    MobileValidateDirective,
+    FileDropDirective
   ]
 })
 export class DirectiveModule { }

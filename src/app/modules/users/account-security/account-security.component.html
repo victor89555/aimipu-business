@@ -1,4 +1,9 @@
-<div class="page-title">{{title}}</div>
+<!--<div class="page-title">{{title}}</div>-->
+<nz-tabset>
+  <nz-tab >
+    <ng-template #nzTabHeading>
+      {{title}}
+    </ng-template>
 <form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
   <div nz-form-item nz-row>
     <div nz-col [nzSpan]="7" nz-form-label>
@@ -47,3 +52,5 @@
     </div>
   </div>
 </form>
+  </nz-tab>
+</nz-tabset>

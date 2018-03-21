@@ -8,21 +8,24 @@
   border: 1px solid #dddddd;
   position: relative;
   &.addbtn {
-    background-image: url("../../../../../assets/img/add-image-btn.png");
+    background-image: url("../../../../assets/img/add-image-btn.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 80px 50px;
     cursor: pointer;
   }
   img {
-    width: 80px;
-    height: 50px;
+    max-width: 78px;
+    max-height: 48px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
   }
   &>.v-close{
     display: none;
     width: 25px;
     height: 25px;
-    background-image: url("../../../../../assets/img/close.png");
+    background-image: url("../../../../assets/img/close.png");
     background-size: 25px;
     background-repeat: no-repeat;
     background-position: center;

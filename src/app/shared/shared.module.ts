@@ -9,6 +9,7 @@ import {DirectiveModule} from './directive/directive.module';
 import {HttpClientModule} from '@angular/common/http';
 import { MyEditorComponent } from './my-editor/my-editor.component';
 import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
+import {ImageUploadComponent} from '../modules/activity/image-upload/image-upload.component';
 
 @NgModule({
   imports: [
@@ -32,9 +33,10 @@ import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
     MyEditorComponent,
     FroalaEditorModule,
     FroalaViewModule,
+    ImageUploadComponent,
   ],
   entryComponents:[],
-  declarations: [MyEditorComponent],
+  declarations: [MyEditorComponent,ImageUploadComponent],
   providers:[
     ModalHelper
   ]

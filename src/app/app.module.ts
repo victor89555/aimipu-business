@@ -11,6 +11,7 @@ import {ModulesModule} from './modules/modules.module';
 import {AppRoutingModule} from './routing/app-routing.module';
 import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ImageService} from './modules/activity/image-upload/image.service';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CacheService,
     LoggerService,
     AppService,
-    CurrUserService,
+    CurrUserService
   ],
   bootstrap: [AppComponent]
 })

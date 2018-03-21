@@ -1,0 +1,15 @@
+<div class="image-upload"
+     fileDrop
+     [accept]="['image/*']"
+     (isFileOver)="fileOver($event)"
+     (fileDrop)="fileChange($event)"
+     [ngClass]="{'file-is-over': isFileOver}"
+>
+  <a href="javascript:;" class="activity-image" *ngFor="let img of imageData; let i = index;">
+    <img src={{img.src}}>
+    <a class="v-close" href="javasctipt:;" (click)="delImg(i)"></a>
+  </a>
+  <div *ngIf="canAdd" class="activity-image addbtn" (click)="toSelectImage()">
+    <input id="activity-image" style="display: none;" type="file" accept=".jpg,.png,.jpeg" (change)="fileChange(input.files)" #input>
+  </div>
+</div>
