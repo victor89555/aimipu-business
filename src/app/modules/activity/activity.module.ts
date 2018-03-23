@@ -10,7 +10,7 @@ import {ActivityManagementPublishedComponent} from './activity-management-publis
 import {ActivityManagementPendingComponent} from './activity-management-pending/activity-management-pending.component';
 
 const routes: Routes = [
-  { path: 'activity-detail', component: ActivityDetailComponent },
+  { path: 'activity-detail/:id', component: ActivityDetailComponent },
   { path: 'activity-published', component: ActivityManagementPublishedComponent },
   { path: 'activity-pending', component: ActivityManagementPendingComponent },
   { path: 'activity-over', component: ActivityManagementOverComponent },
