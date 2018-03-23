@@ -9,8 +9,10 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class ActivityDetailComponent implements OnInit {
 
   title = '发布试用活动'
-  validateForm: FormGroup;
+  activityDetailForm: FormGroup;
   content:any= '';
+  nowTime: Date
+  shops: any[] = []
   callBack(e){
     // console.log(e)
   }
@@ -20,11 +22,13 @@ export class ActivityDetailComponent implements OnInit {
 
 
   ngOnInit() {
-    this.validateForm = this.fb.group({
+    this.nowTime = new Date()
+    this.activityDetailForm = this.fb.group({
+      shopName: [ 1 ],
       source: [ null, [ Validators.required ] ],
-      name: [ null ],
       postage: [ null ],
-      endTime: [ '' ],
+      startTime: [this.nowTime],
+      endTime: [ new Date(this.nowTime.setMonth(this.nowTime.getMonth() + 1)) ],
 
       title: [ '', [ Validators.required ] ],
       type: [ '', [ Validators.required ] ],
@@ -32,7 +36,8 @@ export class ActivityDetailComponent implements OnInit {
       price: [ '', [ Validators.required ] ],
       taoBaoId: [ '', [ Validators.required ] ],
       coins: [ '', [ Validators.required ] ],
-    });
+    })
+    this.getShops()
   }
 
   SubmitApplication(){
@@ -46,6 +51,16 @@ export class ActivityDetailComponent implements OnInit {
   //验证所有
   verifyAll() {
 
+  }
+
+  //获取该商家所有店铺
+  getShops() {
+    //以下为虚拟数据
+    this.shops = [
+      {id: 1, name: '海洋韵诗海泥京东专卖店'},
+      {id: 2, name: '海洋韵诗海泥服装专卖店'},
+      {id: 3, name: '海洋韵诗海泥天猫专卖店'},
+    ]
   }
 
 }
