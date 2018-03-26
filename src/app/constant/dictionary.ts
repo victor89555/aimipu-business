@@ -33,7 +33,6 @@ export const sexOption = [
   }
 ]
 
-
 //用户状态字典
 export const userStatusOption = [
   {
@@ -50,35 +49,10 @@ export const userStatusOption = [
   },
 ]
 
+export const GROUP_OPTION=[
 
-
-//用户类型字典
-export const GROUP_OPTION = [
-  {
-    value: '总编',
-    key: 1
-  },
-  {
-    value: '主管',
-    key: 2
-  },
-  {
-    value: '主编',
-    key: 3
-  },
-  // {
-  //   value: '创作人员',
-  //   key: 4
-  // },
-  {
-    value: '财务',
-    key: 5
-  },
-  {
-    value: '技术',
-    key: 6
-  },
 ]
+
 //文章审核状态  /**审核状态 1-待审核  2-待修改 3--通过（主编）4-被采用（待发工资） 5-完成（发放）*/
 export const ARTICLE_AUD_STATUS = [
   {

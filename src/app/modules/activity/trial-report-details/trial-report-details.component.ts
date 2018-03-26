@@ -11,7 +11,6 @@ export class TrialReportDetailsComponent implements OnInit {
   title = '试用申请详情'
   data:any[] = []
   validateForm: FormGroup
-  $detail_info_side = document.getElementById('detail_info_side')
   style: any = {
     top: '20px'
   };
@@ -35,14 +34,13 @@ export class TrialReportDetailsComponent implements OnInit {
       {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:0},
       {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:2,auditTime:'2018-02-28'},
     ]
-    this.$detail_info_side = document.getElementById('detail_info_side')
   }
 
   open(e){
-    this.$detail_info_side.style.right = '0px'
+    document.getElementById('detail_info_side').style.right = '0px'
   }
   handleCancel(e){
-    this.$detail_info_side.style.right = '-430px'
+    document.getElementById('detail_info_side').style.right = '-430px'
   }
 
 }

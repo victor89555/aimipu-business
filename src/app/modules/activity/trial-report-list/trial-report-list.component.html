@@ -1,0 +1,52 @@
+<!--<div class="page-title">{{title}}</div>-->
+<nz-tabset>
+  <nz-tab >
+    <ng-template #nzTabHeading>
+      {{title}}
+    </ng-template>
+    <form nz-form style="margin-bottom: 20px;" [nzLayout]="'inline'" [formGroup]="validateForm">
+      <div nz-form-item>
+        <div nz-form-control style="min-width: 300px;">
+          <nz-input formControlName="textInput" [nzPlaceHolder]="'关键字'" [nzSize]="'large'"></nz-input>
+        </div>
+      </div>
+      <div nz-form-item>
+        <div nz-form-control>
+          <nz-datepicker (ngModelChange)="_startDate=$event" [ngModel]="_startDate"  [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzSize]="'large'" [nzPlaceHolder]="'开始时间'" [ngModelOptions]="{standalone: true}"></nz-datepicker>
+        </div>
+      </div>
+      <div nz-form-item>
+        <div nz-form-control>
+          <nz-datepicker (ngModelChange)="_endDate=$event" [ngModel]="_endDate"  [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzSize]="'large'" [nzPlaceHolder]="'结束时间'" [ngModelOptions]="{standalone: true}"></nz-datepicker>
+        </div>
+      </div>
+      <button nz-button [nzType]="'primary'" [nzSize]="'large'">搜索</button>
+    </form>
+    <nz-table #nzTable [nzDataSource]="data" [nzPageSize]="10">
+      <thead nz-thead>
+      <tr>
+        <th nz-th><span>序号</span></th>
+        <th nz-th><span>店铺名称</span></th>
+        <th nz-th><span>商品来源</span></th>
+        <th nz-th><span>试用邮费</span></th>
+        <th nz-th><span>试用数量</span></th>
+        <th nz-th><span>奖励金币</span></th>
+        <th nz-th><span>结束时间</span></th>
+        <th nz-th><span>操作</span></th>
+      </tr>
+      </thead>
+      <tbody nz-tbody>
+      <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+        <td nz-td>{{data.id}}</td>
+        <td nz-td>{{data.shopName}}</td>
+        <td nz-td>{{data.source}}</td>
+        <td nz-td>{{data.postage}}</td>
+        <td nz-td>{{data.number}}</td>
+        <td nz-td>{{data.price}}</td>
+        <td nz-td>{{data.endTime}}</td>
+        <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'" routerLink="/auth-guard/activity/report-details">查看详情</button></td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+</nz-tabset>

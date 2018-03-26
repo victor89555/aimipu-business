@@ -9,8 +9,8 @@ import {CacheService} from "./cache.service";
 @Injectable()
 export class LoginService extends BaseService {
 
-  constructor(http: Http,private cacheService:CacheService) {
-    super(http)
+  constructor(http: Http,cacheService:CacheService) {
+    super(http,cacheService)
   }
 
   /**
@@ -20,17 +20,13 @@ export class LoginService extends BaseService {
    * @returns {Promise<any>}
    */
   login(user): Promise<any> {
-    let url = "v1/login"
-    let resultPromise = this.post(url,user);
-    resultPromise.then((data)=>{
-      this.cacheService.setCurrUserInfo(data.data)
-    })
-    return resultPromise
+    let url = "/api/merchant/login"
+    return  this.post(url,user);
   }
 
   logout():Promise<any> {
-    let url = "v1/logout"
-    return this.delete(url,null)
+    let url = "/api/merchant/logout"
+    return this.post(url,null)
   }
 
 

@@ -10,7 +10,7 @@ import {OnInit, Injectable} from "@angular/core";
 export class CacheService implements OnInit {
 
   static CACHE_INIT_OVER:string = "CACHE_INIT_OVER"
-  static APP_INFO_KEY:string = "APP_INFO"
+  static APP_INFO_KEY:string = "APP_INFO"//存toke相关信息
   static PERMISSION_KEY:string = "PERMISSION"
   static CURR_USER_KEY:string = "USER"
   static CURR_USER_INFO_KEY:string = "USER_INFO"

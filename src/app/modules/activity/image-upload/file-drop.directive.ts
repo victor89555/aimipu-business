@@ -5,7 +5,7 @@ import {Directive, HostListener, Output, EventEmitter, Input} from '@angular/cor
 })
 export class FileDropDirective {
   @Input() accept: string[];
-  @Input() max: number = 100;
+  @Input() max: number = 1;
 
   @Output()
   isFileOver: EventEmitter<boolean> = new EventEmitter<boolean>();

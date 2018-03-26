@@ -24,6 +24,7 @@
     "angular-froala-wysiwyg": "^2.7.5",
     "core-js": "^2.4.1",
     "ng-zorro-antd": "^0.6.15",
+    "rebirth-permission": "^5.0.1",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

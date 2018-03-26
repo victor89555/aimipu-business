@@ -1,13 +1,17 @@
 import {Headers, Response, Http} from "@angular/http";
 import "rxjs/add/operator/toPromise";
 import {DOMAIN} from "../../constant/config";
+import {CacheService} from './cache.service';
+import {myValidNull} from '../util/string-utils';
 
 export class BaseService {
 
   private http: Http;
+  cacheService: CacheService;
 
-  constructor(http: Http) {
+  constructor(http: Http,cacheService:CacheService) {
     this.http = http;
+    this.cacheService = cacheService;
   }
 
   private getRequestOptions(): any {
@@ -16,6 +20,9 @@ export class BaseService {
     headers.append('X-Requested-With', 'XMLHttpRequest')
     headers.append('Content-Type', 'application/json; charset=UTF-8')
     headers.append('Accept', 'application/json')
+    let tokenObj:any = this.cacheService.getAppInfo();
+    let authorizationVal = myValidNull(tokenObj)?"":(tokenObj.token_type+" "+tokenObj.access_token);
+    headers.append('authorization', authorizationVal)
 
     return {headers: headers, withCredentials: true}
   }

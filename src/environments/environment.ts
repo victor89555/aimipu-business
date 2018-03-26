@@ -6,7 +6,7 @@
 
 export const environment = {
   production: false,
-  serverDomain: "http://localhost:10088/",
+  serverDomain: "http://localhost:8000/",
   appDomain:"http://b-webtest.idaoying.com/#/",
   qiniuDomain:"http://p22g08bt2.bkt.clouddn.com/",
 };

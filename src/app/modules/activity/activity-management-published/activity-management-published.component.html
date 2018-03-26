@@ -37,6 +37,7 @@
     <th nz-th><span>发布时间</span></th>
     <th nz-th><span>报告申请数</span></th>
     <th nz-th><span>报告提交数</span></th>
+    <th nz-th><span>状态</span></th>
     <th nz-th><span>操作</span></th>
   </tr>
   </thead>
@@ -49,6 +50,7 @@
     <td nz-td>{{data.releaseTime}}</td>
     <td nz-td>{{data.applicationNum}}</td>
     <td nz-td>{{data.submittedNum}}</td>
+    <td nz-td>{{data.status}}</td>
     <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看申请情况</button></td>
   </tr>
   </tbody>

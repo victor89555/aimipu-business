@@ -2,12 +2,13 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {BaseService} from "./base.service";
 import {QiniuUploadToken} from "./qiniu/qiniu-upload-token.model";
+import {CacheService} from './cache.service';
 
 @Injectable()
 export class AppService extends BaseService {
 
-  constructor(http: Http) {
-    super(http)
+  constructor(http: Http,cacheService:CacheService) {
+    super(http,cacheService)
   }
 
   /**

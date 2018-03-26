@@ -27,7 +27,7 @@
         [nzShowFooter]="_footer"
         [nzShowTitle]="_title"
         [nzSize]="_size">
-        <span nz-table-title>申请试用信息
+        <span nz-table-title>试用申请列表
           <button nz-button [nzType]="'default'" style="float: right; position: relative; top: -5px; right: 0px;"><span>查看更多</span></button>
         </span>
         <ng-template #nzFixedHeader [ngIf]="_header&&!_fixHeader">
@@ -51,7 +51,7 @@
               <span nz-table-divider></span>
               <a href="#">Delete</a>
               <span nz-table-divider></span>
-              <button nz-button [nzType]="'default'"><span>查看</span></button>
+              <button nz-button [nzType]="'default'" routerLink="/auth-guard/activity/application-details"><span>查看</span></button>
             </span>
           </td>
         </tr>
@@ -70,7 +70,7 @@
           [nzShowFooter]="_footer"
           [nzShowTitle]="_title"
           [nzSize]="_size">
-        <span nz-table-title>申请试用信息
+        <span nz-table-title>试用报告列表
                   <button nz-button [nzType]="'default'" style="float: right; position: relative; top: -5px; right: 0px;"><span>查看更多</span></button>
         </span>
           <ng-template #nzFixedHeader [ngIf]="_header&&!_fixHeader">
@@ -94,7 +94,7 @@
               <span nz-table-divider></span>
               <a href="#">Delete</a>
               <span nz-table-divider></span>
-              <button nz-button [nzType]="'default'"><span>查看</span></button>
+              <button nz-button [nzType]="'default'" routerLink="/auth-guard/activity/report-details"><span>查看</span></button>
             </span>
             </td>
           </tr>

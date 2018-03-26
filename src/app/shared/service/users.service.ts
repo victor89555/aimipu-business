@@ -11,8 +11,8 @@ import {isUndefined} from "util";
 @Injectable()
 export class UsersService extends BaseService {
 
-  constructor(http: Http,private cacheService:CacheService) {
-    super(http)
+  constructor(http: Http,cacheService:CacheService) {
+    super(http,cacheService)
   }
   baseUrl = "sysUser";
 
@@ -72,10 +72,7 @@ export class UsersService extends BaseService {
     return this.put(url)
   }
 
-  queryByRole(roleId): Promise<any> {
-    return this.get(this.baseUrl+"/role-"+roleId);
-  }
-  queryByParentId(parentId): Promise<any> {
-    return this.get(this.baseUrl+"/parent-"+parentId);
+  loadUserInfo(): Promise<any> {
+    return this.post("/api/merchant/me",null);
   }
 }

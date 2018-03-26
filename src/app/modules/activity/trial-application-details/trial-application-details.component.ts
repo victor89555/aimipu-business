@@ -11,7 +11,6 @@ export class TrialApplicationDetailsComponent implements OnInit {
   title = '试用申请详情'
   data:any[] = []
   validateForm: FormGroup
-  $detail_info_side = document.getElementById('detail_info_side')
   style: any = {
     top: '20px'
   };
@@ -40,14 +39,13 @@ export class TrialApplicationDetailsComponent implements OnInit {
       {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
       {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
     ]
-    this.$detail_info_side = document.getElementById('detail_info_side')
   }
 
   open(e){
-    this.$detail_info_side.style.right = '0px'
+    document.getElementById('detail_info_side').style.right = '0px'
   }
   handleCancel(e){
-    this.$detail_info_side.style.right = '-430px'
+    document.getElementById('detail_info_side').style.right = '-430px'
   }
   openReportDetail(e){
     this.isVisibleDetail = true;
