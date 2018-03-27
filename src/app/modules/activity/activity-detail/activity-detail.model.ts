@@ -1,0 +1,14 @@
+export class ActivityDetailForm {
+  shop_Id: number
+  postage_type: number
+  begin_at: string
+  end_at: string
+  title: string
+  number_of: number
+  taobao_id: string
+  golds: number
+  price: number
+  content: string
+  flow: string
+  thumb: any[]
+}

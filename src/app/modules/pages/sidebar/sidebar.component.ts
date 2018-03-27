@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CurrUserService} from '../../../shared/service/curr-user.service';
-import {CurrUserModel} from '../../../shared/models/curr-user.model';
 import {CacheService} from '../../../shared/service/cache.service';
+import {User} from '../../users/user.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,17 +8,11 @@ import {CacheService} from '../../../shared/service/cache.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
-  isCollapsed = false;
-  isCollapsedRight = false;
-  currUser:CurrUserModel=  new CurrUserModel(null,null,null);
-  constructor( private cacheService: CacheService,
-    private currUserService:CurrUserService,) { }
+  currUser: User = new User()
+  userHeadImg: string;
+  constructor( private cacheService: CacheService) { }
 
   ngOnInit() {
-    this.currUser = this.cacheService.getCurrUser()
-    this.currUserService.currUserChange.subscribe((currUserModel) => {
-      this.currUser = currUserModel;
-    });
+    this.currUser = this.cacheService.getCurrUser();
   }
 }

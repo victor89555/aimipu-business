@@ -1,16 +1,16 @@
 <nz-layout style="background: white; padding: 20px 24px 24px;">
   <div class="notifys" nz-row [nzGutter]="16">
     <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6" [nzXl]="6">
-      <div class="notify-item">已发布活动：55</div>
+      <div class="notify-item">已发布活动：<span>{{countInfo.activies}}</span></div>
     </div>
     <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6" [nzXl]="6">
-      <div class="notify-item">申请使用人数：13000</div>
+      <div class="notify-item">申请使用人数：<span>{{countInfo.applies}}</span></div>
     </div>
     <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6" [nzXl]="6">
-      <div class="notify-item">已参与用人数： 8000</div>
+      <div class="notify-item">已参与用人数：<span>{{countInfo.participants}}</span></div>
     </div>
     <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6" [nzXl]="6">
-      <div class="notify-item">已获得报告数： 10000</div>
+      <div class="notify-item">已获得报告数：<span>{{countInfo.reports}}</span></div>
     </div>
   </div>
   <nz-content style="min-height: 280px;">
@@ -18,8 +18,8 @@
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12" [nzXl]="12">
       <nz-table
         #nzTable
-        [nzScroll]="_fixHeader?{ y: 240 }:null"
-        [nzDataSource]="_dataSet"
+        [nzScroll]="_fixHeader?{ y: 240 }: null"
+        [nzDataSource]="applicationList"
         [nzPageSize]="10"
         [nzBordered]="_bordered"
         [nzLoading]="_loading"
@@ -62,7 +62,7 @@
         <nz-table
           #nzTable1
           [nzScroll]="_fixHeader?{ y: 240 }:null"
-          [nzDataSource]="_dataSet"
+          [nzDataSource]="reportLst"
           [nzPageSize]="10"
           [nzBordered]="_bordered"
           [nzLoading]="_loading"

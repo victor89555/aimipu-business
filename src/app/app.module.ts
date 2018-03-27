@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import {CurrUserService} from './shared/service/curr-user.service';
 import {AppService} from './shared/service/app.service';
 import {LoggerService} from './shared/service/logger.service';
 import {CacheService} from './shared/service/cache.service';
@@ -11,7 +10,8 @@ import {ModulesModule} from './modules/modules.module';
 import {AppRoutingModule} from './routing/app-routing.module';
 import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ImageService} from './modules/activity/image-upload/image.service';
+import {RebirthPermissionModule} from 'rebirth-permission';
+import {RebirthHttpModule} from 'rebirth-http';
 
 
 @NgModule({
@@ -23,13 +23,14 @@ import {ImageService} from './modules/activity/image-upload/image.service';
     BrowserAnimationsModule,
     SharedModule,
     AppRoutingModule,
-    ModulesModule
+    ModulesModule,
+    RebirthHttpModule,
+    RebirthPermissionModule.forRoot({ loginPage: '/login' }),
   ],
   providers: [
     CacheService,
     LoggerService,
-    AppService,
-    CurrUserService
+    AppService
   ],
   bootstrap: [AppComponent]
 })

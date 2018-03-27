@@ -11,8 +11,6 @@ import {UploadFile} from '../../../shared/models/upload-file.model';
 import {timeToString} from '../../../shared/util/string-utils';
 import {QiniuUploadToken} from '../../../shared/service/qiniu/qiniu-upload-token.model';
 import {CacheService} from '../../../shared/service/cache.service';
-import {CurrUserModel} from '../../../shared/models/curr-user.model';
-import {CurrUserService} from '../../../shared/service/curr-user.service';
 import {mobileValidate} from '../../../shared/util/formControl-validate-utils';
 
 @Component({
@@ -36,7 +34,6 @@ export class UserInfoComponent implements OnInit {
               private appService:AppService,
               qiniuUploadService: QiniuUploadService,
               private cacheService:CacheService,
-              private currUserService:CurrUserService,
               private _message: NzMessageService,
               private fileValidationService:FileValidationService,) {
     this.qiniuUploadService = qiniuUploadService;
@@ -66,8 +63,6 @@ export class UserInfoComponent implements OnInit {
         if(resp.code == "SUCCESS"){
           let user = resp.data;
           this.cacheService.setCurrUserInfo(user);
-          let currUser = new CurrUserModel(user.id,user.nickName,user.id);
-          this.currUserService.setCurrUser(currUser);
           this._message.success("修改成功！");
         }else {
           this._message.error("修改失败，请重试！");

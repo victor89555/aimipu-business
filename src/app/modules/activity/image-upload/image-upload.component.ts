@@ -18,6 +18,7 @@ export class FileHolder {
 export class ImageUploadComponent implements OnInit {
 
   @Input() max: number = 100;
+  @Input() imageData: any[] = [];
   @Input() url: string;
   @Input() preview: boolean = true;
   @Input() maxFileSize: number;
@@ -32,7 +33,6 @@ export class ImageUploadComponent implements OnInit {
   onRemove: EventEmitter<FileHolder> = new EventEmitter<FileHolder>();
 
   imageFilesLength = 0
-  imageData = []
   canAdd: boolean = true
   constructor(private imageService: ImageService) { }
 

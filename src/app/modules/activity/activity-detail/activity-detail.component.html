@@ -58,7 +58,7 @@
           <label nz-form-item-required>商品名称</label>
         </div>
         <div nz-form-control nz-col [nzMd]="9" [nzSm]="14" [nzXs]="24">
-          <nz-input [nzSize]="'large'" formControlName="title" [nzPlaceHolder]="'请输入活动标题'"></nz-input>
+          <nz-input [nzSize]="'large'" formControlName="productName" [nzPlaceHolder]="'请输入商品名称'"></nz-input>
           <!--<div nz-form-explain *ngIf="getFormControl('title').dirty&&getFormControl('title').hasError('required')">请输入活动标题</div>-->
         </div>
       </div>
@@ -67,7 +67,7 @@
           <label nz-form-item-required>商品图片</label>
         </div>
         <div nz-form-control nz-col [nzMd]="9" [nzSm]="14" [nzXs]="24">
-          <image-upload [max]="3"></image-upload>
+          <image-upload [max]="3" [imageData]="imgData"></image-upload>
         </div>
       </div>
       <div nz-form-item nz-row>

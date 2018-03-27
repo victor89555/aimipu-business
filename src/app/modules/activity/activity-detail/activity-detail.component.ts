@@ -1,43 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivityDetailService} from './activity-detail.service';
 
 @Component({
   selector: 'activity-detail',
   templateUrl: './activity-detail.component.html',
-  styleUrls: ['./activity-detail.component.scss']
+  styleUrls: ['./activity-detail.component.scss'],
+  providers: [ActivityDetailService]
 })
 export class ActivityDetailComponent implements OnInit {
 
   title = '发布试用活动'
-  activityDetailForm: FormGroup;
-  content:any= '';
+  activityId = null
+  activityDetailForm: FormGroup
+  imgData: any[] = []
+  content: any = ''
   nowTime: Date
   shops: any[] = []
   callBack(e){
     // console.log(e)
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private activityDetailService: ActivityDetailService) {
+
   }
 
-
   ngOnInit() {
+    this.getShops()
+    this.initForm()
+    this.route.params.forEach((params: Params) => {
+      this.activityId = params['id'];
+      console.log(this.activityId)
+      // this.initEntity();
+    });
+
+  }
+
+  initForm(){
     this.nowTime = new Date()
     this.activityDetailForm = this.fb.group({
       shopName: [ 1 ],
-      source: [ null, [ Validators.required ] ],
       postage: [ null ],
       startTime: [this.nowTime],
       endTime: [ new Date(this.nowTime.setMonth(this.nowTime.getMonth() + 1)) ],
 
-      title: [ '', [ Validators.required ] ],
+      productName: [ '', [ Validators.required ] ],
       type: [ '', [ Validators.required ] ],
       quantity: [ '', [ Validators.required ] ],
       price: [ '', [ Validators.required ] ],
       taoBaoId: [ '', [ Validators.required ] ],
       coins: [ '', [ Validators.required ] ],
     })
-    this.getShops()
   }
 
   SubmitApplication(){
@@ -56,11 +72,10 @@ export class ActivityDetailComponent implements OnInit {
   //获取该商家所有店铺
   getShops() {
     //以下为虚拟数据
-    this.shops = [
-      {id: 1, name: '海洋韵诗海泥京东专卖店'},
-      {id: 2, name: '海洋韵诗海泥服装专卖店'},
-      {id: 3, name: '海洋韵诗海泥天猫专卖店'},
-    ]
+    this.activityDetailService.getShops().subscribe((res)=>{
+      console.log(res)
+      this.shops = res.data
+    })
   }
 
 }
