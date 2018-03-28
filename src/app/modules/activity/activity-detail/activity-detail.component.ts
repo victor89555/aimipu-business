@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ActivityDetailService} from './activity-detail.service';
 import {ActivityInfo} from './activity-detail.model';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'activity-detail',
@@ -14,19 +15,18 @@ export class ActivityDetailComponent implements OnInit {
   title = '发布试用活动'
   activityId = null
   activityDetailForm: FormGroup
-  imgArr: any[] = []
-  content: any = ''
   nowTime: Date
   shops: any[] = []
   activityInfo: ActivityInfo = new ActivityInfo()
-  callBack(e){
-    // console.log(e)
-    this.content = e;
-  }
+
+  imgArr:any[]=[];
+
+
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
-              private activityDetailService: ActivityDetailService) {
+              private activityDetailService: ActivityDetailService,
+              private message: NzMessageService) {
 
   }
 
@@ -45,112 +45,68 @@ export class ActivityDetailComponent implements OnInit {
     if(this.activityId>0){
       this.title = '修改试用活动信息'
       this.activityDetailService.getActivityInfo(this.activityId).subscribe((res)=>{
-        var activityInfo:ActivityInfo = res.data.project
-        console.log(activityInfo)
-        //店铺
-        // this.shopId = activityInfo.shop_id
-        //表单信息
-        this.setForm(activityInfo)
-        //图片信息
-        this.imgArr = activityInfo.thumb
-        //图文信息
-        this.content = activityInfo.content
+        this.activityInfo = res.data.project
+        console.log(this.activityInfo)
       })
     }else{
       this.title = '发布试用活动'
+      this.activityInfo.begin_at = this.nowTime.toDateString()
+      this.activityInfo.end_at = new Date(this.nowTime.setMonth(this.nowTime.getMonth() + 1)).toDateString()
     }
-  }
-
-  setForm(info){
-    var form = this.activityDetailForm.controls
-    form.shopId.setValue(info.shop_id)
-    form.postage.setValue(info.postage_type)
-    form.startTime.setValue(info.begin_at)
-    form.endTime.setValue(info.end_at)
-    form.productName.setValue(info.title)
-    // form.goodsType.setValue(activityInfo.goods_type)
-    form.quantity.setValue(info.number_of)
-    form.price.setValue(info.price)
-    form.taoBaoId.setValue(info.taobao_id)
-    form.coins.setValue(info.golds)
   }
 
   initForm(){
     this.nowTime = new Date()
     this.activityDetailForm = this.fb.group({
-      shopId: [ null, [ Validators.required ] ],
-      postage: [ null, [ Validators.required ] ],
-      startTime: [this.nowTime, [ Validators.required ]],
-      endTime: [ new Date(this.nowTime.setMonth(this.nowTime.getMonth() + 1)), [ Validators.required ] ],
-      productName: [ '', [ Validators.required ] ],
-      goodsType: [ '', [ Validators.required ] ],
-      quantity: [ '', [ Validators.required ] ],
-      price: [ '', [ Validators.required ] ],
-      taoBaoId: [ '', [ Validators.required ] ],
-      coins: [ '', [ Validators.required ] ],
+      shopId: [ this.activityInfo.shop_id, [ Validators.required ] ],
+      postage: [ this.activityInfo.postage_type, [ Validators.required ] ],
+      startTime: [this.activityInfo.begin_at, [ Validators.required ]],
+      endTime: [ this.activityInfo.end_at, [ Validators.required ] ],
+      productName: [ this.activityInfo.title,
+        [ Validators.required,Validators.maxLength(100) ] ],
+      imgArr: [ this.activityInfo.thumb],
+      goodsType: [ null],
+      quantity: [ this.activityInfo.number_of, [ Validators.required ] ],
+      price: [ this.activityInfo.price, [ Validators.required ] ],
+      taoBaoId: [ this.activityInfo.taobao_id, [ Validators.required ] ],
+      coins: [ this.activityInfo.golds, [ Validators.required ] ],
+      flow: [this.activityInfo.flow, [ Validators.required]],
+      content: [this.activityInfo.content, [ Validators.required]]
     })
   }
 
   //点击提交
   SubmitApplication(){
+    this.activityInfo.thumb=['https://www.baidu.com/img/bd_logo1.png?where=super'];
     console.log('点击提交申请')
-    if(this.verifyAll()){
-      console.log('验证通过')
-      const info = this.packUpInfo()
-      console.log(info)
-      if(this.activityId>0){
-        this.doEdit(info)
-      }else{
-        this.doAdd(info)
-      }
-    }
-  }
-  doAdd(info){
-    this.activityDetailService.addActivity(info).subscribe((res)=>{
-      console.log(res)
-    })
-  }
-  doEdit(info){
-    this.activityDetailService.editActivityInfo(this.activityId,info).subscribe((res)=>{
-      console.log(res)
-    })
-  }
-  //打包信息
-  packUpInfo(){
-    var form = this.activityDetailForm.controls
-    this.activityInfo = {
-      shop_id: form.shopId.value,
-      postage_type: form.postage.value,
-      begin_at: form.startTime.value,
-      end_at: form.endTime.value,
-      title: form.productName.value,
-      number_of: form.quantity.value,
-      taobao_id: form.taoBaoId.value,
-      golds: form.coins.value,
-      price: form.price.value,
-      content: this.content,
-      flow: null,
-      thumb: this.imgArr
-    }
-    return this.activityInfo
-  }
-  //验证所有
-  verifyAll() {
-    console.log('验证')
-
+    console.log(this.activityInfo)
     console.log(this.activityDetailForm)
-    console.log(this.imgArr)
-    console.log(this.content.length)
+    console.log('验证...')
+    console.log(this.activityDetailForm)
     if(this.activityDetailForm.invalid){
       console.log('invalid')
       return false
-    }else if(this.imgArr.length<=0){
-      return false
-    }else if(this.content.length<=0){
-      return false
     }else{
-      return true
+      console.log('验证通过')
+      console.log(this.activityInfo)
+      if(this.activityId>0){
+        this.doEdit()
+      }else{
+        this.doAdd()
+      }
     }
+  }
+  doAdd(){
+    this.activityDetailService.addActivity(this.activityInfo).subscribe((res)=>{
+      console.log(res)
+      this.message.success('添加成功')
+    })
+  }
+  doEdit(){
+    this.activityDetailService.editActivityInfo(this.activityId,this.activityInfo).subscribe((res)=>{
+      console.log(res)
+      this.message.success('修改成功')
+    })
   }
 
   //获取该商家所有店铺
@@ -159,11 +115,22 @@ export class ActivityDetailComponent implements OnInit {
     this.activityDetailService.getShops().subscribe((res)=>{
       console.log(res)
       this.shops = res.data
+      this.activityInfo.shop_id = this.shops[0].id
     })
   }
 
   callBackImg(e){
+    // console.log(e)
     this.activityInfo.thumb = e;
   }
+  callBackFlow(e){
+    this.activityInfo.flow = e;
+  }
+  callBackContent(e){
+    this.activityInfo.content = e;
+  }
 
+  getFormControl(name) {
+    return this.activityDetailForm.controls[ name ];
+  }
 }
