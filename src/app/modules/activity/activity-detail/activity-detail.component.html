@@ -67,7 +67,9 @@
           <label nz-form-item-required>商品图片</label>
         </div>
         <div nz-form-control nz-col [nzMd]="9" [nzSm]="14" [nzXs]="24">
-          <image-upload [max]="3" [imageData]="imgArr"></image-upload>
+          <!--<nz-input [(ngModel)]="activityInfo.thumb" formControlName="thumb" nzPlaceHolder="请上传主图" [nzSize]="'large'" style="display: none;"></nz-input>-->
+          <upload-qiniu [needNum]="3" [images]="imgArr" (callBack)="callBackImg($event)"></upload-qiniu>
+          <!--<image-upload [max]="3" [imageData]="imgArr"></image-upload>-->
         </div>
       </div>
       <!--<div nz-form-item nz-row>-->

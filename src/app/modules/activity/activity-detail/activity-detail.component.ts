@@ -162,4 +162,8 @@ export class ActivityDetailComponent implements OnInit {
     })
   }
 
+  callBackImg(e){
+    this.activityInfo.thumb = e;
+  }
+
 }
