@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {NzMessageService} from 'ng-zorro-antd';
+import {FinanceService} from '../finance.service';
+import {MERCHANT_GOLD_TYPE} from '../../../constant/dictionary';
 
 @Component({
   selector: 'app-consumption-record',
@@ -9,133 +11,44 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class ConsumptionRecordComponent implements OnInit {
 
   title = '商家消费记录'
-  validateForm: FormGroup
-  _startDate = ''
-  _endDate = ''
-  data = [
-    {
-      userId: '001',
-      type: '试用奖励',
-      shopName: 'XX淘宝店',
-      goodsName: '儿童玩具',
-      number: 60,
-      price: 10,
-      reward: 1,
-      total: '-600',
-      balance: '2300',
-      operationTime: '2018-05-20',
-      serialNum: '20180520111111'
-    },
-    {
-      userId: '001',
-      type: '试用奖励',
-      shopName: 'XX淘宝店',
-      goodsName: '儿童玩具',
-      number: 60,
-      price: 10,
-      reward: 1,
-      total: '-600',
-      balance: '2300',
-      operationTime: '2018-05-20',
-      serialNum: '20180520111111'
-    },
-    {
-      userId: '001',
-      type: '试用奖励',
-      shopName: 'XX淘宝店',
-      goodsName: '儿童玩具',
-      number: 60,
-      price: 10,
-      reward: 1,
-      total: '-600',
-      balance: '2300',
-      operationTime: '2018-05-20',
-      serialNum: '20180520111111'
-    },
-    {
-      userId: '001',
-      type: '试用奖励',
-      shopName: 'XX淘宝店',
-      goodsName: '儿童玩具',
-      number: 60,
-      price: 10,
-      reward: 1,
-      total: '-600',
-      balance: '2300',
-      operationTime: '2018-05-20',
-      serialNum: '20180520111111'
-    },
-    {
-      userId: '001',
-      type: '试用奖励',
-      shopName: 'XX淘宝店',
-      goodsName: '儿童玩具',
-      number: 60,
-      price: 10,
-      reward: 1,
-      total: '-600',
-      balance: '2300',
-      operationTime: '2018-05-20',
-      serialNum: '20180520111111'
-    },
-    {
-      userId: '001',
-      type: '试用奖励',
-      shopName: 'XX淘宝店',
-      goodsName: '儿童玩具',
-      number: 60,
-      price: 10,
-      reward: 1,
-      total: '-600',
-      balance: '2300',
-      operationTime: '2018-05-20',
-      serialNum: '20180520111111'
-    },
-    {
-      userId: '001',
-      type: '试用奖励',
-      shopName: 'XX淘宝店',
-      goodsName: '儿童玩具',
-      number: 60,
-      price: 10,
-      reward: 1,
-      total: '-600',
-      balance: '2300',
-      operationTime: '2018-05-20',
-      serialNum: '20180520111111'
-    },
-    {
-      userId: '001',
-      type: '试用奖励',
-      shopName: 'XX淘宝店',
-      goodsName: '儿童玩具',
-      number: 60,
-      price: 10,
-      reward: 1,
-      total: '-600',
-      balance: '2300',
-      operationTime: '2018-05-20',
-      serialNum: '20180520111111'
-    },
-    {
-      userId: '001',
-      type: '试用奖励',
-      shopName: 'XX淘宝店',
-      goodsName: '儿童玩具',
-      number: 60,
-      price: 10,
-      reward: 1,
-      total: '-600',
-      balance: '2300',
-      operationTime: '2018-05-20',
-      serialNum: '20180520111111'
-    },
-  ]
-  constructor(private fb: FormBuilder) { }
+  isLoading:boolean=false;
+  keyword:any;
+  page:any={current_page:1,per_page:10,total: 0,data:[]};
+
+  goldType:any[]=MERCHANT_GOLD_TYPE;
+
+  constructor(private message:NzMessageService,
+              private financeService:FinanceService) { }
 
   ngOnInit() {
-    this.validateForm = this.fb.group({
-      textInput: [ '', [ Validators.required ] ]
+    this.initPage();
+  }
+
+  initPage(){
+    this.isLoading = true;
+    this.page.keyword = this.keyword;
+    this.page.in_out = 1;//1消费2充值
+    this.financeService.pagination(this.page).subscribe((resp)=>{
+      if(resp.status=="success"){
+        this.page = resp.data;
+      }else {
+        this.message.warning(resp.message);
+      }
+      this.isLoading = false;
+    },error=>{
+      console.log(error)
+      this.isLoading = false;
     })
   }
+  search(){
+    this.page={current_page:1,per_page:10,total: 0,data:[]};
+    this.initPage();
+  }
+
+  changePageNo(pageNo){
+    this.page={current_page:1,per_page:10,total: 0,data:[]};
+    this.page.page=pageNo;
+    this.initPage();
+  }
+
 }

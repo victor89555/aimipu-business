@@ -14,6 +14,7 @@ import {RebirthPermissionModule} from 'rebirth-permission';
 import {RebirthHttpModule} from 'rebirth-http';
 import {RebirthStorageModule} from 'rebirth-storage';
 import {ActivityDetailService} from './modules/activity/activity-detail/activity-detail.service';
+import {FinanceService} from './modules/finance/finance.service';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {ActivityDetailService} from './modules/activity/activity-detail/activity
     CacheService,
     LoggerService,
     AppService,
-    ActivityDetailService
+    ActivityDetailService,
+    FinanceService
   ],
   bootstrap: [AppComponent]
 })

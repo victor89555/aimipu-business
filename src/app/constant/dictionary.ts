@@ -96,3 +96,19 @@ export const ARTICLE_PUB_STATUS = [
     key: 3
   }
 ]
+
+// 商家消费类型 1邀请奖励  2余额充值 3试用消费 。。。
+export const MERCHANT_GOLD_TYPE = [
+  {
+    value: '邀请奖励',
+    key: 1
+  },
+  {
+    value: '余额充值',
+    key: 2
+  },
+  {
+    value: '试用消费',
+    key: 3
+  },
+]

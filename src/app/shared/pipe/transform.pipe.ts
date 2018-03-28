@@ -102,7 +102,7 @@ export class DicsNamePipe implements PipeTransform {
     if(!myValidNull(desc)){
       descName = desc;
     }
-    let result = "";
+    let result = value;
     for (let obj of groupDicts) {
       if(obj[keyName]==value){
         result = obj[descName];

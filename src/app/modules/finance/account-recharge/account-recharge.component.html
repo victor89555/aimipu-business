@@ -1,4 +1,48 @@
-<!--<div class="page-title">{{title}}</div>-->
+<nz-tabset>
+  <nz-tab >
+    <ng-template #nzTabHeading>
+      {{title}}
+    </ng-template>
+    <!--<div style="margin-bottom: 20px;">
+      <nz-input  [nzPlaceHolder]="'姓名、邮箱'"  [(ngModel)]="keyword" [nzSize]="'large'" style = "width: 20%;"></nz-input>
+      <button nz-button [nzType]="'primary'" nzGhost [nzSize]="'large'" (click)="search()">
+        <i class="anticon anticon-search"></i><span>搜索</span>
+      </button>
+    </div>-->
+    <nz-table #nzTable   [nzAjaxData]="page.data"
+              [nzPageSize]="page.per_page"
+              [nzTotal]="page.total"
+              [nzPageIndex]="page.current_page"
+              (nzPageIndexChangeClick)="changePageNo($event)"
+              [nzLoading]="isLoading"
+              [nzShowTotal]="true">
+      <thead nz-thead>
+      <tr>
+        <th nz-th><span>序号</span></th>
+        <th nz-th><span>充值金额</span></th>
+        <th nz-th><span>类型</span></th>
+        <th nz-th><span>充值时间</span></th>
+        <th nz-th><span>操作时间</span></th>
+        <th nz-th><span>操作人员</span></th>
+      </tr>
+      </thead>
+      <tbody nz-tbody>
+      <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index;">
+        <td nz-td>{{i+1}}</td>
+        <td nz-td>{{data.golds}}</td>
+        <td nz-td>{{data.type|dicsNamePipe:goldType:"key":"value"}}</td>
+        <td nz-td>{{data.recharge_at}}</td>
+        <td nz-td>{{data.created_at}}</td>
+        <td nz-td>{{data.operate_user_name}}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+</nz-tabset>
+
+
+<!--
+
 <nz-tabset>
   <nz-tab >
     <ng-template #nzTabHeading>
@@ -46,3 +90,4 @@
 </nz-table>
   </nz-tab>
 </nz-tabset>
+-->
