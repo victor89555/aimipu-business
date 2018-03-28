@@ -15,6 +15,8 @@ import {RebirthHttpModule} from 'rebirth-http';
 import {RebirthStorageModule} from 'rebirth-storage';
 import {ActivityDetailService} from './modules/activity/activity-detail/activity-detail.service';
 import {FinanceService} from './modules/finance/finance.service';
+import {UsersService} from './modules/users/users.service';
+import {CurrUserService} from './shared/service/curr-user.service';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import {FinanceService} from './modules/finance/finance.service';
     LoggerService,
     AppService,
     ActivityDetailService,
-    FinanceService
+    FinanceService,
+    UsersService,
+    CurrUserService
   ],
   bootstrap: [AppComponent]
 })

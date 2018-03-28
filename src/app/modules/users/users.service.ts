@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {BaseUrl, POST, RebirthHttp} from 'rebirth-http';
+import {BaseUrl, Body, POST, RebirthHttp} from 'rebirth-http';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../environments/environment';
@@ -18,6 +18,14 @@ export class UsersService extends RebirthHttp {
 
   @POST('/api/merchant/me')
   loadUserInfo(): Observable<User>{
+    return null
+  }
+  @POST('/api/merchant/update')
+  updateUserInfo(@Body user: any): Observable<any>{
+    return null
+  }
+  @POST('/api/merchant/reset')
+  resetPwd(@Body user: any): Observable<any>{
     return null
   }
 }

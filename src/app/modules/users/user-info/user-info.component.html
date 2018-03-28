@@ -7,67 +7,36 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
   <div nz-form-item nz-row>
     <div nz-form-label nz-col [nzSm]="4" [nzXs]="24">
-      <label  nz-form-item-required>登录名</label>
+      <label  nz-form-item-required>姓名</label>
     </div>
-    <div nz-form-control nz-col [nzSm]="8" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('loginName')">
-      <nz-input [nzSize]="'large'" formControlName="loginName" [(ngModel)]="user.loginName" [nzId]="'loginName'" [nzPlaceHolder]="'输入登录名'"></nz-input>
-      <div nz-form-explain *ngIf="getFormControl('loginName').dirty&&getFormControl('loginName').hasError('required')">请输入登录名</div>
-      <div nz-form-explain *ngIf="getFormControl('loginName').dirty&&getFormControl('loginName').hasError('maxlength')">不能超过20个字</div>
-    </div>
-    <div nz-form-label nz-col [nzSm]="4" [nzXs]="24">
-      <label nz-form-item-required>昵称</label>
-    </div>
-    <div nz-form-control nz-col [nzSm]="8" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('nickName')">
-      <nz-input [nzSize]="'large'" formControlName="nickName" [(ngModel)]="user.nickName" [nzId]="'nickName'" [nzPlaceHolder]="'请输入昵称'"></nz-input>
-      <div nz-form-explain *ngIf="getFormControl('nickName').dirty&&getFormControl('nickName').hasError('required')">请输入昵称</div>
-      <div nz-form-explain *ngIf="getFormControl('nickName').dirty&&getFormControl('nickName').hasError('maxlength')">不能超过20个字</div>
+    <div nz-form-control nz-col [nzSm]="12" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('name')">
+      <nz-input [nzSize]="'large'" formControlName="name" [(ngModel)]="user.name" [nzPlaceHolder]="'输入姓名'"></nz-input>
+      <div nz-form-explain *ngIf="getFormControl('name').dirty&&getFormControl('name').hasError('required')">请输入登录名</div>
+      <div nz-form-explain *ngIf="getFormControl('name').dirty&&getFormControl('name').hasError('maxlength')">不能超过20个字</div>
     </div>
   </div>
   <div nz-form-item nz-row>
     <div nz-form-label nz-col [nzSm]="4" [nzXs]="24">
       <label nz-form-item-required>手机号码</label>
     </div>
-    <div nz-form-control nz-col [nzSm]="8" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('mobile')">
-      <nz-input [nzSize]="'large'" formControlName="mobile" [(ngModel)]="user.mobile" [nzId]="'mobile'"  [nzPlaceHolder]="'输入手机号码'"></nz-input>
-      <div nz-form-explain *ngIf="getFormControl('mobile').dirty&&getFormControl('mobile').hasError('required')">请输入手机号码</div>
-      <div nz-form-explain *ngIf="getFormControl('mobile').dirty&&getFormControl('mobile').hasError('mobileValidate')">手机号码格式不正确</div>
-    </div>
-    <div nz-form-label nz-col [nzSm]="4" [nzXs]="24">
-      <label nz-form-item-required>Email</label>
-    </div>
-    <div nz-form-control nz-col [nzSm]="8" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('email')">
-      <nz-input [nzSize]="'large'" formControlName="email" [(ngModel)]="user.email" [nzId]="'email'"  [nzPlaceHolder]="'输入Email'"></nz-input>
-      <div nz-form-explain *ngIf="getFormControl('email').dirty&&getFormControl('email').hasError('email')">邮箱格式不正确</div>
-      <div nz-form-explain *ngIf="getFormControl('email').dirty&&getFormControl('email').hasError('maxlength')">不能超过50个字</div>
+    <div nz-form-control nz-col [nzSm]="12" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('phone')">
+      <nz-input [nzSize]="'large'" formControlName="phone" [(ngModel)]="user.phone" [nzPlaceHolder]="'输入手机号码'"></nz-input>
+      <div nz-form-explain *ngIf="getFormControl('phone').dirty&&getFormControl('phone').hasError('required')">请输入手机号码</div>
+      <div nz-form-explain *ngIf="getFormControl('phone').dirty&&getFormControl('phone').hasError('mobileValidate')">手机号码格式不正确</div>
     </div>
   </div>
+
   <div nz-form-item nz-row>
     <div nz-form-label nz-col [nzSm]="4" [nzXs]="24">
-      <label >头像</label>
+      <label nz-form-item-required>QQ</label>
     </div>
-    <div nz-form-control nz-col [nzSm]="8" [nzXs]="24" nz-form-control [nzValidateStatus]="getFormControl('headImg')">
-      <nz-avatar *ngIf="user.headImg" style="cursor: pointer;" nzIcon="user" nzSrc="{{qiniuDomain+user.headImg}}" nzSize="large" (click)="toSelectFile()"></nz-avatar>
-      <nz-avatar *ngIf="!user.headImg" style="cursor: pointer;" nzText="LOGO" nzSize="large" (click)="toSelectFile()"></nz-avatar>
-      <input type="file"  id="headImg" style="display: none" (change)="onAfterSelect($event)" accept=".jpg,.png,.jpeg">
-      <nz-input formControlName="headImg" [(ngModel)]="user.headImg"  style="display: none" [nzSize]="'large'"></nz-input>
-      <div nz-form-explain *ngIf="getFormControl('headImg').dirty&&getFormControl('headImg').hasError('required')">请上传头像</div>
-    </div>
-
-    <div nz-form-label nz-col [nzSm]="4" [nzXs]="24">
-      <label nz-form-item-required>性别</label>
-    </div>
-    <div nz-form-control nz-col [nzSm]="8" [nzXs]="24" [nzValidateStatus]="getFormControl('sex')">
-      <nz-radio-group formControlName="sex" [(ngModel)]="user.sex">
-        <label nz-radio [nzValue]="1">
-          <span>男</span>
-        </label>
-        <label nz-radio [nzValue]="0">
-          <span>女</span>
-        </label>
-      </nz-radio-group>
-      <div nz-form-explain *ngIf="getFormControl('sex').dirty&&getFormControl('sex').hasError('required')">请选择性别</div>
+    <div nz-form-control nz-col [nzSm]="12" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('qq')">
+      <nz-input [nzSize]="'large'" formControlName="qq" [(ngModel)]="user.qq" [nzPlaceHolder]="'输入QQ'"></nz-input>
+      <div nz-form-explain *ngIf="getFormControl('qq').dirty&&getFormControl('qq').hasError('required')">请输入QQ</div>
+      <div nz-form-explain *ngIf="getFormControl('qq').dirty&&getFormControl('qq').hasError('maxlength')">不能超过20个字</div>
     </div>
   </div>
+
   <div nz-form-item nz-row class="customize-footer" >
     <div nz-form-control nz-col [nzSpan]="14" [nzOffset]="3">
       <button nz-button type="submit" [disabled]="isLoading" [nzType]="'primary'" [nzSize]="'large'"><!-- (click)="emitDataOutside($event)"-->

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UsersService} from '../../../shared/service/users.service';
 import {NzMessageService} from 'ng-zorro-antd';
+import {UsersService} from '../users.service';
 
 @Component({
   selector: 'app-account-security',
   templateUrl: './account-security.component.html',
   styleUrls: ['./account-security.component.scss'],
-  providers: [UsersService]
+  providers: []
 })
 export class AccountSecurityComponent implements OnInit {
 
@@ -22,22 +22,22 @@ export class AccountSecurityComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      newPassword :            [ '', [ Validators.required,Validators.minLength(6) ,Validators.maxLength(36)] ],
-      passwordConfirmation: [ '', [ this.passwordConfirmationValidator ,Validators.minLength(6),Validators.maxLength(36)] ],
-      oldPassword :         ['', [ Validators.required ,Validators.maxLength(36)] ],
+      password :            [ '', [ Validators.required,Validators.minLength(6) ,Validators.maxLength(20)] ],
+      password_confirmation: [ '', [ this.passwordConfirmationValidator ,Validators.minLength(6),Validators.maxLength(20)] ],
+      old_password :         ['', [ Validators.required ,Validators.maxLength(20)] ],
     });
   }
 
   passwordConfirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return { required: true };
-    } else if (control.value !== this.validateForm.controls[ 'newPassword' ].value) {
+    } else if (control.value !== this.validateForm.controls[ 'password' ].value) {
       return { confirm: true, error: true };
     }
   };
   validateConfirmPassword() {
     setTimeout(_ => {
-      this.validateForm.controls[ 'passwordConfirmation' ].updateValueAndValidity();
+      this.validateForm.controls[ 'password_confirmation' ].updateValueAndValidity();
     })
   }
 
@@ -48,9 +48,9 @@ export class AccountSecurityComponent implements OnInit {
       }
     }else {
       this.isLoading = true;
-      this.userService.modifyPassword(this.user).then((user)=>{
+      this.userService.resetPwd(this.user).subscribe((resp)=>{
         //修改成功
-        this._message.success("修改成功！");
+        this._message.success(resp.message);
         this.isLoading = false;
       },(error)=>{
         console.error("保存出错：",error);
@@ -64,5 +64,6 @@ export class AccountSecurityComponent implements OnInit {
   getFormControl(name) {
     return this.validateForm.controls[ name ];
   }
+
 
 }
