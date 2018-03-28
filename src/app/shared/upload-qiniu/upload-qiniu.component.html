@@ -1,0 +1,12 @@
+<div nz-row>
+  <div nz-col [nzSpan]="24">
+    <div class="activity-image" *ngFor="let img of images;let i = index;">
+      <a href="javascript:;">
+        <img src="{{download+img.src}}" (click)="changeImg($event,i)" title="点击进行修改" alt="加载失败">
+        <span title="点击删除" class="v-close" (click)="delImg(i)"></span>
+      </a>
+    </div>
+    <input id="upload-img" style="display: none;" type="file" accept=".jpg,.png,.jpeg"  (change)="onAfterSelect($event)">
+    <div class="activity-image addbtn" [ngStyle]="{'display':images.length<needNum ? 'block' : 'none' }" (click)="toSelectImage($event)"></div>
+  </div>
+</div>

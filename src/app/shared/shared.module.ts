@@ -11,6 +11,7 @@ import { MyEditorComponent } from './my-editor/my-editor.component';
 import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 import {ImageUploadComponent} from '../modules/activity/image-upload/image-upload.component';
 import {RebirthPermissionModule} from 'rebirth-permission';
+import {UploadQiniuComponent} from './upload-qiniu/upload-qiniu.component';
 
 @NgModule({
   imports: [
@@ -37,9 +38,10 @@ import {RebirthPermissionModule} from 'rebirth-permission';
     FroalaViewModule,
     ImageUploadComponent,
     RebirthPermissionModule,
+    UploadQiniuComponent
   ],
   entryComponents:[],
-  declarations: [MyEditorComponent,ImageUploadComponent],
+  declarations: [MyEditorComponent,ImageUploadComponent,UploadQiniuComponent],
   providers:[
     ModalHelper
   ]

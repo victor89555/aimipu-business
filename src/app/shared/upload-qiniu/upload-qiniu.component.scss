@@ -1,0 +1,43 @@
+.activity-image {
+  float: left;
+  width: 90px;
+  height: 60px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #dddddd;
+  &>a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    line-height: 60px;
+    &>img {
+      max-width: 80px;
+      max-height: 50px;
+      height: auto;
+      width: auto;
+    }
+
+    &>.v-close{
+      width: 25px;
+      height: 25px;
+      background-image: url("../../../assets/img/close.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: absolute;
+      top: -15px;
+      right: -15px;
+    }
+  }
+  &.addbtn {
+    background-image: url("../../../assets/img/add-image-btn.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 80px 50px;
+    cursor: pointer;
+  }
+
+}
