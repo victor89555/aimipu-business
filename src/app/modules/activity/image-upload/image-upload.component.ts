@@ -37,6 +37,7 @@ export class ImageUploadComponent implements OnInit {
   constructor(private imageService: ImageService) { }
 
   ngOnInit() {
+    console.log(this.imageData)
   }
 
   toSelectImage() {
@@ -79,7 +80,7 @@ export class ImageUploadComponent implements OnInit {
     function toPreviewer(img) {
       console.dir(img)
 
-      _this.imageData.push(img)
+      _this.imageData.push(img.src)
     }
 
     function compress(img, fileType) {

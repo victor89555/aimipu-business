@@ -41,6 +41,8 @@ const routes: Routes = [
     TrialApplicationDetailsComponent,
     TrialApplicationListComponent,
     TrialReportListComponent
+  ],
+  providers: [
   ]
 })
 

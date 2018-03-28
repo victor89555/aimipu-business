@@ -10,6 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { MyEditorComponent } from './my-editor/my-editor.component';
 import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 import {ImageUploadComponent} from '../modules/activity/image-upload/image-upload.component';
+import {RebirthPermissionModule} from 'rebirth-permission';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {ImageUploadComponent} from '../modules/activity/image-upload/image-uploa
     TransformModule,
     DirectiveModule,
     NgZorroAntdModule.forRoot(),
-    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
+    RebirthPermissionModule,
   ],
   exports:[
     CommonModule,
@@ -34,6 +36,7 @@ import {ImageUploadComponent} from '../modules/activity/image-upload/image-uploa
     FroalaEditorModule,
     FroalaViewModule,
     ImageUploadComponent,
+    RebirthPermissionModule,
   ],
   entryComponents:[],
   declarations: [MyEditorComponent,ImageUploadComponent],

@@ -5,8 +5,8 @@
      (fileDrop)="fileChange($event)"
      [ngClass]="{'file-is-over': isFileOver}"
 >
-  <a href="javascript:;" class="activity-image" *ngFor="let img of imageData; let i = index;">
-    <img src={{img.src}}>
+  <a href="javascript:;" class="activity-image" *ngFor="let src of imageData; let i = index;">
+    <img src={{src}}>
     <a class="v-close" href="javasctipt:;" (click)="delImg(i)"></a>
   </a>
   <div *ngIf="canAdd" class="activity-image addbtn" (click)="toSelectImage()">

@@ -1,5 +1,5 @@
-export class ActivityDetailForm {
-  shop_Id: number
+export class ActivityInfo {
+  shop_id: number
   postage_type: number
   begin_at: string
   end_at: string

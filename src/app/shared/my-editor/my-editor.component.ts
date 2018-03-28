@@ -45,9 +45,9 @@ export class MyEditorComponent implements OnInit,DoCheck {
 
   ngOnInit() {
     //初始化token以备第一次上传使用
-    this.appService.getToken(1).then((token:QiniuUploadToken)=> {
-      this.token = token[0]
-    })
+    // this.appService.getToken(1).then((token:QiniuUploadToken)=> {
+    //   this.token = token[0]
+    // })
     this.initFroala();
   }
 

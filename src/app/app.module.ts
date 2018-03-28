@@ -12,6 +12,8 @@ import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RebirthPermissionModule} from 'rebirth-permission';
 import {RebirthHttpModule} from 'rebirth-http';
+import {RebirthStorageModule} from 'rebirth-storage';
+import {ActivityDetailService} from './modules/activity/activity-detail/activity-detail.service';
 
 
 @NgModule({
@@ -25,12 +27,14 @@ import {RebirthHttpModule} from 'rebirth-http';
     AppRoutingModule,
     ModulesModule,
     RebirthHttpModule,
+    RebirthStorageModule,
     RebirthPermissionModule.forRoot({ loginPage: '/login' }),
   ],
   providers: [
     CacheService,
     LoggerService,
-    AppService
+    AppService,
+    ActivityDetailService
   ],
   bootstrap: [AppComponent]
 })
