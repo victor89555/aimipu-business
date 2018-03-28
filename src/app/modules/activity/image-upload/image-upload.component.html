@@ -1,9 +1,7 @@
 <div class="image-upload"
      fileDrop
      [accept]="['image/*']"
-     (isFileOver)="fileOver($event)"
      (fileDrop)="fileChange($event)"
-     [ngClass]="{'file-is-over': isFileOver}"
 >
   <a href="javascript:;" class="activity-image" *ngFor="let src of imageData; let i = index;">
     <img src={{src}}>

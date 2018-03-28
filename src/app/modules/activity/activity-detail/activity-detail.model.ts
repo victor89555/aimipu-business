@@ -1,6 +1,6 @@
 export class ActivityInfo {
   shop_id: number
-  postage_type: number
+  postage_type: number = 1
   begin_at: string
   end_at: string
   title: string
@@ -10,5 +10,5 @@ export class ActivityInfo {
   price: number
   content: string
   flow: string
-  thumb: any[]
+  thumb: any[] = []
 }
