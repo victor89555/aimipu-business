@@ -83,7 +83,7 @@ export class ActivityDetailComponent implements OnInit {
       startTime: [this.nowTime, [ Validators.required ]],
       endTime: [ new Date(this.nowTime.setMonth(this.nowTime.getMonth() + 1)), [ Validators.required ] ],
       productName: [ '', [ Validators.required ] ],
-      type: [ '', [ Validators.required ] ],
+      goodsType: [ '', [ Validators.required ] ],
       quantity: [ '', [ Validators.required ] ],
       price: [ '', [ Validators.required ] ],
       taoBaoId: [ '', [ Validators.required ] ],
@@ -95,7 +95,9 @@ export class ActivityDetailComponent implements OnInit {
   SubmitApplication(){
     console.log('点击提交申请')
     if(this.verifyAll()){
+      console.log('验证通过')
       const info = this.packUpInfo()
+      console.log(info)
       if(this.activityId>0){
         this.doEdit(info)
       }else{
@@ -134,9 +136,12 @@ export class ActivityDetailComponent implements OnInit {
   }
   //验证所有
   verifyAll() {
-    var b = false
     console.log('验证')
-    if(this.activityDetailForm.valid){
+    console.log(this.activityDetailForm)
+    console.log(this.imgArr)
+    console.log(this.content.length)
+    if(this.activityDetailForm.invalid){
+      console.log('invalid')
       return false
     }else if(this.imgArr.length<=0){
       return false
