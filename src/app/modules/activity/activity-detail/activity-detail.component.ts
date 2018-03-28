@@ -137,6 +137,7 @@ export class ActivityDetailComponent implements OnInit {
   //验证所有
   verifyAll() {
     console.log('验证')
+
     console.log(this.activityDetailForm)
     console.log(this.imgArr)
     console.log(this.content.length)
