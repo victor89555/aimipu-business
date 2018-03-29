@@ -35,40 +35,67 @@ export class ActivityService extends RebirthHttp{
 
   //试用管理分页列表
   @POST('/api/merchant/project/pagination')
-  query(@Body page):Observable<any>{
+  query1(@Body page):Observable<any>{
     return null
   }
 
   getPending(page):Observable<any>{
     page.auditing_status = 1
-    return this.query(page).map((res)=>{
+    return this.query1(page).map((res)=>{
       return res
     })
   }
   getPassed(page):Observable<any>{
     page.auditing_status = 2
-    return this.query(page).map((res)=>{
+    return this.query1(page).map((res)=>{
       return res
     })
   }
   getFailed(page):Observable<any>{
     page.auditing_status = 3
-    return this.query(page).map((res)=>{
+    return this.query1(page).map((res)=>{
       return res
     })
   }
   getPublished(page):Observable<any>{
     page.auditing_status = 4
-    return this.query(page).map((res)=>{
+    return this.query1(page).map((res)=>{
       return res
     })
   }
   getDone(page):Observable<any>{
     page.auditing_status = 5
-    return this.query(page).map((res)=>{
+    return this.query1(page).map((res)=>{
       return res
     })
   }
 
+  //试用申请列表
+  @POST('api/merchant/apply/pagination')
+  query2(@Body page):Observable<any>{
+    return null
+  }
+  getApplicationList(page):Observable<any>{
+    page.type = 1
+    return this.query2(page).map((res)=>{
+      return res
+    })
+  }
+  getReportList(page):Observable<any>{
+    page.type = 2
+    return this.query2(page).map((res)=>{
+      return res
+    })
+  }
+
+  //审核申请试用状态 0试用终止 1待审核 2待提交 3待修改 4待确认 5已完成 6审核不通过
+  //failed_reason 状态 0、6 时必填
+  //turned_reason 状态 3 时必填
+  @PUT('/api/merchant/apply/:id')
+  changeApplicationStatus(@Path('id') applicationId:number,@Body content):Observable<any>{
+    return null
+  }
+  //审核不通过
 
 }
+
