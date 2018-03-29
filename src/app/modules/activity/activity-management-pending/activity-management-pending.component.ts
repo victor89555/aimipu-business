@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ACTIVITY_AUDITING_STATUS} from '../../../constant/dictionary';
+import {ActivityService} from '../share/service/activity.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'activity-management-pending',
@@ -9,236 +12,45 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class ActivityManagementPendingComponent implements OnInit {
 
   title = '待审核活动'
-  data = [
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30'
-    },
-  ];
+  isLoading:boolean = false
+  keyword:string = ''
+  page:any = {current_page:1,per_page:10,total: 0,data:[]}
+  activity_status = ACTIVITY_AUDITING_STATUS
 
   validateForm: FormGroup;
 
-  _submitForm() {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[ i ].markAsDirty();
-    }
+  constructor(private fb: FormBuilder,
+              private activityService: ActivityService,
+              private router: Router) {
   }
 
-  constructor(private fb: FormBuilder) {
+  _submitForm() {
+    this.getPendingData()
   }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      userName: [ null, [ Validators.required ] ],
-      password: [ null, [ Validators.required ] ],
-      select: [ 1 ],
+      keyword: [ this.keyword ],
     });
+    this.getPendingData()
+  }
+
+  getPendingData(){
+    this.isLoading = true
+    this.page.keyword = this.keyword
+    this.activityService.getPending(this.page).subscribe((res)=>{
+      this.page = res.data
+      this.isLoading = false
+    })
+  }
+
+  changePageNo(pageNo){
+    this.page={current_page:1,per_page:10,total: 0,data:[]}
+    this.page.page=pageNo
+    this.getPendingData()
+  }
+  editActivityInfo(id){
+    this.router.navigateByUrl('/auth-guard/activity/activity-detail/'+id)
   }
 
 }

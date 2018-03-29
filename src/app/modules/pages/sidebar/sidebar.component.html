@@ -43,20 +43,26 @@
             <i class="anticon anticon-home"></i>首页
           </a>
         </li>
-        <li nz-submenu nzOpen="false" routerLinkActive="ant-menu-submenu-selected" [routerLinkActiveOptions]="{ exact: true }">
+        <li nz-submenu nzOpen="true" routerLinkActive="ant-menu-submenu-selected" [routerLinkActiveOptions]="{ exact: true }">
           <span title><i class="anticon anticon-flag"></i>试用活动管理</span>
           <ul>
             <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
               <a routerLink="/auth-guard/activity/activity-detail/0">发布试用</a>
             </li>
             <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
-              <a routerLink="/auth-guard/activity/activity-published">已发布</a>
-            </li>
-            <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
               <a routerLink="/auth-guard/activity/activity-pending">待审核</a>
             </li>
             <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
+              <a routerLink="/auth-guard/activity/activity-passed">已通过</a>
+            </li>
+            <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
+              <a routerLink="/auth-guard/activity/activity-published">已发布</a>
+            </li>
+            <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
               <a routerLink="/auth-guard/activity/activity-over">已完成</a>
+            </li>
+            <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
+              <a routerLink="/auth-guard/activity/activity-fail">未通过</a>
             </li>
           </ul>
         </li>

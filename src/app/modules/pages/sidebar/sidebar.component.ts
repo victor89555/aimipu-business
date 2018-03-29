@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {CacheService} from '../../../shared/service/cache.service';
-import {User} from '../../users/user.model';
 import {CurrUserService} from '../../../shared/service/curr-user.service';
 import {CurrUserModel} from '../../../shared/models/curr-user.model';
 

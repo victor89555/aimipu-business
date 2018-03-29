@@ -10,14 +10,18 @@ import {ActivityManagementPublishedComponent} from './activity-management-publis
 import {ActivityManagementPendingComponent} from './activity-management-pending/activity-management-pending.component';
 import { TrialApplicationListComponent } from './trial-application-list/trial-application-list.component';
 import { TrialReportListComponent } from './trial-report-list/trial-report-list.component';
+import { ActivityManagmentPassedComponent } from './activity-managment-passed/activity-managment-passed.component';
+import { ActivityManagmentFailComponent } from './activity-managment-fail/activity-managment-fail.component';
 
 const routes: Routes = [
   { path: 'activity-detail/:id', component: ActivityDetailComponent },
   { path: 'activity-published', component: ActivityManagementPublishedComponent },
   { path: 'activity-pending', component: ActivityManagementPendingComponent },
   { path: 'activity-over', component: ActivityManagementOverComponent },
-  { path: 'application-details', component: TrialApplicationDetailsComponent},
-  { path: 'report-details', component: TrialReportDetailsComponent},
+  { path: 'activity-passed', component: ActivityManagmentPassedComponent },
+  { path: 'activity-fail', component: ActivityManagmentFailComponent },
+  { path: 'application-details/:id', component: TrialApplicationDetailsComponent},
+  { path: 'report-details/:id', component: TrialReportDetailsComponent},
   { path: 'application-list', component: TrialApplicationListComponent},
   { path: 'report-list', component: TrialReportListComponent},
 ];
@@ -40,9 +44,9 @@ const routes: Routes = [
     TrialReportDetailsComponent,
     TrialApplicationDetailsComponent,
     TrialApplicationListComponent,
-    TrialReportListComponent
-  ],
-  providers: [
+    TrialReportListComponent,
+    ActivityManagmentPassedComponent,
+    ActivityManagmentFailComponent
   ]
 })
 

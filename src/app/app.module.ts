@@ -13,8 +13,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RebirthPermissionModule} from 'rebirth-permission';
 import {RebirthHttpModule} from 'rebirth-http';
 import {RebirthStorageModule} from 'rebirth-storage';
-import {ActivityDetailService} from './modules/activity/activity-detail/activity-detail.service';
 import {FinanceService} from './modules/finance/finance.service';
+import {ActivityService} from './modules/activity/share/service/activity.service';
 import {UsersService} from './modules/users/users.service';
 import {CurrUserService} from './shared/service/curr-user.service';
 import {ShopService} from './modules/users/shop-management/shop.service';
@@ -38,7 +38,7 @@ import {ShopService} from './modules/users/shop-management/shop.service';
     CacheService,
     LoggerService,
     AppService,
-    ActivityDetailService,
+    ActivityService,
     FinanceService,
     UsersService,
     CurrUserService,

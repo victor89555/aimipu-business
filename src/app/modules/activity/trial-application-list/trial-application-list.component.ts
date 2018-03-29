@@ -10,97 +10,26 @@ export class TrialApplicationListComponent implements OnInit {
 
   title = '试用申请列表'
   validateForm: FormGroup;
+  keyword:string = ''
   _startDate = ''
   _endDate = ''
-  data = [
-    {
-      id: 1,
-      shopName: '某某淘宝店',
-      source: '淘宝',
-      postage: '邮费',
-      number: 100,
-      price: 20,
-      endTime: '2018-02-25'
-    },
-    {
-      id: 1,
-      shopName: '某某淘宝店',
-      source: '淘宝',
-      postage: '邮费',
-      number: 100,
-      price: 20,
-      endTime: '2018-02-25'
-    },
-    {
-      id: 1,
-      shopName: '某某淘宝店',
-      source: '淘宝',
-      postage: '免邮费',
-      number: 100,
-      price: 20,
-      endTime: '2018-02-25'
-    },
-    {
-      id: 1,
-      shopName: '某某淘宝店',
-      source: '淘宝',
-      postage: '邮费',
-      number: 100,
-      price: 20,
-      endTime: '2018-02-25'
-    },
-    {
-      id: 1,
-      shopName: '某某淘宝店',
-      source: '淘宝',
-      postage: '邮费',
-      number: 100,
-      price: 20,
-      endTime: '2018-02-25'
-    },
-    {
-      id: 1,
-      shopName: '某某淘宝店',
-      source: '淘宝',
-      postage: '邮费',
-      number: 100,
-      price: 20,
-      endTime: '2018-02-25'
-    },
-    {
-      id: 1,
-      shopName: '某某淘宝店',
-      source: '淘宝',
-      postage: '邮费',
-      number: 100,
-      price: 20,
-      endTime: '2018-02-25'
-    },
-    {
-      id: 1,
-      shopName: '某某淘宝店',
-      source: '淘宝',
-      postage: '邮费',
-      number: 100,
-      price: 20,
-      endTime: '2018-02-25'
-    },
-    {
-      id: 1,
-      shopName: '某某淘宝店',
-      source: '淘宝',
-      postage: '邮费',
-      number: 100,
-      price: 20,
-      endTime: '2018-02-25'
-    },
-  ]
+  page:any = {current_page:1,per_page:10,total: 0,data:[]}
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      textInput: [ '', [ Validators.required ] ]
+      keyword: [ this.keyword],
+      startDate: [this._startDate],
+      endDate: [this._endDate]
     })
+  }
+
+  _submitForm(){
+
+  }
+
+  getApplicationInfo(){
+
   }
 
 }

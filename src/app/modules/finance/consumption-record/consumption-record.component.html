@@ -32,7 +32,7 @@
       </thead>
       <tbody nz-tbody>
       <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index;">
-        <td nz-td>{{i+1}}</td>
+        <td nz-td>{{(page.current_page-1)*page.per_page+i+1}}</td>
         <td nz-td>{{data.type|dicsNamePipe:goldType:"key":"value"}}</td>
         <td nz-td>{{data.title}}</td>
         <td nz-td>{{data.number_of}}</td>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivityService} from '../share/service/activity.service';
+import {ACTIVITY_AUDITING_STATUS} from '../../../constant/dictionary';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'activity-management-published',
@@ -9,86 +12,50 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class ActivityManagementPublishedComponent implements OnInit {
 
   title = '已发布活动'
-  data = [
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30',
-      status: 1,
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30',
-      status: 2,
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30',
-      status: 1,
-    },
-    {
-      title: '商品标题',
-      source: '淘宝',
-      shopName: 'xxxx淘宝店',
-      issuedQuantity: 50,
-      releaseTime: '2018-02-28',
-      applicationNum: 100,
-      submittedNum: 20,
-      submitTime: '2018-02-28',
-      applicationStatus: '待审核',
-      auditOpinion: '审核意见详情内容随便写',
-      activityTime: '2018-02-28~2018-04-01',
-      totalNum: '100/50/45/30',
-      status: 2,
-    },
-  ];
+  isLoading:boolean = false
+  keyword:string = ''
+  page:any = {current_page:1,per_page:10,total: 0,data:[]}
+  activity_status = ACTIVITY_AUDITING_STATUS
 
   validateForm: FormGroup;
 
-  _submitForm() {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[ i ].markAsDirty();
-    }
+  constructor(private fb: FormBuilder,
+              private activityService: ActivityService,
+              private router: Router) {
   }
 
-  constructor(private fb: FormBuilder) {
+  _submitForm() {
+    this.getPublishedData()
   }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      userName: [ null, [ Validators.required ] ],
-      password: [ null, [ Validators.required ] ],
-      select: [ 1 ],
+      keyword: [ this.keyword ],
     });
+    this.getPublishedData()
   }
+
+  getPublishedData(){
+    this.isLoading = true
+    this.page.keyword = this.keyword
+    this.activityService.getPublished(this.page).subscribe((res)=>{
+      this.page = res.data
+      this.isLoading = false
+    })
+  }
+
+  changePageNo(pageNo){
+    this.page={current_page:1,per_page:10,total: 0,data:[]}
+    this.page.page=pageNo
+    this.getPublishedData();
+  }
+
+  checkApplication(id){
+    this.router.navigate(['/auth-guard/activity/application-details/'+id]);
+  }
+  checkReport(id){
+    this.router.navigate(['/auth-guard/activity/report-details/'+id]);
+  }
+
 
 }

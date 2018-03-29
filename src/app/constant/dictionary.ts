@@ -113,6 +113,30 @@ export const MERCHANT_GOLD_TYPE = [
   },
 ]
 
+//试用活动状态 1待审核（新建）2通过 3不通过4已发布5已完成
+export const ACTIVITY_AUDITING_STATUS = [
+  {
+    value: '待审核',
+    key: 1
+  },
+  {
+    value: '已通过',
+    key: 2
+  },
+  {
+    value: '不通过',
+    key: 3
+  },
+  {
+    value: '已发布',
+    key: 4
+  },
+  {
+    value: '已完成',
+    key: 5
+  },
+]
+
 // 店铺状态 1新建（待审核） 2通过(已审核) 3不通过 4-逻辑删除
 export const SHOP_STATUS = [
   {

@@ -7,34 +7,26 @@
 <form nz-form style="margin-bottom: 20px;" [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="_submitForm()">
   <div nz-form-item>
     <div nz-form-control>
-      <nz-input formControlName="userName" [nzPlaceHolder]="'商品名称'" [nzSize]="'large'"></nz-input>
+      <nz-input [(ngModel)]="keyword" formControlName="keyword" [nzPlaceHolder]="'输入关键字'" [nzSize]="'large'"></nz-input>
     </div>
   </div>
-  <div nz-form-item>
-    <div nz-form-control style="min-width: 100px;">
-      <nz-select formControlName="select" [nzSize]="'large'">
-        <nz-option [nzLabel]="'淘宝11111111111'" [nzValue]="1"></nz-option>
-        <nz-option [nzLabel]="'京东'" [nzValue]="2"></nz-option>
-      </nz-select>
-    </div>
-  </div>
-  <div nz-form-item>
-    <div nz-form-control style="min-width: 100px;">
-      <nz-select formControlName="select" [nzSize]="'large'">
-        <nz-option [nzLabel]="'淘宝'" [nzValue]="1"></nz-option>
-        <nz-option [nzLabel]="'京东'" [nzValue]="2"></nz-option>
-      </nz-select>
-    </div>
-  </div>
+  <button nz-button [nzType]="'primary'" [nzSize]="'large'" type="submit">搜索</button>
 </form>
-<nz-table #nzTable [nzDataSource]="data" [nzPageSize]="10">
+<nz-table #nzTable
+          [nzAjaxData]="page.data"
+          [nzPageSize]="page.per_page"
+          [nzTotal]="page.total"
+          [nzPageIndex]="page.current_page"
+          (nzPageIndexChangeClick)="changePageNo($event)"
+          [nzLoading]="isLoading"
+          [nzShowTotal]="true">
   <thead nz-thead>
   <tr>
     <th nz-th><span>商品标题</span></th>
-    <th nz-th><span>商品来源</span></th>
     <th nz-th><span>店铺名称</span></th>
     <th nz-th><span>发放数量</span></th>
     <th nz-th><span>发布时间</span></th>
+    <th nz-th><span>结束时间</span></th>
     <th nz-th><span>报告申请数</span></th>
     <th nz-th><span>报告提交数</span></th>
     <th nz-th><span>状态</span></th>
@@ -43,15 +35,20 @@
   </thead>
   <tbody nz-tbody>
   <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-    <td nz-td>{{data.title}} <i class="anticon anticon-picture"></i></td>
-    <td nz-td>{{data.source}}</td>
-    <td nz-td>{{data.shopName}}</td>
-    <td nz-td>{{data.issuedQuantity}}</td>
-    <td nz-td>{{data.releaseTime}}</td>
-    <td nz-td>{{data.applicationNum}}</td>
-    <td nz-td>{{data.submittedNum}}</td>
-    <td nz-td>{{data.status}}</td>
-    <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看申请情况</button></td>
+    <td nz-td>{{data.title}}</td>
+    <td nz-td>{{data.shop_id}}</td>
+    <td nz-td>{{data.number_of}}</td>
+    <td nz-td>{{data.begin_at}}</td>
+    <td nz-td>{{data.end_at}}</td>
+    <td nz-td>0</td>
+    <td nz-td>0</td>
+    <td nz-td>{{data.auditing_status|dicsNamePipe:activity_status:"key":"value"}}</td>
+    <td nz-td>
+      <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'"
+              (click)="checkApplication(data.id)">查看申请情况</button>
+      <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'"
+              (click)="checkReport(data.id)">查看试用报告</button>
+    </td>
   </tr>
   </tbody>
 </nz-table>
