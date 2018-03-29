@@ -36,7 +36,8 @@
           <label nz-form-item-required>活动开始时间</label>
         </div>
         <div nz-form-control nz-col [nzMd]="9" [nzSm]="14" [nzXs]="24" [nzValidateStatus]="getFormControl('startTime')">
-          <nz-datepicker [(ngModel)]="activityInfo.begin_at" formControlName="startTime" [nzSize]="'large'">
+          <nz-datepicker [(ngModel)]="activityInfo.begin_at"
+                         [nzShowTime]="{nzDisabledMinutes:disabledMinutes,nzDisabledSeconds:disabledSeconds}" [nzFormat]="'YYYY-MM-DD HH:00:00'"  formControlName="startTime" [nzSize]="'large'">
           </nz-datepicker>
           <div nz-form-explain *ngIf="getFormControl('startTime').dirty&&getFormControl('startTime').hasError('required')">请选择活动开始时间</div>
         </div>
@@ -46,7 +47,8 @@
           <label nz-form-item-required>活动结束时间</label>
         </div>
         <div nz-form-control nz-col [nzMd]="9" [nzSm]="14" [nzXs]="24" [nzValidateStatus]="getFormControl('endTime')">
-          <nz-datepicker [(ngModel)]="activityInfo.end_at" formControlName="endTime" [nzSize]="'large'">
+          <nz-datepicker [(ngModel)]="activityInfo.end_at" formControlName="endTime"
+                         [nzShowTime]="{nzDisabledMinutes:disabledMinutes,nzDisabledSeconds:disabledSeconds}" [nzFormat]="'YYYY-MM-DD HH:00:00'" [nzSize]="'large'">
           </nz-datepicker>
           <div nz-form-explain *ngIf="getFormControl('endTime').dirty&&getFormControl('endTime').hasError('required')">请选择活动结束时间</div>
         </div>

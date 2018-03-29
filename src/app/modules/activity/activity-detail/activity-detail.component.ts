@@ -15,7 +15,6 @@ export class ActivityDetailComponent implements OnInit {
   title = '发布试用活动'
   activityId = null
   activityDetailForm: FormGroup
-  nowTime: Date
   shops: any[] = []
   activityInfo: ActivityInfo = new ActivityInfo()
 
@@ -50,13 +49,10 @@ export class ActivityDetailComponent implements OnInit {
       })
     }else{
       this.title = '发布试用活动'
-      this.activityInfo.begin_at = this.nowTime.toDateString()
-      this.activityInfo.end_at = new Date(this.nowTime.setMonth(this.nowTime.getMonth() + 1)).toDateString()
     }
   }
 
   initForm(){
-    this.nowTime = new Date()
     this.activityDetailForm = this.fb.group({
       shopId: [ this.activityInfo.shop_id, [ Validators.required ] ],
       postage: [ this.activityInfo.postage_type, [ Validators.required ] ],
@@ -133,4 +129,20 @@ export class ActivityDetailComponent implements OnInit {
   getFormControl(name) {
     return this.activityDetailForm.controls[ name ];
   }
+
+
+  newArray = (start, end) => {
+    const result = [];
+    for (let i = start; i < end; i++) {
+      result.push(i);
+    }
+    return result;
+  };
+
+  disabledSeconds = (h) => {
+    return this.newArray(1, 60);
+  };
+  disabledMinutes = (h) => {
+      return this.newArray(1, 60);
+  };
 }
