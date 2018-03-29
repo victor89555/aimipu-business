@@ -53,13 +53,21 @@ export class UploadQiniuComponent implements OnInit,DoCheck {
     let files = event.target.files;
     for (let i = 0; i < files.length; i++) {// only one;
       let file: any = files[i];
+      let fileSize = (file.size / (1024 * 1024)).toFixed(2)
+      let fileSizeFloat = parseFloat(fileSize)
+      if (fileSizeFloat > 2){
+        this.message.warning("图片最大不能超过2MB");
+        $doc.setAttribute("type","text");
+        $doc.setAttribute("type","file");
+        return false;
+      }
       this.uploadFileUtilService.uploadFile(file).then((resp: any) => {
         // console.log(resp);
         if(resp.status=="success"){
           if ($this.type ==  1){
-            this.images.push({src:resp.data.filename});
+            this.images.push(resp.data.filename);
           }else {
-            $this.images.splice(this.index,1,{src:resp.data.filename})
+            $this.images.splice(this.index,1,resp.data.filename)
           }
 
           this.callBack.emit(this.images);

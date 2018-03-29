@@ -34,7 +34,7 @@ export class ActivityDetailComponent implements OnInit {
     this.initForm()
     this.route.params.forEach((params: Params) => {
       this.activityId = params['id'];
-      console.log(this.activityId)
+      // console.log(this.activityId)
       this.initEntity();
     });
 
@@ -73,18 +73,16 @@ export class ActivityDetailComponent implements OnInit {
 
   //点击提交
   SubmitApplication(){
-    this.activityInfo.thumb=['https://www.baidu.com/img/bd_logo1.png?where=super'];
+    // this.activityInfo.thumb=['https://www.baidu.com/img/bd_logo1.png?where=super'];
     console.log('点击提交申请')
     console.log(this.activityInfo)
-    console.log(this.activityDetailForm)
-    console.log('验证...')
-    console.log(this.activityDetailForm)
     if(this.activityDetailForm.invalid){
-      console.log('invalid')
+      for (const i in this.activityDetailForm.controls) {
+        this.activityDetailForm.controls[i].markAsDirty();
+      }
       return false
     }else{
       console.log('验证通过')
-      console.log(this.activityInfo)
       if(this.activityId>0){
         this.doEdit()
       }else{
@@ -109,7 +107,7 @@ export class ActivityDetailComponent implements OnInit {
   getShops() {
     //以下为虚拟数据
     this.activityDetailService.getShops().subscribe((res)=>{
-      console.log(res)
+      // console.log(res)
       this.shops = res.data
       this.activityInfo.shop_id = this.shops[0].id
     })
