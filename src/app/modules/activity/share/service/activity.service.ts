@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import {Body, GET, Path, POST, PUT, Query, RebirthHttp} from 'rebirth-http';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {ActivityInfo} from './activity-detail.model';
+import {ActivityInfo} from '../../activity-detail/activity-detail.model';
 
 @Injectable()
-export class ActivityDetailService extends RebirthHttp{
+export class ActivityService extends RebirthHttp{
 
   constructor(http: HttpClient) {
     super(http);
@@ -35,32 +35,37 @@ export class ActivityDetailService extends RebirthHttp{
 
   //试用管理分页列表
   @POST('/api/merchant/project/pagination')
-  query(@Query("keyword") keyword:string,@Query("auditing_status") status:number):Observable<any>{
+  query(@Body page):Observable<any>{
     return null
   }
 
-  getPending():Observable<any>{
-    return this.query('',1).map((res)=>{
+  getPending(page):Observable<any>{
+    page.auditing_status = 1
+    return this.query(page).map((res)=>{
       return res
     })
   }
-  getPassed():Observable<any>{
-    return this.query('',2).map((res)=>{
+  getPassed(page):Observable<any>{
+    page.auditing_status = 2
+    return this.query(page).map((res)=>{
       return res
     })
   }
-  getFailed():Observable<any>{
-    return this.query('',3).map((res)=>{
+  getFailed(page):Observable<any>{
+    page.auditing_status = 3
+    return this.query(page).map((res)=>{
       return res
     })
   }
-  getPublished():Observable<any>{
-    return this.query('',4).map((res)=>{
+  getPublished(page):Observable<any>{
+    page.auditing_status = 4
+    return this.query(page).map((res)=>{
       return res
     })
   }
-  getDone():Observable<any>{
-    return this.query('',5).map((res)=>{
+  getDone(page):Observable<any>{
+    page.auditing_status = 5
+    return this.query(page).map((res)=>{
       return res
     })
   }
