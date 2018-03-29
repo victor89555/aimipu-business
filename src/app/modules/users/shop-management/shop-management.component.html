@@ -1,4 +1,77 @@
-<!--<div class="page-title">{{title}}</div>-->
+<nz-tabset>
+  <nz-tab >
+    <ng-template #nzTabHeading>
+      {{title}}
+    </ng-template>
+    <div style="margin-bottom: 20px;">
+      <nz-input  [nzPlaceHolder]="'店铺名称、地址'"  [(ngModel)]="keyword" [nzSize]="'large'" style = "width: 20%;"></nz-input>
+      <nz-select style="width: 120px;" [(ngModel)]="origin" nzAllowClear [nzSize]="'large'" [nzShowSearch]="true" nzPlaceHolder="店铺来源">
+        <nz-option
+          *ngFor="let option of shopOrigin"
+          [nzLabel]="option.value"
+          [nzValue]="option.key">
+        </nz-option>
+      </nz-select>
+      <nz-select style="width: 120px;" [(ngModel)]="status" nzAllowClear [nzSize]="'large'" [nzShowSearch]="true" nzPlaceHolder="审核状态">
+        <nz-option
+          *ngFor="let option of shopStatus"
+          [nzLabel]="option.value"
+          [nzValue]="option.key">
+        </nz-option>
+      </nz-select>
+      <button nz-button [nzType]="'primary'" nzGhost [nzSize]="'large'" (click)="search()">
+        <i class="anticon anticon-search"></i><span>搜索</span>
+      </button>
+      <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="editEntity({id:0})" style="position:absolute;right: 25px;">
+        <i class="anticon anticon-plus"></i><span>添加</span>
+      </button>
+    </div>
+    <nz-table #nzTable   [nzAjaxData]="page.data"
+              [nzPageSize]="page.per_page"
+              [nzTotal]="page.total"
+              [nzPageIndex]="page.current_page"
+              (nzPageIndexChangeClick)="changePageNo($event)"
+              [nzLoading]="isLoading"
+              [nzShowTotal]="true">
+      <thead nz-thead>
+      <tr>
+        <th nz-th><span>序号</span></th>
+        <th nz-th><span>店铺来源</span></th>
+        <th nz-th><span>店铺名称</span></th>
+        <th nz-th><span>店铺地址</span></th>
+        <th nz-th><span>审核状态</span></th>
+        <th nz-th><span>审核时间</span></th>
+        <th nz-th><span>操作</span></th>
+      </tr>
+      </thead>
+      <tbody nz-tbody>
+      <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index;">
+        <td nz-td>{{i+1}}</td>
+        <td nz-td>{{data.origin|dicsNamePipe:shopOrigin:"key":"value"}}</td>
+        <td nz-td>{{data.name}}</td>
+        <td nz-td><a href="{{data.url}}" target="_blank">{{data.url|stringEllipsisCutPipe:36}}</a></td>
+        <td nz-td>{{data.status|dicsNamePipe:shopStatus:"key":"value"}}</td>
+        <td nz-td>{{data.checked_at}}</td>
+        <td nz-td>
+          <span>
+           <span>
+              <a href="javascript:void (0);" (click)="editEntity(data)">查看详情</a>
+            </span>
+               <span nz-table-divider></span>
+              <nz-popconfirm [nzTitle]="'确定要删除这条数据吗？'" (nzOnConfirm)="delete(data)">
+                <a nz-popconfirm>删除</a>
+              </nz-popconfirm>
+        </span>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+</nz-tabset>
+
+
+<!--
+
 <nz-tabset>
   <nz-tab >
     <ng-template #nzTabHeading>
@@ -57,3 +130,4 @@
 </nz-table>
   </nz-tab>
 </nz-tabset>
+-->

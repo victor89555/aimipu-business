@@ -17,6 +17,7 @@ import {ActivityDetailService} from './modules/activity/activity-detail/activity
 import {FinanceService} from './modules/finance/finance.service';
 import {UsersService} from './modules/users/users.service';
 import {CurrUserService} from './shared/service/curr-user.service';
+import {ShopService} from './modules/users/shop-management/shop.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {CurrUserService} from './shared/service/curr-user.service';
     ActivityDetailService,
     FinanceService,
     UsersService,
-    CurrUserService
+    CurrUserService,
+    ShopService
   ],
   bootstrap: [AppComponent]
 })

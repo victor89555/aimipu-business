@@ -4,6 +4,7 @@ import {UserInfoComponent} from './user-info/user-info.component';
 import {SharedModule} from '../../shared/shared.module';
 import { AccountSecurityComponent } from './account-security/account-security.component';
 import { ShopManagementComponent } from './shop-management/shop-management.component';
+import { EditShopComponent } from './shop-management/edit-shop/edit-shop.component';
 
 const routes: Routes = [
   { path: 'user-info', component: UserInfoComponent },
@@ -19,7 +20,7 @@ const routes: Routes = [
   exports:[
     RouterModule
   ],
-  entryComponents:[],
-  declarations: [ UserInfoComponent, AccountSecurityComponent, ShopManagementComponent]
+  entryComponents:[EditShopComponent],
+  declarations: [ UserInfoComponent, AccountSecurityComponent, ShopManagementComponent, EditShopComponent]
 })
 export class UsersModule { }

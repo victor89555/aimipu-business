@@ -112,3 +112,34 @@ export const MERCHANT_GOLD_TYPE = [
     key: 3
   },
 ]
+
+// 店铺状态 1新建（待审核） 2通过(已审核) 3不通过 4-逻辑删除
+export const SHOP_STATUS = [
+  {
+    value: '待审核',
+    key: 1
+  },
+  {
+    value: '已审核',
+    key: 2
+  },
+  {
+    value: '不通过',
+    key: 3
+  },
+  {
+    value: '删除',
+    key: 4
+  },
+]
+// 店铺来源 1 淘宝 2 京东
+export const SHOP_ORIGIN = [
+  {
+    value: '淘宝',
+    key: 1
+  },
+  {
+    value: '京东',
+    key: 2
+  },
+]
