@@ -29,8 +29,10 @@ export class CustomerInfoComponent implements OnInit,OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if(this.customer_id > 0){
       this.initDatas()
+      document.getElementById('detail_info_mask').style.display = 'block'
       document.getElementById('detail_info_side').style.right = '0px'
     }else {
+      document.getElementById('detail_info_mask').style.display = 'none'
       document.getElementById('detail_info_side').style.right = '-430px'
     }
   }

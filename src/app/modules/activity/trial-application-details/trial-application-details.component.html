@@ -12,153 +12,75 @@
               <h2>活动信息</h2>
               <ul>
                 <li><span class="title">商品来源：</span><span class="content">淘宝</span></li>
-                <li><span class="title">店铺名称：</span><span class="content">淘宝XX店</span></li>
-                <li><span class="title">试用邮费：</span><span class="content">包邮 | 15元邮费</span></li>
-                <li><span class="title">试用数量：</span><span class="content">60</span></li>
-                <li><span class="title">奖励金币：</span><span class="content">1</span></li>
-                <li><span class="title">结束时间：</span><span class="content">2018-04-02</span></li>
+                <li><span class="title">店铺名称：</span><span class="content">{{activityInfo.shop_id}}</span></li>
+                <li><span class="title">试用邮费：</span><span class="content">{{activityInfo.postage_type}}</span></li>
+                <li><span class="title">试用数量：</span><span class="content">{{activityInfo.number_of}}</span></li>
+                <li><span class="title">奖励金币：</span><span class="content">{{activityInfo.golds}}</span></li>
+                <li><span class="title">结束时间：</span><span class="content">{{activityInfo.end_at}}</span></li>
               </ul>
             </div>
             <div nz-col [nzXs]="24">
               <h2>商品信息</h2>
               <ul>
-                <li><span class="title">标题：</span><span class="content">祛痘前五强精华去痘印痘疤凹洞</span></li>
+                <li><span class="title">标题：</span><span class="content">{{activityInfo.title}}</span></li>
                 <li><span class="title">图片：</span><span class="content"></span></li>
-                <li><span class="title">类型：</span><span class="contWent">XX类</span></li>
-                <li><span class="title">淘宝id：</span><span class="content">559999455666</span></li>
-                <li><span class="title">价格：</span><span class="content">50元</span></li>
+                <!--<li><span class="title">类型：</span><span class="content">XX类</span></li>-->
+                <li><span class="title">淘宝id：</span><span class="content">{{activityInfo.taobao_id}}</span></li>
+                <li><span class="title">价格：</span><span class="content">{{activityInfo.price}}元</span></li>
               </ul>
             </div>
           </div>
         </div>
         <div nz-col [nzMd]="16" [nzXs]="24">
-          <nz-tabset [nzType]="'card'">
-            <nz-tab>
-              <ng-template #nzTabHeading>全部（120）</ng-template>
-              <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm">
-                <div nz-form-item>
-                  <div nz-form-control>
-                    <nz-input formControlName="userName" [nzSize]="'large'"></nz-input>
-                  </div>
-                </div>
-                <button nz-button [nzType]="'primary'" [nzSize]="'large'">搜索</button>
-              </form>
-              <nz-table #nzTable [nzDataSource]="data" [nzPageSize]="10">
-                <thead nz-thead>
-                <tr>
-                  <th nz-th><span>用户</span></th>
-                  <th nz-th><span>手机号码</span></th>
-                  <th nz-th><span>申请时间</span></th>
-                  <th nz-th><span>审核状态</span></th>
-                  <th nz-th><span>操作</span></th>
-                </tr>
-                </thead>
-                <tbody nz-tbody>
-                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-                  <td nz-td><a (click)="open($event)">{{data.user}} <i class="anticon anticon-picture"></i></a></td>
-                  <td nz-td>{{data.phone}}</td>
-                  <td nz-td>{{data.appTime}}</td>
-                  <td nz-td>{{data.status}}</td>
-                  <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
-                </tr>
-                </tbody>
-              </nz-table>
+          <nz-tabset [nzType]="'card'" >
+            <nz-tab (nzClick)="selectTab('all')">
+              <ng-template #nzTabHeading>全部（60）</ng-template>
             </nz-tab>
-            <nz-tab>
-              <ng-template #nzTabHeading>待审核（20）</ng-template>
-              <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm">
-                <div nz-form-item>
-                  <div nz-form-control>
-                    <nz-input formControlName="userName" [nzSize]="'large'"></nz-input>
-                  </div>
-                </div>
-                <button nz-button [nzType]="'primary'" [nzSize]="'large'">搜索</button>
-              </form>
-              <nz-table #nzTable1 [nzDataSource]="data" [nzPageSize]="10">
-                <thead nz-thead>
-                <tr>
-                  <th nz-th><span>用户</span></th>
-                  <th nz-th><span>手机号码</span></th>
-                  <th nz-th><span>申请时间</span></th>
-                  <th nz-th><span>操作</span></th>
-                </tr>
-                </thead>
-                <tbody nz-tbody>
-                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-                  <td nz-td><a (click)="open($event)">{{data.user}} <i class="anticon anticon-picture"></i></a></td>
-                  <td nz-td>{{data.phone}}</td>
-                  <td nz-td>{{data.appTime}}</td>
-                  <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
-                </tr>
-                </tbody>
-              </nz-table>
+            <nz-tab (nzClick)="selectTab('1')">
+              <ng-template #nzTabHeading>待审核（18）</ng-template>
             </nz-tab>
-            <nz-tab>
-              <ng-template #nzTabHeading>通过（50）</ng-template>
-              <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm">
-                <div nz-form-item>
-                  <div nz-form-control>
-                    <nz-input formControlName="userName" [nzSize]="'large'"></nz-input>
-                  </div>
-                </div>
-                <button nz-button [nzType]="'primary'" [nzSize]="'large'">搜索</button>
-              </form>
-              <nz-table #nzTable2 [nzDataSource]="data" [nzPageSize]="10">
-                <thead nz-thead>
-                <tr>
-                  <th nz-th><span>用户</span></th>
-                  <th nz-th><span>手机号码</span></th>
-                  <th nz-th><span>申请时间</span></th>
-                  <th nz-th><span>审核时间</span></th>
-                  <th nz-th><span>操作</span></th>
-                </tr>
-                </thead>
-                <tbody nz-tbody>
-                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-                  <td nz-td><a (click)="open($event)">{{data.user}} <i class="anticon anticon-picture"></i></a></td>
-                  <td nz-td>{{data.phone}}</td>
-                  <td nz-td>{{data.appTime}}</td>
-                  <td nz-td>{{data.auditTime}}</td>
-                  <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
-                </tr>
-                </tbody>
-              </nz-table>
+            <nz-tab (nzClick)="selectTab('2')">
+              <ng-template #nzTabHeading>通过（20）</ng-template>
             </nz-tab>
-            <nz-tab>
-              <ng-template #nzTabHeading>不通过（50）</ng-template>
-              <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm">
-                <div nz-form-item>
-                  <div nz-form-control>
-                    <nz-input formControlName="userName" [nzSize]="'large'"></nz-input>
-                  </div>
-                </div>
-                <button nz-button [nzType]="'primary'" [nzSize]="'large'">搜索</button>
-              </form>
-              <nz-table #nzTable3 [nzDataSource]="data" [nzPageSize]="10">
-                <thead nz-thead>
-                <tr>
-                  <th nz-th><span>用户</span></th>
-                  <th nz-th><span>手机号码</span></th>
-                  <th nz-th><span>申请时间</span></th>
-                  <th nz-th><span>审核时间</span></th>
-                  <th nz-th><span>操作</span></th>
-                </tr>
-                </thead>
-                <tbody nz-tbody>
-                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-                  <td nz-td><a (click)="open($event)">{{data.user}} <i class="anticon anticon-picture"></i></a></td>
-                  <td nz-td>{{data.phone}}</td>
-                  <td nz-td>{{data.appTime}}</td>
-                  <td nz-td>{{data.auditTime}}</td>
-                  <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
-                </tr>
-                </tbody>
-              </nz-table>
+            <nz-tab (nzClick)="selectTab('6')">
+              <ng-template #nzTabHeading>不通过（10）</ng-template>
             </nz-tab>
           </nz-tabset>
+
+          <form nz-form style="margin-bottom: 20px; text-align: right;" [nzLayout]="'inline'" [formGroup]="validateForm" (submit)="doLocalSearch()">
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input [(ngModel)]="keyword" formControlName="keyword" [nzSize]="'large'"></nz-input>
+              </div>
+            </div>
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'" type="submit">搜索</button>
+          </form>
+          <nz-table #nzTable [nzDataSource]="nowData" [nzPageSize]="10">
+            <thead nz-thead>
+            <tr>
+              <th nz-th><span>用户</span></th>
+              <th nz-th><span>手机号码</span></th>
+              <th nz-th><span>申请时间</span></th>
+              <th nz-th><span>审核时间</span></th>
+              <th nz-th><span>提交时间</span></th>
+              <th nz-th><span>操作</span></th>
+            </tr>
+            </thead>
+            <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+              <td nz-td><a href="javascript:;">{{data.real_name}}</a></td>
+              <td nz-td>{{data.phone}}</td>
+              <td nz-td>{{data.applied_at}}</td>
+              <td nz-td>{{data.checked_at}}</td>
+              <td nz-td>{{data.submitted_at}}</td>
+              <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
+            </tr>
+            </tbody>
+          </nz-table>
         </div>
       </div>
 
+      //用户信息
       <div nz-row class="detail-info-side right-bar" id="detail_info_side">
         <button aria-label="Close" class="ant-modal-close ng-star-inserted">
           <span class="ant-modal-close-x" (click)="handleCancel($event)"></span>
@@ -210,6 +132,7 @@
           </ul>
         </div>
       </div>
+
     </div>
   </nz-tab>
 </nz-tabset>

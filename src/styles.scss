@@ -55,7 +55,7 @@ nav.right-nav{
     //display: none;
     position: fixed;
     width: 400px;
-    top: 64px;
+    top: 0px;
     right: -430px;
     bottom: 0px;
     background-color: #ffffff;
@@ -64,7 +64,21 @@ nav.right-nav{
     box-shadow: 0px 0px 20px #888888;
     transition-property: right;
     transition-duration: 0.25s;
+    z-index: 3200;
 
+    &>span.close-x{
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      font-size: 16px;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      &:hover{
+        cursor: pointer;
+      }
+    }
     &>div {
       &>ul {
         padding: 15px 20px;

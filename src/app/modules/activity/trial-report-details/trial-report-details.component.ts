@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Params} from '@angular/router';
+import {ActivityService} from '../share/service/activity.service';
 
 @Component({
   selector: 'app-trial-report-details',
@@ -9,52 +11,67 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class TrialReportDetailsComponent implements OnInit {
 
   title = '试用报告详情'
-  data:any[] = []
+  activityId = null
+  index:any = "all";
+  keyword:string = ''
+  activityInfo:any = {}
+  totalData:any = {}
+  nowData:any[] = []
+  isLoading:boolean = false
   validateForm: FormGroup
-  style: any = {
-    top: '20px'
-  };
-  isVisibleDetail = false;
-  constructor(private fb: FormBuilder) { }
+
+  constructor(private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private activityService: ActivityService) { }
 
   ngOnInit() {
-    this.validateForm = this.fb.group({
-      userName: [ null, [ Validators.required ] ],
-      password: [ null, [ Validators.required ] ],
-      select: [ 1 ],
+    this.route.params.forEach((params: Params) => {
+      this.activityId = params['id'];
+      this.getActivityInfo()
     });
-    this.data = [
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',auditTime:'2018-02-28',submitTime:'2018-02-28',completeTime:'2018-02-28',terminateTime:'2018-02-28',modifyTime:'2018-02-28',id:'逍遥一',orderNum:'466995111'},
-    ]
+    this.validateForm = this.fb.group({
+      keyword: [ this.keyword ]
+    });
+  }
+  //关键本地字查询
+  doLocalSearch(){
+
   }
 
-  open(e){
-    document.getElementById('detail_info_side').style.right = '0px'
+  //选中tab
+  selectTab(e){
+    this.index =e
+    //状态 0试用终止 1待审核 2待提交 3待修改 4待确认 5已完成6审核不通过
+    switch (e){
+      case 'all':
+        this.nowData = this.totalData.applys?this.totalData.applys:[];
+        break;
+      case '0':
+        this.nowData = this.totalData.groupApplys['0']?this.totalData.groupApplys['0']:[];
+        break;
+      case '2':
+        this.nowData = this.totalData.groupApplys['2']?this.totalData.groupApplys['2']:[];
+        break;
+      case '3':
+        this.nowData = this.totalData.groupApplys['3']?this.totalData.groupApplys['3']:[];
+        break;
+      case '4':
+        this.nowData = this.totalData.groupApplys['4']?this.totalData.groupApplys['4']:[];
+        break;
+      case '5':
+        this.nowData = this.totalData.groupApplys['5']?this.totalData.groupApplys['5']:[];
+        break;
+    }
   }
-  handleCancel(e){
-    document.getElementById('detail_info_side').style.right = '-430px'
-  }
-  openReportDetail(e){
-    this.isVisibleDetail = true;
-  }
-  handleCancelDetail(e){
-    this.isVisibleDetail = false;
-  }
-  handleOkDetail(e){
-    this.isVisibleDetail = false;
+
+  getActivityInfo(){
+    this.isLoading = true
+    this.activityService.getActivityInfo(this.activityId).subscribe((res)=>{
+      this.totalData = res.data
+      this.activityInfo = res.data.project
+      this.selectTab(this.index)
+      this.isLoading = false
+    })
   }
 
 }

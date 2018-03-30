@@ -136,7 +136,37 @@ export const ACTIVITY_AUDITING_STATUS = [
     key: 5
   },
 ]
-
+//试用记录状态//status 0试用终止 1待审核 2待提交 3待修改 4待确认 5已完成 6审核不通过
+export const ACTIVITY_APPLY_STATUS = [
+  {
+    value: '试用终止',
+    key: 0
+  },
+  {
+    value: '待审核',
+    key: 1
+  },
+  {
+    value: '待提交',
+    key: 2
+  },
+  {
+    value: '待修改',
+    key: 3
+  },
+  {
+    value: '待确认',
+    key: 4
+  },
+  {
+    value: '已完成',
+    key: 5
+  },
+  {
+    value: '不通过',
+    key: 6
+  },
+]
 // 店铺状态 1新建（待审核） 2通过(已审核) 3不通过 4-逻辑删除
 export const SHOP_STATUS = [
   {

@@ -1,5 +1,5 @@
+<div class="detail_info_mask" id="detail_info_mask" (click)="toClose($event)"></div>
 <div nz-row class="detail-info-side right-bar" id="detail_info_side">
-  <span class="ant-modal-close-x" style="float:right;" (click)="toClose($event)"><i class="anticon anticon-close"></i></span>
   <div nz-col [nzXs]="24">
     <h2>用户详细信息</h2>
     <ul>
@@ -46,4 +46,6 @@
       <li><span class="title">平均提交报告时长：</span><span class="content">{{allCount.avgTime}}</span></li>
     </ul>
   </div>
+
+  <span class="close-x" (click)="toClose($event)"><i class="anticon anticon-close"></i></span>
 </div>

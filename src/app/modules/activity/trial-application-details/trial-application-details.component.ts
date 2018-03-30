@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Params} from '@angular/router';
+import {ActivityService} from '../share/service/activity.service';
 
 @Component({
   selector: 'app-trial-application-details',
@@ -9,31 +11,66 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class TrialApplicationDetailsComponent implements OnInit {
 
   title = '试用申请详情'
-  data:any[] = []
+  activityId = null
+  index:any = "all";
+  keyword:string = ''
+  activityInfo:any = {}
+  totalData:any = {}
+  nowData:any[] = []
+  isLoading:boolean = false
   validateForm: FormGroup
+
+
   style: any = {
     top: '20px'
   };
-  constructor(private fb: FormBuilder) { }
+
+  constructor(private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private activityService: ActivityService) { }
 
   ngOnInit() {
-    this.validateForm = this.fb.group({
-      userName: [ null, [ Validators.required ] ],
-      password: [ null, [ Validators.required ] ],
-      select: [ 1 ],
+    this.route.params.forEach((params: Params) => {
+      this.activityId = params['id'];
+      this.getActivityInfo()
     });
-    this.data = [
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:0},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:1,auditTime:'2018-02-28'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:2,auditTime:'2018-02-28'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:0},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:1,auditTime:'2018-02-28'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:2,auditTime:'2018-02-28'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:0},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:1,auditTime:'2018-02-28'},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:0},
-      {user:'张三',phone:'15985800000',appTime:'2018-02-28',status:2,auditTime:'2018-02-28'},
-    ]
+    this.validateForm = this.fb.group({
+      keyword: [ this.keyword ]
+    });
+  }
+  //关键本地字查询
+  doLocalSearch(){
+
+  }
+
+  //选中tab
+  selectTab(e){
+    this.index =e
+    //状态 0试用终止 1待审核 2待提交 3待修改 4待确认 5已完成6审核不通过
+    switch (e){
+      case 'all':
+        this.nowData = this.totalData.applys?this.totalData.applys:[];
+        break;
+      case '1':
+        this.nowData = this.totalData.groupApplys['1']?this.totalData.groupApplys['1']:[];
+        break;
+      case '2':
+        this.nowData = this.totalData.groupApplys['2']?this.totalData.groupApplys['2']:[];
+        break;
+      case '6':
+        this.nowData = this.totalData.groupApplys['6']?this.totalData.groupApplys['6']:[];
+        break;
+    }
+  }
+
+  getActivityInfo(){
+    this.isLoading = true
+    this.activityService.getActivityInfo(this.activityId).subscribe((res)=>{
+      this.totalData = res.data
+      this.activityInfo = res.data.project
+      this.selectTab(this.index)
+      this.isLoading = false
+    })
   }
 
   open(e){

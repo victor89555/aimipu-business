@@ -4,47 +4,57 @@
     <ng-template #nzTabHeading>
       {{title}}
     </ng-template>
-    <form nz-form style="margin-bottom: 20px;" [nzLayout]="'inline'" [formGroup]="validateForm">
+    <form nz-form style="margin-bottom: 20px;" [nzLayout]="'inline'" [formGroup]="validateForm"  (ngSubmit)="_submitForm()">
       <div nz-form-item>
         <div nz-form-control style="min-width: 300px;">
-          <nz-input formControlName="textInput" [nzPlaceHolder]="'关键字'" [nzSize]="'large'"></nz-input>
+          <nz-input [(ngModel)]="keyword" formControlName="keyword" [nzPlaceHolder]="'请输入关键字'" [nzSize]="'large'"></nz-input>
         </div>
       </div>
       <div nz-form-item>
         <div nz-form-control>
-          <nz-datepicker (ngModelChange)="_startDate=$event" [ngModel]="_startDate"  [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzSize]="'large'" [nzPlaceHolder]="'开始时间'" [ngModelOptions]="{standalone: true}"></nz-datepicker>
+          <nz-datepicker [(ngModel)]="_startDate"  [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzSize]="'large'" [nzPlaceHolder]="'开始时间'" formControlName="startDate"></nz-datepicker>
         </div>
       </div>
       <div nz-form-item>
         <div nz-form-control>
-          <nz-datepicker (ngModelChange)="_endDate=$event" [ngModel]="_endDate"  [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzSize]="'large'" [nzPlaceHolder]="'结束时间'" [ngModelOptions]="{standalone: true}"></nz-datepicker>
+          <nz-datepicker [(ngModel)]="_endDate"  [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzSize]="'large'" [nzPlaceHolder]="'结束时间'" formControlName="endDate"></nz-datepicker>
         </div>
       </div>
-      <button nz-button [nzType]="'primary'" [nzSize]="'large'">搜索</button>
+      <button nz-button [nzType]="'primary'" [nzSize]="'large'" type="submit">搜索</button>
     </form>
-    <nz-table #nzTable [nzDataSource]="data" [nzPageSize]="10">
+    <nz-table #nzTable
+              [nzAjaxData]="page.data"
+              [nzPageSize]="page.per_page"
+              [nzTotal]="page.total"
+              [nzPageIndex]="page.page"
+              (nzPageIndexChangeClick)="changePageNo($event)"
+              [nzLoading]="isLoading"
+              [nzShowTotal]="true">
       <thead nz-thead>
       <tr>
         <th nz-th><span>序号</span></th>
         <th nz-th><span>店铺名称</span></th>
-        <th nz-th><span>商品来源</span></th>
-        <th nz-th><span>试用邮费</span></th>
-        <th nz-th><span>试用数量</span></th>
+        <th nz-th><span>用户姓名</span></th>
+        <th nz-th><span>用户手机</span></th>
         <th nz-th><span>奖励金币</span></th>
-        <th nz-th><span>结束时间</span></th>
+        <th nz-th><span>申请时间</span></th>
+        <th nz-th><span>状态</span></th>
         <th nz-th><span>操作</span></th>
       </tr>
       </thead>
       <tbody nz-tbody>
-      <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-        <td nz-td>{{data.id}}</td>
-        <td nz-td>{{data.shopName}}</td>
-        <td nz-td>{{data.source}}</td>
-        <td nz-td>{{data.postage}}</td>
-        <td nz-td>{{data.number}}</td>
-        <td nz-td>{{data.price}}</td>
-        <td nz-td>{{data.endTime}}</td>
-        <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'" routerLink="/auth-guard/activity/report-details">查看详情</button></td>
+      <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index;">
+        <td nz-td>{{(page.page-1)*page.per_page+i+1}}</td>
+        <td nz-td>{{data.shop_id}}</td>
+        <td nz-td><a href="javascript:;">{{data.real_name}}</a></td>
+        <td nz-td>{{data.phone}}</td>
+        <td nz-td>{{data.golds}}</td>
+        <td nz-td>{{data.applied_at}}</td>
+        <td nz-td>{{data.status|dicsNamePipe:apply_status:"key":"value"}}</td>
+        <td nz-td>
+          <button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="auditReport(data)">审核报告内容</button>
+          <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="/auth-guard/activity/report-details/{{data.project_id}}">查看该活动详情</button>
+        </td>
       </tr>
       </tbody>
     </nz-table>
