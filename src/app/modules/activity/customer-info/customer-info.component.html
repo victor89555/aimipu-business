@@ -1,0 +1,49 @@
+<div nz-row class="detail-info-side right-bar" id="detail_info_side">
+  <span class="ant-modal-close-x" style="float:right;" (click)="toClose($event)"><i class="anticon anticon-close"></i></span>
+  <div nz-col [nzXs]="24">
+    <h2>用户详细信息</h2>
+    <ul>
+      <li><span class="title">姓名：</span><span class="content">{{customerInfo.real_name}}</span></li>
+      <li><span class="title">手机号：</span><span class="content">{{customerInfo.phone}}</span></li>
+      <li><span class="title">淘宝id：</span><span class="content">{{customerInfo.taobao_id}}</span></li>
+      <!--<li><span class="title">性别：</span><span class="content">女</span></li>-->
+      <!--<li><span class="title">年龄：</span><span class="content">{{customerInfo.real_name}}</span></li>-->
+      <li><span class="title">所属区域：</span><span class="content">{{customerInfo.province+" "+customerInfo.city}}</span></li>
+      <li><span class="title">个性签名：</span><span class="content">{{customerInfo.motto}}</span></li>
+      <li><span class="title">加入平台时间：</span><span class="content">{{customerInfo.created_at}}</span></li>
+      <li><span class="title">平台标签：</span><span class="content">{{customerInfo.tags}}</span></li>
+    </ul>
+  </div>
+  <div nz-col [nzXs]="24">
+    <h2>
+      <span style="float: left;">本店试用情况</span>
+      <nz-radio-group [nzSize]="'small'" style="float: right;" [(ngModel)]="shopType" >
+        <label nz-radio-button [nzValue]="1" (click)="getShopCount(1)"><span>一个月</span></label>
+        <label nz-radio-button [nzValue]="2" (click)="getShopCount(2)"><span>半年</span></label>
+      </nz-radio-group>
+    </h2>
+    <ul>
+      <li><span class="title">申请试用次数：</span><span class="content">{{shopCount.count1}}次</span></li>
+      <li><span class="title">申请通过次数：</span><span class="content">{{shopCount.count2}}次</span></li>
+      <li><span class="title">报告交次数：</span><span class="content">{{shopCount.count3}}次</span></li>
+      <li><span class="title">报告通过次数：</span><span class="content">{{shopCount.count4}}次</span></li>
+      <li><span class="title">平均提交报告时长：</span><span class="content">{{shopCount.avgTime}}</span></li>
+    </ul>
+  </div>
+  <div nz-col [nzXs]="24">
+    <h2>
+      <span style="float: left;">平台试用情况</span>
+      <nz-radio-group [nzSize]="'small'" style="float: right;" [(ngModel)]="allType" >
+        <label nz-radio-button [nzValue]="1" (click)="getAllCount(1)"><span>一个月</span></label>
+        <label nz-radio-button [nzValue]="2" (click)="getAllCount(2)"><span>半年</span></label>
+      </nz-radio-group>
+    </h2>
+    <ul>
+      <li><span class="title">申请试用次数：</span><span class="content">{{allCount.count1}}次</span></li>
+      <li><span class="title">申请通过次数：</span><span class="content">{{allCount.count2}}次</span></li>
+      <li><span class="title">报告交次数：</span><span class="content">{{allCount.count3}}次</span></li>
+      <li><span class="title">报告通过次数：</span><span class="content">{{allCount.count4}}次</span></li>
+      <li><span class="title">平均提交报告时长：</span><span class="content">{{allCount.avgTime}}</span></li>
+    </ul>
+  </div>
+</div>

@@ -12,6 +12,7 @@ import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
 import {ImageUploadComponent} from '../modules/activity/image-upload/image-upload.component';
 import {RebirthPermissionModule} from 'rebirth-permission';
 import {UploadQiniuComponent} from './upload-qiniu/upload-qiniu.component';
+import {CustomerInfoComponent} from '../modules/activity/customer-info/customer-info.component';
 
 @NgModule({
   imports: [
@@ -38,10 +39,11 @@ import {UploadQiniuComponent} from './upload-qiniu/upload-qiniu.component';
     FroalaViewModule,
     ImageUploadComponent,
     RebirthPermissionModule,
-    UploadQiniuComponent
+    UploadQiniuComponent,
+    CustomerInfoComponent
   ],
-  entryComponents:[],
-  declarations: [MyEditorComponent,ImageUploadComponent,UploadQiniuComponent],
+  entryComponents:[CustomerInfoComponent],
+  declarations: [MyEditorComponent,ImageUploadComponent,UploadQiniuComponent,CustomerInfoComponent],
   providers:[
     ModalHelper
   ]

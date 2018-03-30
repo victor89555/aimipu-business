@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivityService} from '../share/service/activity.service';
 
 @Component({
@@ -37,6 +37,7 @@ export class TrialApplicationListComponent implements OnInit {
     this.page.keyword = this.keyword
     this.activityService.getApplicationList(this.page).subscribe((res)=>{
       this.page = res.data
+      console.log(this.page)
       this.isLoading = false
     })
   }
@@ -57,5 +58,14 @@ export class TrialApplicationListComponent implements OnInit {
     this.activityService.changeApplicationStatus(id,content).subscribe((res)=>{
       console.log(res)
     })
+  }
+
+
+  customerInfo:any={id:0,shop_id:0};
+  showCustomerInfo(data){
+    this.customerInfo.id=data.user_id;
+  }
+  toClose(e){
+    this.customerInfo={id:0,shop_id:0};
   }
 }
