@@ -11,6 +11,7 @@ export class AppService extends BaseService {
     super(http,cacheService)
   }
 
+
   /**
    * 获取首页统计数据
    *

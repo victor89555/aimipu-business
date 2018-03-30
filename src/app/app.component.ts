@@ -5,6 +5,7 @@ import {AuthorizationService} from 'rebirth-permission';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import 'rxjs/add/operator/do';
+import {NzMessageService} from 'ng-zorro-antd';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class AppComponent {
 
   constructor(private rebirthHttpProvider: RebirthHttpProvider,
               private authorizationService: AuthorizationService,
-              private router: Router) {
+              private router: Router,
+              private messageService: NzMessageService) {
     this.applicationSetup();
   }
 
@@ -63,12 +65,7 @@ export class AppComponent {
         }
         if ([400].indexOf(res.status) !== -1) {
           console.log(res.error.msg)
-          alert(res.error.msg || "Error！")
-          // this.alertBoxService.placement("top")
-          // this.alertBoxService.open({
-          //   type: 'danger',
-          //   html: res.error.msg || "Error！"
-          // }, 5000);
+          this.messageService.error(res.error.msg || "Error！")
         }
       });
   }

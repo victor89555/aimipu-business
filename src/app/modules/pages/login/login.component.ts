@@ -8,6 +8,7 @@ import {UsersService} from '../../users/users.service';
 import {AuthorizationService} from 'rebirth-permission';
 import {CurrUserService} from '../../../shared/service/curr-user.service';
 import {CurrUserModel} from '../../../shared/models/curr-user.model';
+import {ShopService} from '../../users/shop-management/shop.service';
 
 @Component({
   selector: 'app-pages-login',
@@ -31,7 +32,8 @@ export class LoginComponent implements OnInit{
                private message: NzMessageService,
                private cacheService:CacheService,
                private currUserService:CurrUserService,
-               private authorizationService: AuthorizationService) {
+               private authorizationService: AuthorizationService,
+               private shopService: ShopService) {
     this.valForm1 = fb.group({
       phone: [null, Validators.compose([Validators.required])],//, Validators.email
       password: [null, Validators.required],
@@ -50,14 +52,9 @@ export class LoginComponent implements OnInit{
       this.isLoading = true;
       this.loginService.login(this.user).subscribe((appInfo)=>{
         this.authorizationService.setCurrentUser(appInfo)
-        this.userService.loadUserInfo().subscribe((user)=>{
-          // console.log(user)
-          this.cacheService.setCurrUserInfo(user);
-          let currUser = new CurrUserModel(user.id,user.name,user.phone);
-          this.currUserService.setCurrUser(currUser);
-          this.router.navigate(['/auth-guard']);
-          // this.message.error(res.message);
-        })
+        this.getUserInfo()
+        this.getShops()
+        this.router.navigate(['/auth-guard']);
       },error=>{
         this.isLoading = false;
         this.message.error("登录出错："+error.error.error);
@@ -71,5 +68,21 @@ export class LoginComponent implements OnInit{
 
   logout(){
     this.loginService.logout()
+  }
+
+  getUserInfo(){
+    this.userService.loadUserInfo().subscribe((user)=>{
+      // console.log(user)
+      this.cacheService.setCurrUserInfo(user);
+      let currUser = new CurrUserModel(user.id,user.name,user.phone);
+      this.currUserService.setCurrUser(currUser);
+      // this.message.error(res.message);
+    })
+  }
+
+  getShops(){
+    this.shopService.getAllShops().subscribe((res)=>{
+      console.log(res)
+    })
   }
 }

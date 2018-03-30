@@ -1,6 +1,6 @@
 
 import {Injectable} from "@angular/core";
-import {Body, DELETE, Path, POST, PUT, RebirthHttp} from 'rebirth-http';
+import {Body, DELETE, GET, Path, POST, PUT, RebirthHttp} from 'rebirth-http';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 
@@ -37,6 +37,12 @@ export class ShopService extends RebirthHttp{
 
   @DELETE("/api/merchant/shop/:id")
   deleteObj(@Path('id') id:number): Observable<any>{
+    return null
+  }
+
+  //获取所有店铺
+  @GET('/api/merchant/shop/all')
+  getAllShops(): Observable<any>{
     return null
   }
 }
