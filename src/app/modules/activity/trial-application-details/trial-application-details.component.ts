@@ -73,10 +73,4 @@ export class TrialApplicationDetailsComponent implements OnInit {
     })
   }
 
-  open(e){
-    document.getElementById('detail_info_side').style.right = '0px'
-  }
-  handleCancel(e){
-    document.getElementById('detail_info_side').style.right = '-430px'
-  }
 }
