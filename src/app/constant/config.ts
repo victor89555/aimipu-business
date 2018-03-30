@@ -12,4 +12,4 @@ export const QINIU_DOMAIN = environment.qiniuDomain
 
 
 export const DOWNLOAD_DOMAIN = DOMAIN+"storage/";
-export const UPLOAD_DOMAIN = DOMAIN+"api/upload";
+export const UPLOAD_DOMAIN = DOMAIN+"api/merchant/upload";

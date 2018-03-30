@@ -65,9 +65,9 @@ export class UploadQiniuComponent implements OnInit,DoCheck {
         // console.log(resp);
         if(resp.status=="success"){
           if ($this.type ==  1){
-            this.images.push(resp.data.filename);
+            this.images.push(resp.data);
           }else {
-            $this.images.splice(this.index,1,resp.data.filename)
+            $this.images.splice(this.index,1,resp.data)
           }
 
           this.callBack.emit(this.images);
