@@ -26,7 +26,7 @@
               [nzAjaxData]="page.data"
               [nzPageSize]="page.per_page"
               [nzTotal]="page.total"
-              [nzPageIndex]="page.page"
+              [nzPageIndex]="page.current_page"
               (nzPageIndexChangeClick)="changePageNo($event)"
               [nzLoading]="isLoading"
               [nzShowTotal]="true">
@@ -44,7 +44,7 @@
       </thead>
       <tbody nz-tbody>
       <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index;">
-        <td nz-td>{{(page.page-1)*page.per_page+i+1}}</td>
+        <td nz-td>{{(page.current_page-1)*page.per_page+i+1}}</td>
         <td nz-td>{{data.shop_id}}</td>
         <td nz-td><a href="javascript:;" (click)="showCustomerInfo(data)">{{data.real_name}}</a></td>
         <td nz-td>{{data.phone}}</td>

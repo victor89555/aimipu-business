@@ -11,7 +11,6 @@ import { TrialApplicationListComponent } from './trial-application-list/trial-ap
 import { TrialReportListComponent } from './trial-report-list/trial-report-list.component';
 import { ActivityManagmentPassedComponent } from './activity-managment-passed/activity-managment-passed.component';
 import { ActivityManagmentFailComponent } from './activity-managment-fail/activity-managment-fail.component';
-import { TrialReportDetailCComponent } from './trial-report-detail-c/trial-report-detail-c.component';
 
 const routes: Routes = [
   { path: 'activity-detail/:id', component: ActivityDetailComponent },
@@ -34,7 +33,7 @@ const routes: Routes = [
   exports:[
     RouterModule
   ],
-  entryComponents:[TrialReportDetailCComponent],
+  entryComponents:[],
   declarations: [
     ActivityDetailComponent,
     ActivityManagementPublishedComponent,
@@ -45,8 +44,7 @@ const routes: Routes = [
     TrialApplicationListComponent,
     TrialReportListComponent,
     ActivityManagmentPassedComponent,
-    ActivityManagmentFailComponent,
-    TrialReportDetailCComponent
+    ActivityManagmentFailComponent
   ]
 })
 

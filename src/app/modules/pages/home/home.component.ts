@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Count_Info} from './count_Info.model';
 import {HomeService} from './home.service';
+import {ActivityService} from '../../activity/share/service/activity.service';
+import {TrialReportDetailCComponent} from '../../activity/trial-report-detail-c/trial-report-detail-c.component';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-home',
@@ -10,19 +13,22 @@ import {HomeService} from './home.service';
 })
 export class HomeComponent implements OnInit {
 
-  _bordered = true;
-  _loading = false;
-  _pagination = false;
-  _header = false;
-  _title = true;
-  _footer = false;
-  _fixHeader = false;
-  _size = 'small';
-
   countInfo: Count_Info = new Count_Info()
-  applicationList: any = []
-  reportLst: any = []
-  constructor(private homeSevice: HomeService) {
+  applicationList: any[] = []
+  reportList: any[] = []
+  table1_loading:boolean = false
+  table2_loading:boolean = false
+
+  applyId = null
+  reason:string = ''
+  isEmpty:boolean = false
+  isVisible:boolean = false
+  isConfirmLoading:boolean = false
+
+  constructor(private homeSevice: HomeService,
+              private activityService: ActivityService,
+              private modalService: NzModalService,
+              private messageService: NzMessageService) {
   }
 
   ngOnInit() {
@@ -47,30 +53,107 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  customerInfo:any={id:0,shop_id:0};
+  showCustomerInfo(data){
+    this.customerInfo.id=data.user_id;
+  }
+  toClose(e){
+    this.customerInfo={id:0,shop_id:0};
+  }
+
   getApplicationList(){
-    //假数据
-    for (let i = 1; i <= 10; i++) {
-      this.applicationList.push({
-        key        : i,
-        name       : 'John Brown',
-        age        : `${i}2`,
-        address    : `New York No. ${i} Lake Park`,
-        description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
-      });
-    }
+    this.table1_loading = true
+    this.activityService.getApplicationList({}).subscribe((res)=>{
+      this.applicationList = res.data.data
+      this.table1_loading = false
+    })
   }
 
   getReportLst(){
-    //假数据
-    for (let i = 1; i <= 10; i++) {
-      this.reportLst.push({
-        key        : i,
-        name       : 'John Brown',
-        age        : `${i}2`,
-        address    : `New York No. ${i} Lake Park`,
-        description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
-      });
+    this.table2_loading = true
+    this.activityService.getReportList({}).subscribe((res)=>{
+      this.reportList = res.data.data
+      this.table2_loading = false
+    })
+  }
+
+  //审核报告内容
+  auditReport(data){
+    var _this = this
+    const subscription = this.modalService.open({
+      title: '试用报告内容',
+      content: TrialReportDetailCComponent,
+      onOk() {
+        _this.getReportLst()
+      },
+      onCancel() {
+        console.log('Click cancel');
+      },
+      footer: false,
+      componentParams: {
+        data:data,
+      }
+    });
+    subscription.subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  doPass(id){
+    var _this = this
+    this.modalService.open({
+      title   : '提示',
+      content : '确认通过？',
+      closable: false,
+      showConfirmLoading: true,
+      onOk() {
+        var content = {status:2}
+        _this.activityService.changeApplicationStatus(id,content).subscribe((res)=>{
+          return new Promise(() => {
+            _this.messageService.success('提交通过成功！')
+            _this.getApplicationList()
+          });
+        })
+      },
+      onCancel() {
+      }
+    });
+
+  }
+  doNoPass(id){
+    this.applyId = id
+    this.isVisible = true;
+  }
+  onInput(e){
+    this.checkEmpty()
+  }
+  checkEmpty(){
+    if(this.reason.trim()==''){
+      this.isEmpty = true
+      return false
+    }else {
+      this.isEmpty = false
+      return true
     }
+  }
+  handleOk(e) {
+    var _this = this
+    if(_this.checkEmpty()){
+      this.isConfirmLoading = true;
+      this.activityService
+        .changeApplicationStatus(this.applyId,{status:5,failed_reason:this.reason})
+        .subscribe((res)=>{
+          _this.isConfirmLoading = false;
+          _this.messageService.info('不通过已提交！')
+          _this.applyId = null
+          _this.isVisible = false
+          _this.getApplicationList()
+        })
+    }
+  }
+  handleCancel(e){
+    this.applyId = null
+    this.isVisible = false
   }
 
 }

@@ -16,86 +16,79 @@
   <nz-content style="min-height: 280px;">
     <div nz-row [nzGutter]="16">
       <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12" [nzXl]="12">
-      <nz-table
-        #nzTable
-        [nzScroll]="_fixHeader?{ y: 240 }: null"
-        [nzDataSource]="applicationList"
-        [nzPageSize]="10"
-        [nzBordered]="_bordered"
-        [nzLoading]="_loading"
-        [nzIsPagination]="_pagination"
-        [nzShowFooter]="_footer"
-        [nzShowTitle]="_title"
-        [nzSize]="_size">
-        <span nz-table-title>试用申请列表
-          <button nz-button [nzType]="'default'" style="float: right; position: relative; top: -5px; right: 0px;"><span>查看更多</span></button>
-        </span>
-        <ng-template #nzFixedHeader [ngIf]="_header&&!_fixHeader">
-          <thead nz-thead>
-          <tr>
-            <th nz-th [nzWidth]="'150px'"><span>Name</span></th>
-            <th nz-th [nzWidth]="'70px'"><span>Age</span></th>
-            <th nz-th [nzWidth]="'360px'"><span>Address</span></th>
-            <th nz-th><span>Action</span></th>
-          </tr>
-          </thead>
-        </ng-template>
-        <tbody nz-tbody>
-        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-          <td nz-td>{{data.name}}</td>
-          <td nz-td>{{data.age}}</td>
-          <td nz-td>{{data.address}}</td>
-          <td nz-td>
-            <span>
-              <a href="#">Action 一 {{data.name}}</a>
-              <span nz-table-divider></span>
-              <a href="#">Delete</a>
-              <span nz-table-divider></span>
-              <button nz-button [nzType]="'default'" routerLink="/auth-guard/activity/application-details"><span>查看</span></button>
-            </span>
-          </td>
-        </tr>
-        </tbody>
-      </nz-table>
-    </div>
-      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12" [nzXl]="12">
         <nz-table
           #nzTable1
-          [nzScroll]="_fixHeader?{ y: 240 }:null"
-          [nzDataSource]="reportLst"
+          [nzDataSource]="applicationList"
           [nzPageSize]="10"
-          [nzBordered]="_bordered"
-          [nzLoading]="_loading"
-          [nzIsPagination]="_pagination"
-          [nzShowFooter]="_footer"
-          [nzShowTitle]="_title"
-          [nzSize]="_size">
-        <span nz-table-title>试用报告列表
-                  <button nz-button [nzType]="'default'" style="float: right; position: relative; top: -5px; right: 0px;"><span>查看更多</span></button>
+          [nzBordered]="false"
+          [nzLoading]="table1_loading"
+          [nzIsPagination]="false"
+          [nzShowFooter]="false"
+          [nzShowTitle]="true"
+          [nzBordered]="true"
+          [nzSize]="'small'" >
+        <span nz-table-title>试用申请列表
+          <button nz-button [nzType]="'default'" routerLink="/auth-guard/activity/application-list"
+                  style="float: right; position: relative; top: -5px; right: 0px;">查看更多</button>
         </span>
-          <ng-template #nzFixedHeader [ngIf]="_header&&!_fixHeader">
-            <thead nz-thead>
-            <tr>
-              <th nz-th [nzWidth]="'150px'"><span>Name</span></th>
-              <th nz-th [nzWidth]="'70px'"><span>Age</span></th>
-              <th nz-th [nzWidth]="'360px'"><span>Address</span></th>
-              <th nz-th><span>Action</span></th>
-            </tr>
-            </thead>
-          </ng-template>
+          <thead nz-thead>
+          <tr>
+            <th nz-th><span>序号</span></th>
+            <th nz-th><span>店铺名称</span></th>
+            <th nz-th><span>用户姓名</span></th>
+            <th nz-th><span>申请时间</span></th>
+            <th nz-th><span>操作</span></th>
+          </tr>
+          </thead>
           <tbody nz-tbody>
-          <tr nz-tbody-tr *ngFor="let data of nzTable1.data">
-            <td nz-td>{{data.name}}</td>
-            <td nz-td>{{data.age}}</td>
-            <td nz-td>{{data.address}}</td>
+          <tr nz-tbody-tr *ngFor="let data of nzTable1.data;let i = index;">
+            <td nz-td>{{i+1}}</td>
+            <td nz-td>{{data.shop_id}}</td>
+            <td nz-td><a href="javascript:void (0);" (click)="showCustomerInfo(data)">{{data.real_name}}</a></td>
+            <td nz-td>{{data.applied_at}}</td>
             <td nz-td>
-            <span>
-              <a href="#">Action 一 {{data.name}}</a>
-              <span nz-table-divider></span>
-              <a href="#">Delete</a>
-              <span nz-table-divider></span>
-              <button nz-button [nzType]="'default'" routerLink="/auth-guard/activity/report-details"><span>查看</span></button>
-            </span>
+              <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="/auth-guard/activity/application-details/{{data.project_id}}">查看该活动详情</button>
+              <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" (click)="doPass(data.id)">通过</button>
+              <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" (click)="doNoPass(data.id)">不通过</button>
+            </td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </div>
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12" [nzXl]="12">
+        <nz-table
+          #nzTable2
+          [nzDataSource]="reportList"
+          [nzPageSize]="10"
+          [nzBordered]="false"
+          [nzLoading]="table2_loading"
+          [nzIsPagination]="false"
+          [nzShowFooter]="false"
+          [nzShowTitle]="true"
+          [nzBordered]="true"
+          [nzSize]="'small'" >
+        <span nz-table-title>试用报告列表
+                  <button nz-button [nzType]="'default'" routerLink="/auth-guard/activity/report-list"
+                          style="float: right; position: relative; top: -5px; right: 0px;">查看更多</button>
+        </span>
+          <thead nz-thead>
+          <tr>
+            <th nz-th><span>序号</span></th>
+            <th nz-th><span>店铺名称</span></th>
+            <th nz-th><span>用户姓名</span></th>
+            <th nz-th><span>申请时间</span></th>
+            <th nz-th><span>操作</span></th>
+          </tr>
+          </thead>
+          <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let data of nzTable2.data;let i = index;">
+            <td nz-td>{{i+1}}</td>
+            <td nz-td>{{data.shop_id}}</td>
+            <td nz-td><a href="javascript:;" (click)="showCustomerInfo(data)">{{data.real_name}}</a></td>
+            <td nz-td>{{data.applied_at}}</td>
+            <td nz-td>
+              <button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="auditReport(data)">审核报告内容</button>
+              <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="/auth-guard/activity/report-details/{{data.project_id}}">查看该活动详情</button>
             </td>
           </tr>
           </tbody>
@@ -104,3 +97,16 @@
     </div>
   </nz-content>
 </nz-layout>
+
+
+<customer-info [customer_id]="customerInfo.id" [shop_id]="customerInfo.shop_id" (close)="toClose($event)"></customer-info>
+
+<nz-modal [nzVisible]="isVisible" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzConfirmLoading]="isConfirmLoading">
+  <ng-template #modalContent>
+    <h2 style="margin-bottom: 20px;">审核原因</h2>
+    <nz-input [(ngModel)]="reason" [nzRows]="2" [nzType]="'textarea'" (ngModelChange)="onInput($event)"
+              [nzPlaceHolder]="'请填写原因'" [nzSize]="'large'">
+    </nz-input>
+    <div *ngIf="isEmpty"><span style="color: red;">请填写审核原因</span></div>
+  </ng-template>
+</nz-modal>

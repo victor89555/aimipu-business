@@ -13,6 +13,7 @@ import {ImageUploadComponent} from '../modules/activity/image-upload/image-uploa
 import {RebirthPermissionModule} from 'rebirth-permission';
 import {UploadQiniuComponent} from './upload-qiniu/upload-qiniu.component';
 import {CustomerInfoComponent} from '../modules/activity/customer-info/customer-info.component';
+import {TrialReportDetailCComponent} from '../modules/activity/trial-report-detail-c/trial-report-detail-c.component';
 
 @NgModule({
   imports: [
@@ -40,10 +41,11 @@ import {CustomerInfoComponent} from '../modules/activity/customer-info/customer-
     ImageUploadComponent,
     RebirthPermissionModule,
     UploadQiniuComponent,
-    CustomerInfoComponent
+    CustomerInfoComponent,
+    TrialReportDetailCComponent
   ],
-  entryComponents:[CustomerInfoComponent],
-  declarations: [MyEditorComponent,ImageUploadComponent,UploadQiniuComponent,CustomerInfoComponent],
+  entryComponents:[CustomerInfoComponent, TrialReportDetailCComponent],
+  declarations: [MyEditorComponent,ImageUploadComponent,UploadQiniuComponent,CustomerInfoComponent, TrialReportDetailCComponent],
   providers:[
     ModalHelper
   ]

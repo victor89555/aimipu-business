@@ -59,8 +59,6 @@
     </nz-table>
   </nz-tab>
 </nz-tabset>
-
-
 <customer-info [customer_id]="customerInfo.id" [shop_id]="customerInfo.shop_id" (close)="toClose($event)"></customer-info>
 
 <nz-modal [nzVisible]="isVisible" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzConfirmLoading]="isConfirmLoading">
