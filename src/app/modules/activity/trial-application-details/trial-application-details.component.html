@@ -68,7 +68,7 @@
             </thead>
             <tbody nz-tbody>
             <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-              <td nz-td><a href="javascript:;">{{data.real_name}}</a></td>
+              <td nz-td><a href="javascript:;" (click)="showCustomerInfo(data)">{{data.real_name}}</a></td>
               <td nz-td>{{data.phone}}</td>
               <td nz-td>{{data.applied_at}}</td>
               <td nz-td>{{data.checked_at}}</td>
@@ -83,3 +83,6 @@
     </div>
   </nz-tab>
 </nz-tabset>
+
+
+<customer-info [customer_id]="customerInfo.id" [shop_id]="customerInfo.shop_id" (close)="toClose($event)"></customer-info>

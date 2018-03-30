@@ -73,4 +73,13 @@ export class TrialApplicationDetailsComponent implements OnInit {
     })
   }
 
+
+  customerInfo:any={id:0,shop_id:0};
+  showCustomerInfo(data){
+    this.customerInfo.id=data.user_id;
+  }
+  toClose(e){
+    this.customerInfo={id:0,shop_id:0};
+  }
+
 }

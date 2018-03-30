@@ -46,7 +46,7 @@
       <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index;">
         <td nz-td>{{(page.page-1)*page.per_page+i+1}}</td>
         <td nz-td>{{data.shop_id}}</td>
-        <td nz-td><a href="javascript:;">{{data.real_name}}</a></td>
+        <td nz-td><a href="javascript:;" (click)="showCustomerInfo(data)">{{data.real_name}}</a></td>
         <td nz-td>{{data.phone}}</td>
         <td nz-td>{{data.golds}}</td>
         <td nz-td>{{data.applied_at}}</td>
@@ -60,3 +60,5 @@
     </nz-table>
   </nz-tab>
 </nz-tabset>
+
+<customer-info [customer_id]="customerInfo.id" [shop_id]="customerInfo.shop_id" (close)="toClose($event)"></customer-info>

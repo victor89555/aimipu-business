@@ -59,4 +59,16 @@
     </nz-table>
   </nz-tab>
 </nz-tabset>
+
+
 <customer-info [customer_id]="customerInfo.id" [shop_id]="customerInfo.shop_id" (close)="toClose($event)"></customer-info>
+
+<nz-modal [nzVisible]="isVisible" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzConfirmLoading]="isConfirmLoading">
+  <ng-template #modalContent>
+    <h2 style="margin-bottom: 20px;">审核原因</h2>
+    <nz-input [(ngModel)]="reason" [nzRows]="2" [nzType]="'textarea'" (ngModelChange)="onInput($event)"
+              [nzPlaceHolder]="'请填写原因'" [nzSize]="'large'">
+    </nz-input>
+    <div *ngIf="isEmpty"><span style="color: red;">请填写审核原因</span></div>
+  </ng-template>
+</nz-modal>
