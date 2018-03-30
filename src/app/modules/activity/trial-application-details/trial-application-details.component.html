@@ -73,7 +73,10 @@
               <td nz-td>{{data.applied_at}}</td>
               <td nz-td>{{data.checked_at}}</td>
               <td nz-td>{{data.submitted_at}}</td>
-              <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
+              <td nz-td>
+                <button *ngIf="data.status == 1" nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" (click)="doPass(data.id)">通过</button>
+                <button *ngIf="data.status == 1" nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" (click)="doNoPass(data.id)">不通过</button>
+              </td>
             </tr>
             </tbody>
           </nz-table>
@@ -86,3 +89,13 @@
 
 
 <customer-info [customer_id]="customerInfo.id" [shop_id]="customerInfo.shop_id" (close)="toClose($event)"></customer-info>
+
+<nz-modal [nzVisible]="isVisible" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" [nzConfirmLoading]="isConfirmLoading">
+  <ng-template #modalContent>
+    <h2 style="margin-bottom: 20px;">审核原因</h2>
+    <nz-input [(ngModel)]="reason" [nzRows]="2" [nzType]="'textarea'" (ngModelChange)="onInput($event)"
+              [nzPlaceHolder]="'请填写原因'" [nzSize]="'large'">
+    </nz-input>
+    <div *ngIf="isEmpty"><span style="color: red;">请填写审核原因</span></div>
+  </ng-template>
+</nz-modal>

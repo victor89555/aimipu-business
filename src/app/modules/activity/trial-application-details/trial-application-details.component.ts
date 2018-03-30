@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ActivityService} from '../share/service/activity.service';
+import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-trial-application-details',
@@ -20,6 +21,11 @@ export class TrialApplicationDetailsComponent implements OnInit {
   isLoading:boolean = false
   validateForm: FormGroup
 
+  applyId = null
+  reason:string = ''
+  isEmpty:boolean = false
+  isVisible:boolean = false
+  isConfirmLoading:boolean = false
 
   style: any = {
     top: '20px'
@@ -27,7 +33,9 @@ export class TrialApplicationDetailsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
-              private activityService: ActivityService) { }
+              private activityService: ActivityService,
+              private messageService:NzMessageService,
+              private modalService:NzModalService) { }
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
@@ -81,5 +89,65 @@ export class TrialApplicationDetailsComponent implements OnInit {
   toClose(e){
     this.customerInfo={id:0,shop_id:0};
   }
+
+
+  doPass(id){
+    var _this = this
+    this.modalService.open({
+      title   : '提示',
+      content : '确认通过？',
+      closable: false,
+      showConfirmLoading: true,
+      onOk() {
+        var content = {status:2}
+        _this.activityService.changeApplicationStatus(id,content).subscribe((res)=>{
+          return new Promise(() => {
+            _this.messageService.success('提交通过成功！')
+            _this.getActivityInfo()
+          });
+        })
+      },
+      onCancel() {
+      }
+    });
+
+  }
+  doNoPass(id){
+    this.applyId = id
+    this.isVisible = true;
+  }
+
+  onInput(e){
+    this.checkEmpty()
+  }
+  checkEmpty(){
+    if(this.reason.trim()==''){
+      this.isEmpty = true
+      return false
+    }else {
+      this.isEmpty = false
+      return true
+    }
+  }
+  handleOk(e) {
+    var _this = this
+    if(_this.checkEmpty()){
+      this.isConfirmLoading = true;
+      this.activityService
+        .changeApplicationStatus(this.applyId,{status:5,failed_reason:this.reason})
+        .subscribe((res)=>{
+          _this.isConfirmLoading = false;
+          _this.messageService.info('不通过已提交！')
+          _this.applyId = null
+          _this.isVisible = false
+          _this.getActivityInfo()
+        })
+    }
+  }
+  handleCancel(e){
+    this.applyId = null
+    this.isVisible = false
+  }
+
 
 }

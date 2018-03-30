@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ActivityService} from '../share/service/activity.service';
+import {TrialReportDetailCComponent} from '../trial-report-detail-c/trial-report-detail-c.component';
+import {NzModalService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-trial-report-details',
@@ -22,7 +24,8 @@ export class TrialReportDetailsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
-              private activityService: ActivityService) { }
+              private activityService: ActivityService,
+              private modalService: NzModalService) { }
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
@@ -83,4 +86,26 @@ export class TrialReportDetailsComponent implements OnInit {
     this.customerInfo={id:0,shop_id:0};
   }
 
+
+  //审核报告内容
+  auditReport(data){
+    var _this = this
+    const subscription = this.modalService.open({
+      title: '试用报告内容',
+      content: TrialReportDetailCComponent,
+      onOk() {
+        _this.getActivityInfo()
+      },
+      onCancel() {
+        console.log('Click cancel');
+      },
+      footer: false,
+      componentParams: {
+        data:data,
+      }
+    });
+    subscription.subscribe(result => {
+      console.log(result);
+    })
+  }
 }

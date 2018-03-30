@@ -79,7 +79,10 @@
               <td nz-td>{{data.applied_at}}</td>
               <td nz-td>{{data.checked_at}}</td>
               <td nz-td>{{data.submitted_at}}</td>
-              <td nz-td><button nz-button [nzType]="'primary'" [nzSize]="'small'">查看详情</button></td>
+              <td nz-td>
+                <button *ngIf="data.status == 4" nz-button (click)="auditReport(data)"
+                        [nzType]="'primary'" [nzSize]="'small'">审核报告内容</button>
+              </td>
             </tr>
             </tbody>
           </nz-table>
