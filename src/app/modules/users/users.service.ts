@@ -4,7 +4,6 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../environments/environment';
 import {User} from './user.model';
-import {ActivityInfo} from '../activity/activity-detail/activity-detail.model';
 
 /**
  * 账号(用户)管理服务
