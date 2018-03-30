@@ -182,7 +182,7 @@ export const SHOP_STATUS = [
     key: 3
   },
   {
-    value: '删除',
+    value: '已删除',
     key: 4
   },
 ]
