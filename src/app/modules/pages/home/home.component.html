@@ -35,6 +35,7 @@
           <tr>
             <th nz-th><span>序号</span></th>
             <th nz-th><span>店铺名称</span></th>
+            <th nz-th><span>商品名称</span></th>
             <th nz-th><span>用户姓名</span></th>
             <th nz-th><span>申请时间</span></th>
             <th nz-th><span>操作</span></th>
@@ -44,10 +45,11 @@
           <tr nz-tbody-tr *ngFor="let data of nzTable1.data;let i = index;">
             <td nz-td>{{i+1}}</td>
             <td nz-td>{{data.shop_id|dicsNamePipe:allShop:"id":"name"}}</td>
+            <td nz-td [title]="data.title">{{data.title|stringEllipsisCutPipe:10}}</td>
             <td nz-td><a href="javascript:void (0);" (click)="showCustomerInfo(data)">{{data.real_name}}</a></td>
             <td nz-td>{{data.applied_at}}</td>
             <td nz-td>
-              <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="/auth-guard/activity/application-details/{{data.project_id}}">查看该活动详情</button>
+              <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="/auth-guard/activity/application-details/{{data.project_id}}">查看</button>
               <!--<button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" (click)="doPass(data.id)">通过</button>-->
               <!--<button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" (click)="doNoPass(data.id)">不通过</button>-->
             </td>
@@ -75,6 +77,7 @@
           <tr>
             <th nz-th><span>序号</span></th>
             <th nz-th><span>店铺名称</span></th>
+            <th nz-th><span>商品名称</span></th>
             <th nz-th><span>用户姓名</span></th>
             <th nz-th><span>申请时间</span></th>
             <th nz-th><span>操作</span></th>
@@ -84,11 +87,12 @@
           <tr nz-tbody-tr *ngFor="let data of nzTable2.data;let i = index;">
             <td nz-td>{{i+1}}</td>
             <td nz-td>{{data.shop_id|dicsNamePipe:allShop:"id":"name"}}</td>
+            <td nz-td [title]="data.title">{{data.title|stringEllipsisCutPipe:10}}</td>
             <td nz-td><a href="javascript:;" (click)="showCustomerInfo(data)">{{data.real_name}}</a></td>
             <td nz-td>{{data.applied_at}}</td>
             <td nz-td>
               <!--<button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="auditReport(data)">审核报告内容</button>-->
-              <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="/auth-guard/activity/report-details/{{data.project_id}}">查看该活动详情</button>
+              <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="/auth-guard/activity/report-details/{{data.project_id}}">查看</button>
             </td>
           </tr>
           </tbody>
