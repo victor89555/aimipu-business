@@ -34,22 +34,22 @@
         <div nz-col [nzMd]="16" [nzXs]="24">
           <nz-tabset [nzType]="'card'" >
             <nz-tab (nzClick)="selectTab('all')">
-              <ng-template #nzTabHeading>全部（60）</ng-template>
+              <ng-template #nzTabHeading>全部（{{num_all}}）</ng-template>
             </nz-tab>
             <nz-tab (nzClick)="selectTab('2')">
-              <ng-template #nzTabHeading>待提交（18）</ng-template>
+              <ng-template #nzTabHeading>待提交（{{num_2}}）</ng-template>
             </nz-tab>
             <nz-tab (nzClick)="selectTab('4')">
-              <ng-template #nzTabHeading>待确认（20）</ng-template>
+              <ng-template #nzTabHeading>待确认（{{num_4}}）</ng-template>
             </nz-tab>
             <nz-tab (nzClick)="selectTab('3')">
-              <ng-template #nzTabHeading>待修改（10）</ng-template>
+              <ng-template #nzTabHeading>待修改（{{num_3}}）</ng-template>
             </nz-tab>
             <nz-tab (nzClick)="selectTab('5')">
-              <ng-template #nzTabHeading>已完成（10）</ng-template>
+              <ng-template #nzTabHeading>已完成（{{num_5}}）</ng-template>
             </nz-tab>
             <nz-tab (nzClick)="selectTab('0')">
-              <ng-template #nzTabHeading>试用终止（2）</ng-template>
+              <ng-template #nzTabHeading>试用终止（{{num_0}}）</ng-template>
             </nz-tab>
           </nz-tabset>
 
@@ -61,7 +61,7 @@
             </div>
             <button nz-button [nzType]="'primary'" [nzSize]="'large'" type="submit">搜索</button>
           </form>
-          <nz-table #nzTable [nzDataSource]="nowData" [nzPageSize]="10">
+          <nz-table #nzTable [nzDataSource]="nowData" [nzPageSize]="10" [nzLoading]="isLoading">
             <thead nz-thead>
             <tr>
               <th nz-th><span>用户</span></th>

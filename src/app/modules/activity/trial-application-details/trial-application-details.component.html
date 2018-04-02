@@ -34,16 +34,16 @@
         <div nz-col [nzMd]="16" [nzXs]="24">
           <nz-tabset [nzType]="'card'" >
             <nz-tab (nzClick)="selectTab('all')">
-              <ng-template #nzTabHeading>全部（60）</ng-template>
+              <ng-template #nzTabHeading>全部（{{num_all}}）</ng-template>
             </nz-tab>
             <nz-tab (nzClick)="selectTab('1')">
-              <ng-template #nzTabHeading>待审核（18）</ng-template>
+              <ng-template #nzTabHeading>待审核（{{num_1}}）</ng-template>
             </nz-tab>
             <nz-tab (nzClick)="selectTab('2')">
-              <ng-template #nzTabHeading>通过（20）</ng-template>
+              <ng-template #nzTabHeading>通过（{{num_2}}）</ng-template>
             </nz-tab>
             <nz-tab (nzClick)="selectTab('6')">
-              <ng-template #nzTabHeading>不通过（10）</ng-template>
+              <ng-template #nzTabHeading>不通过（{{num_6}}）</ng-template>
             </nz-tab>
           </nz-tabset>
 
@@ -55,7 +55,7 @@
             </div>
             <button nz-button [nzType]="'primary'" [nzSize]="'large'" type="submit">搜索</button>
           </form>
-          <nz-table #nzTable [nzDataSource]="nowData" [nzPageSize]="10">
+          <nz-table #nzTable [nzDataSource]="nowData" [nzPageSize]="10" [nzLoading]="isLoading">
             <thead nz-thead>
             <tr>
               <th nz-th><span>用户</span></th>

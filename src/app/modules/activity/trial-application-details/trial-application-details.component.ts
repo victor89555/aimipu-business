@@ -29,6 +29,10 @@ export class TrialApplicationDetailsComponent implements OnInit {
   isVisible:boolean = false
   isConfirmLoading:boolean = false
 
+  num_all:number = 0
+  num_1:number = 0
+  num_2:number = 0
+  num_6:number = 0
   style: any = {
     top: '20px'
   };
@@ -42,8 +46,6 @@ export class TrialApplicationDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.allShop = this.cacheService.getShops()
-
-    console.log(1111)
     this.route.params.forEach((params: Params) => {
       this.activityId = params['id'];
       this.getActivityInfo()
@@ -82,6 +84,10 @@ export class TrialApplicationDetailsComponent implements OnInit {
     this.activityService.getActivityInfo(this.activityId).subscribe((res)=>{
       this.totalData = res.data
       this.activityInfo = res.data.project
+      this.num_all = this.totalData.applys?this.totalData.applys.length:0
+      this.num_1 = this.totalData.groupApplys['1']?this.totalData.groupApplys['1'].length:0
+      this.num_2 = this.totalData.groupApplys['2']?this.totalData.groupApplys['2'].length:0
+      this.num_6 = this.totalData.groupApplys['6']?this.totalData.groupApplys['6'].length:0
       this.selectTab(this.index)
       this.isLoading = false
     })
