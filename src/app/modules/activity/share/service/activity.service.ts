@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Body, GET, Path, POST, PUT, Query, RebirthHttp} from 'rebirth-http';
+import {Body, DELETE, GET, Path, POST, PUT, Query, RebirthHttp} from 'rebirth-http';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {ActivityInfo} from '../../activity-detail/activity-detail.model';
@@ -30,6 +30,12 @@ export class ActivityService extends RebirthHttp{
   //修改试用信息
   @PUT('/api/merchant/project/:id')
   editActivityInfo(@Path("id") id:number, @Body activityInfo: ActivityInfo):Observable<any>{
+    return null
+  }
+
+  //删除试用活动
+  @DELETE('/api/merchant/project/:id')
+  deleteActivity(@Path("id") id:number):Observable<any>{
     return null
   }
 

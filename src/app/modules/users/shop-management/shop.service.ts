@@ -41,7 +41,7 @@ export class ShopService extends RebirthHttp{
   }
 
   //获取所有店铺
-  @GET('/api/merchant/shop/all')
+  @GET('/api/merchant/shops')
   getAllShops(): Observable<any>{
     return null
   }

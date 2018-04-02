@@ -4,6 +4,7 @@ import {ActivityService} from '../share/service/activity.service';
 import {NzModalService} from 'ng-zorro-antd';
 import {TrialReportDetailCComponent} from '../trial-report-detail-c/trial-report-detail-c.component';
 import {ACTIVITY_APPLY_STATUS} from '../../../constant/dictionary';
+import {CacheService} from '../../../shared/service/cache.service';
 
 @Component({
   selector: 'app-trial-report-list',
@@ -19,12 +20,15 @@ export class TrialReportListComponent implements OnInit {
   keyword:string = ''
   _startDate = ''
   _endDate = ''
+  allShop:any[]=[]
   page:any = {current_page:1,per_page:10,total: 0,data:[]}
   constructor(private fb: FormBuilder,
               private activityService: ActivityService,
-              private modalService: NzModalService) { }
+              private modalService: NzModalService,
+              private cacheService: CacheService) { }
 
   ngOnInit() {
+    this.allShop = this.cacheService.getShops()
     this.validateForm = this.fb.group({
       keyword: [ this.keyword],
       startDate: [this._startDate],

@@ -5,6 +5,7 @@ import {ShopService} from './shop.service';
 import {myValidNull} from '../../../shared/util/string-utils';
 import {ModalHelper} from '../../../shared/modal.helper';
 import {EditShopComponent} from './edit-shop/edit-shop.component';
+import {CacheService} from '../../../shared/service/cache.service';
 
 @Component({
   selector: 'app-shop-management',
@@ -25,7 +26,8 @@ export class ShopManagementComponent implements OnInit {
 
   constructor(private message:NzMessageService,
               private modalHelper:ModalHelper,
-              private shopService:ShopService) { }
+              private shopService:ShopService,
+              private cacheService: CacheService) { }
 
   ngOnInit() {
     this.initPage();
@@ -66,6 +68,9 @@ export class ShopManagementComponent implements OnInit {
     this.modalHelper.open(EditShopComponent, {entity:bak}, 'lg',{title:'店铺信息',showConfirmLoading:true,footer:false}).subscribe(u => {
       console.log(u);
       temp?this.search():this.initPage();
+      this.shopService.getAllShops().subscribe((res)=>{
+        this.cacheService.setShops(res.data);
+      })
     },(error)=>{
       console.error("弹窗回调出错：",error);
     })

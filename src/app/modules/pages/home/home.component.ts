@@ -4,6 +4,7 @@ import {HomeService} from './home.service';
 import {ActivityService} from '../../activity/share/service/activity.service';
 import {TrialReportDetailCComponent} from '../../activity/trial-report-detail-c/trial-report-detail-c.component';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
+import {CacheService} from '../../../shared/service/cache.service';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,8 @@ export class HomeComponent implements OnInit {
   table1_loading:boolean = false
   table2_loading:boolean = false
 
+  allShop:any[]=[];
+
   applyId = null
   reason:string = ''
   isEmpty:boolean = false
@@ -26,12 +29,16 @@ export class HomeComponent implements OnInit {
   isConfirmLoading:boolean = false
 
   constructor(private homeSevice: HomeService,
+              private cacheService:CacheService,
               private activityService: ActivityService,
               private modalService: NzModalService,
               private messageService: NzMessageService) {
   }
 
   ngOnInit() {
+    this.allShop = this.cacheService.getShops();
+    console.log(666666666666)
+    console.log(this.allShop)
     //获取首页统计信息
     this.getCountInfo()
 

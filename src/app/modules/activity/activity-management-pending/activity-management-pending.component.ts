@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ACTIVITY_AUDITING_STATUS} from '../../../constant/dictionary';
 import {ActivityService} from '../share/service/activity.service';
 import {Router} from '@angular/router';
+import {CacheService} from '../../../shared/service/cache.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'activity-management-pending',
@@ -14,6 +16,7 @@ export class ActivityManagementPendingComponent implements OnInit {
   title = '待审核活动'
   isLoading:boolean = false
   keyword:string = ''
+  allShop:any[]=[]
   page:any = {current_page:1,per_page:10,total: 0,data:[]}
   activity_status = ACTIVITY_AUDITING_STATUS
 
@@ -21,7 +24,9 @@ export class ActivityManagementPendingComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private activityService: ActivityService,
-              private router: Router) {
+              private router: Router,
+              private cacheService: CacheService,
+              private messageService: NzMessageService) {
   }
 
   _submitForm() {
@@ -29,6 +34,7 @@ export class ActivityManagementPendingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.allShop = this.cacheService.getShops()
     this.validateForm = this.fb.group({
       keyword: [ this.keyword ],
     });
@@ -50,7 +56,15 @@ export class ActivityManagementPendingComponent implements OnInit {
     this.getPendingData()
   }
   editActivityInfo(id){
-    this.router.navigateByUrl('/auth-guard/activity/activity-detail/'+id)
+    this.router.navigateByUrl('/auth-guard/activity/activity-pending/'+id)
+  }
+  deleteActivity(id){
+    this.activityService.deleteActivity(id).subscribe((res)=>{
+      this.messageService.success('删除成功！')
+    })
+  }
+  cancel(){
+    console.log('cancel')
   }
 
 }

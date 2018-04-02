@@ -11,18 +11,24 @@ import { TrialApplicationListComponent } from './trial-application-list/trial-ap
 import { TrialReportListComponent } from './trial-report-list/trial-report-list.component';
 import { ActivityManagmentPassedComponent } from './activity-managment-passed/activity-managment-passed.component';
 import { ActivityManagmentFailComponent } from './activity-managment-fail/activity-managment-fail.component';
+import { ReportContentComponent } from './report-content/report-content.component';
 
 const routes: Routes = [
   { path: 'activity-detail/:id', component: ActivityDetailComponent },
   { path: 'activity-published', component: ActivityManagementPublishedComponent },
+  { path: 'activity-published/report/:id', component: TrialReportDetailsComponent },
+  { path: 'activity-published/application/:id', component: TrialApplicationDetailsComponent },
   { path: 'activity-pending', component: ActivityManagementPendingComponent },
+  { path: 'activity-pending/:id', component: ActivityDetailComponent },
   { path: 'activity-over', component: ActivityManagementOverComponent },
   { path: 'activity-passed', component: ActivityManagmentPassedComponent },
   { path: 'activity-fail', component: ActivityManagmentFailComponent },
   { path: 'application-details/:id', component: TrialApplicationDetailsComponent},
   { path: 'report-details/:id', component: TrialReportDetailsComponent},
   { path: 'application-list', component: TrialApplicationListComponent},
+  { path: 'application-list/:id', component: TrialApplicationDetailsComponent},
   { path: 'report-list', component: TrialReportListComponent},
+  { path: 'report-list/:id', component: TrialReportDetailsComponent},
 ];
 
 @NgModule({
@@ -44,7 +50,8 @@ const routes: Routes = [
     TrialApplicationListComponent,
     TrialReportListComponent,
     ActivityManagmentPassedComponent,
-    ActivityManagmentFailComponent
+    ActivityManagmentFailComponent,
+    ReportContentComponent
   ]
 })
 

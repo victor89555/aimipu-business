@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit{
   }
 
   getUserInfo(){
+    console.log('getUserInfo()')
     this.userService.loadUserInfo().subscribe((user)=>{
       // console.log(user)
       this.cacheService.setCurrUserInfo(user);
@@ -81,8 +82,9 @@ export class LoginComponent implements OnInit{
   }
 
   getShops(){
+    console.log('getShops')
     this.shopService.getAllShops().subscribe((res)=>{
-      console.log(res)
+      this.cacheService.setShops(res.data);
     })
   }
 }

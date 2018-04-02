@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ActivityService} from '../share/service/activity.service';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
+import {CacheService} from '../../../shared/service/cache.service';
 
 @Component({
   selector: 'app-trial-application-details',
@@ -20,6 +21,7 @@ export class TrialApplicationDetailsComponent implements OnInit {
   nowData:any[] = []
   isLoading:boolean = false
   validateForm: FormGroup
+  allShop:any[]=[]
 
   applyId = null
   reason:string = ''
@@ -35,9 +37,13 @@ export class TrialApplicationDetailsComponent implements OnInit {
               private route: ActivatedRoute,
               private activityService: ActivityService,
               private messageService:NzMessageService,
-              private modalService:NzModalService) { }
+              private modalService:NzModalService,
+              private cacheService: CacheService) { }
 
   ngOnInit() {
+    this.allShop = this.cacheService.getShops()
+
+    console.log(1111)
     this.route.params.forEach((params: Params) => {
       this.activityId = params['id'];
       this.getActivityInfo()

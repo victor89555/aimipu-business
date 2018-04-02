@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ACTIVITY_AUDITING_STATUS} from '../../../constant/dictionary';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivityService} from '../share/service/activity.service';
+import {CacheService} from '../../../shared/service/cache.service';
 
 @Component({
   selector: 'app-activity-managment-passed',
@@ -13,13 +14,15 @@ export class ActivityManagmentPassedComponent implements OnInit {
   title = '已通过活动'
   isLoading:boolean = false
   keyword:string = ''
+  allShop:any[]=[]
   page:any = {current_page:1,per_page:10,total: 0,data:[]}
   activity_status = ACTIVITY_AUDITING_STATUS
 
   validateForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private activityService: ActivityService) {
+              private activityService: ActivityService,
+              private cacheService: CacheService) {
   }
 
   _submitForm() {
@@ -27,6 +30,7 @@ export class ActivityManagmentPassedComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.allShop = this.cacheService.getShops()
     this.validateForm = this.fb.group({
       keyword: [ this.keyword ],
     });

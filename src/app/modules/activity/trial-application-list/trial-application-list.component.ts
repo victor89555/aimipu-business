@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivityService} from '../share/service/activity.service';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
+import {CacheService} from '../../../shared/service/cache.service';
 
 @Component({
   selector: 'app-trial-application-list',
@@ -14,6 +15,7 @@ export class TrialApplicationListComponent implements OnInit {
   isLoading:boolean = false
   validateForm: FormGroup;
   keyword:string = ''
+  allShop:any[]=[]
 
   applyId = null
   reason:string = ''
@@ -26,9 +28,11 @@ export class TrialApplicationListComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private activityService: ActivityService,
               private messageService: NzMessageService,
-              private modalService: NzModalService) { }
+              private modalService: NzModalService,
+              private cacheService: CacheService) { }
 
   ngOnInit() {
+    this.allShop = this.cacheService.getShops()
     this.validateForm = this.fb.group({
       keyword: [ this.keyword],
       startDate: [this._startDate],

@@ -13,8 +13,6 @@ import {NzMessageService} from 'ng-zorro-antd';
   template: '<router-outlet></router-outlet>',
 })
 export class AppComponent {
-  title = 'aimipu';
-
   constructor(private rebirthHttpProvider: RebirthHttpProvider,
               private authorizationService: AuthorizationService,
               private router: Router,

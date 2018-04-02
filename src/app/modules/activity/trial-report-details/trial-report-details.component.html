@@ -12,7 +12,7 @@
               <h2>活动信息</h2>
               <ul>
                 <li><span class="title">商品来源：</span><span class="content">淘宝</span></li>
-                <li><span class="title">店铺名称：</span><span class="content">{{activityInfo.shop_id}}</span></li>
+                <li><span class="title">店铺名称：</span><span class="content">{{activityInfo.shop_id|dicsNamePipe:allShop:"id":"name"}}</span></li>
                 <li><span class="title">试用邮费：</span><span class="content">{{activityInfo.postage_type}}</span></li>
                 <li><span class="title">试用数量：</span><span class="content">{{activityInfo.number_of}}</span></li>
                 <li><span class="title">奖励金币：</span><span class="content">{{activityInfo.golds}}</span></li>
