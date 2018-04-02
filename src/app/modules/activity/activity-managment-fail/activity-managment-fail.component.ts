@@ -58,6 +58,7 @@ export class ActivityManagmentFailComponent implements OnInit {
   deleteActivity(id){
     this.activityService.deleteActivity(id).subscribe((res)=>{
       this.messageService.success('删除成功！')
+      this.getFailedData()
     })
   }
   cancel(){
