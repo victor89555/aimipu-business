@@ -36,6 +36,7 @@
         <th nz-th><span>店铺名称</span></th>
         <th nz-th><span>用户姓名</span></th>
         <th nz-th><span>用户手机</span></th>
+        <th nz-th><span>商品名称</span></th>
         <th nz-th><span>奖励金币</span></th>
         <th nz-th><span>申请时间</span></th>
         <th nz-th><span>状态</span></th>
@@ -48,12 +49,13 @@
         <td nz-td>{{data.shop_id|dicsNamePipe:allShop:"id":"name"}}</td>
         <td nz-td><a href="javascript:;" (click)="showCustomerInfo(data)">{{data.real_name}}</a></td>
         <td nz-td>{{data.phone}}</td>
+        <td nz-td [title]="data.title">{{data.title|stringEllipsisCutPipe:20}}</td>
         <td nz-td>{{data.golds}}</td>
         <td nz-td>{{data.applied_at}}</td>
         <td nz-td>{{data.status|dicsNamePipe:apply_status:"key":"value"}}</td>
         <td nz-td>
-          <button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="auditReport(data)">审核报告内容</button>
-          <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="/auth-guard/activity/report-list/{{data.project_id}}">查看该活动详情</button>
+          <button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="auditReport(data)">审核</button>
+          <button nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" routerLink="/auth-guard/activity/report-list/{{data.project_id}}">查看</button>
         </td>
       </tr>
       </tbody>

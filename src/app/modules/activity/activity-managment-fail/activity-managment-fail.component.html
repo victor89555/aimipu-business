@@ -33,7 +33,7 @@
       </thead>
       <tbody nz-tbody>
       <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-        <td nz-td>{{data.title}}</td>
+        <td nz-td [title]="data.title">{{data.title|stringEllipsisCutPipe:20}}</td>
         <td nz-td>{{data.shop_id|dicsNamePipe:allShop:"id":"name"}}</td>
         <td nz-td>{{data.number_of}}</td>
         <td nz-td>{{data.begin_at}}</td>
@@ -41,7 +41,7 @@
         <td nz-td>{{data.auditing_status|dicsNamePipe:activity_status:"key":"value"}}</td>
         <td nz-td>
           <nz-popconfirm [nzTitle]="'确定要删除这个任务吗？'" (nzOnConfirm)="deleteActivity(data.id)" (nzOnCancel)="cancel()">
-            <button nz-popconfirm nz-button [nzType]="'danger'" [nzGhost]="true" [nzSize]="'small'">删除试用</button>
+            <button nz-popconfirm nz-button [nzType]="'danger'" [nzGhost]="true" [nzSize]="'small'">删除</button>
           </nz-popconfirm>
         </td>
       </tr>

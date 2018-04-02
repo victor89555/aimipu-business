@@ -32,7 +32,7 @@
       </thead>
       <tbody nz-tbody>
       <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-        <td nz-td>{{data.title}}</td>
+        <td nz-td [title]="data.title">{{data.title|stringEllipsisCutPipe:20}}</td>
         <td nz-td>{{data.shop_id|dicsNamePipe:allShop:"id":"name"}}</td>
         <td nz-td>{{data.number_of}}</td>
         <td nz-td>{{data.begin_at}}</td>
