@@ -28,15 +28,6 @@
                   <a href="https://item.jd.com/{{activityInfo.taobao_id}}.html" *ngIf="totalData.shop.origin ==3" target="_blank">{{activityInfo.title}}</a>
                 </span></li>
                 <li><span class="title">图片：</span><span class="content"></span></li>
-                <li><span class="title">标题：</span><span class="content">{{activityInfo.title}}</span></li>
-                <li>
-                  <span class="title">图片：</span>
-                  <span class="content">
-                    <ul class="picList">
-                      <li *ngFor="let pic of activityInfo.thumb"><a class="picItem" href="javascript:;"><img src="{{pic}}"></a></li>
-                    </ul>
-                  </span>
-                </li>
                 <!--<li><span class="title">类型：</span><span class="content">XX类</span></li>-->
                 <!--<li><span class="title">淘宝id：</span><span class="content">{{activityInfo.taobao_id}}</span></li>-->
                 <li><span class="title">价格：</span><span class="content">{{activityInfo.price}}元</span></li>
