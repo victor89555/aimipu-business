@@ -20,6 +20,7 @@ export class TrialReportDetailsComponent implements OnInit {
   keyword:string = ''
   activityInfo:any = {}
   totalData:any = {}
+  shop:any = {}
   nowData:any[] = []
   isLoading:boolean = false
   validateForm: FormGroup
@@ -86,6 +87,7 @@ export class TrialReportDetailsComponent implements OnInit {
     this.activityService.getActivityInfo(this.activityId).subscribe((res)=>{
       this.totalData = res.data
       this.activityInfo = res.data.project
+      this.shop = res.data.shop
       this.num_all = this.totalData.applys?this.totalData.applys.length:0
       this.num_1 = this.totalData.groupApplys['1']?this.totalData.groupApplys['1'].length:0
       this.num_2 = this.totalData.groupApplys['2']?this.totalData.groupApplys['2'].length:0

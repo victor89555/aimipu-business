@@ -4,7 +4,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {ActivityService} from '../share/service/activity.service';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {CacheService} from '../../../shared/service/cache.service';
-import {SHOP_ORIGIN} from '../../../constant/dictionary';
+import {ACTIVITY_APPLY_STATUS, SHOP_ORIGIN} from '../../../constant/dictionary';
 
 @Component({
   selector: 'app-trial-application-details',
@@ -18,12 +18,14 @@ export class TrialApplicationDetailsComponent implements OnInit {
   index:any = "all";
   keyword:string = ''
   activityInfo:any = {}
+  shop:any = {}
   totalData:any = {}
   nowData:any[] = []
   isLoading:boolean = false
   validateForm: FormGroup
   allShop:any[]=[]
 
+  applyStatus:any[] = ACTIVITY_APPLY_STATUS;
   shopOrigin:any[] = SHOP_ORIGIN;
 
   applyId = null
@@ -87,10 +89,22 @@ export class TrialApplicationDetailsComponent implements OnInit {
     this.activityService.getActivityInfo(this.activityId).subscribe((res)=>{
       this.totalData = res.data
       this.activityInfo = res.data.project
+      this.shop = res.data.shop
       this.num_all = this.totalData.applys?this.totalData.applys.length:0
-      this.num_1 = this.totalData.groupApplys['1']?this.totalData.groupApplys['1'].length:0
-      this.num_2 = this.totalData.groupApplys['2']?this.totalData.groupApplys['2'].length:0
-      this.num_6 = this.totalData.groupApplys['6']?this.totalData.groupApplys['6'].length:0
+      console.log(this.totalData.groupApplys)
+      //状态 0试用终止 1待审核 2待提交 3待修改 4待确认 5已完成6审核不通过
+      this.totalData.groupApplys['0']=this.totalData.groupApplys['0']?this.totalData.groupApplys['0']:[]
+      this.totalData.groupApplys['1']=this.totalData.groupApplys['1']?this.totalData.groupApplys['1']:[]
+      this.totalData.groupApplys['2']=this.totalData.groupApplys['2']?this.totalData.groupApplys['2']:[]
+      this.totalData.groupApplys['3']=this.totalData.groupApplys['3']?this.totalData.groupApplys['3']:[]
+      this.totalData.groupApplys['4']=this.totalData.groupApplys['4']?this.totalData.groupApplys['4']:[]
+      this.totalData.groupApplys['5']=this.totalData.groupApplys['5']?this.totalData.groupApplys['5']:[]
+      this.totalData.groupApplys['6']=this.totalData.groupApplys['6']?this.totalData.groupApplys['6']:[]
+      this.totalData.groupApplys['2']= this.totalData.groupApplys['2'].concat(this.totalData.groupApplys['0'],this.totalData.groupApplys['3'],
+        this.totalData.groupApplys['4'],this.totalData.groupApplys['5']);
+      this.num_1 = this.totalData.groupApplys['1'].length
+      this.num_2 = this.totalData.groupApplys['2'].length
+      this.num_6 = this.totalData.groupApplys['6'].length
       this.selectTab(this.index)
       this.isLoading = false
     })
