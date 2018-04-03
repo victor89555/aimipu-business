@@ -1,0 +1,15 @@
+<div *ngIf="show" class="pic-view">
+  <div class="mask" (click)="close()"></div>
+  <div class="content">
+    <div class="imgBox">
+      <span *ngIf="showPrev" href="javascript:;" class="btn-prev" (click)="doPrev()">
+        <i class="anticon anticon-left"></i>
+      </span>
+      <img [src]="picList[picIdx]"/>
+      <span *ngIf="showNext" href="javascript:;" class="btn-next" (click)="doNext()">
+        <i class="anticon anticon-right"></i>
+      </span>
+    </div>
+  </div>
+  <div class="btn-close" (click)="close()">关 闭</div>
+</div>

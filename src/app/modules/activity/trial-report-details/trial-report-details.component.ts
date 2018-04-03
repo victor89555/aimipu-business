@@ -35,6 +35,17 @@ export class TrialReportDetailsComponent implements OnInit {
   num_5:number = 0
   num_0:number = 0
 
+  isShowPic:boolean = false
+  picIdx:number = 0
+  showPic(i){
+    console.log('show:'+i)
+    this.picIdx = i
+    this.isShowPic = true
+  }
+  onPicClose(res){
+    this.isShowPic = res
+  }
+
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private activityService: ActivityService,

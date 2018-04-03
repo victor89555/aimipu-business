@@ -31,7 +31,9 @@
                   <span class="title">图片：</span>
                   <span class="content">
                     <ul class="picList">
-                      <li *ngFor="let pic of activityInfo.thumb"><a class="picItem" href="javascript:;"><img src="{{pic}}"></a></li>
+                      <li *ngFor="let pic of activityInfo.thumb; let i = index;">
+                        <a class="picItem" href="javascript:;" (click)="showPic(i)"><img src="{{pic}}"></a>
+                      </li>
                     </ul>
                   </span>
                 </li>
@@ -105,3 +107,6 @@
 </nz-tabset>
 
 <customer-info [customer_id]="customerInfo.id" [shop_id]="customerInfo.shop_id" (close)="toClose($event)"></customer-info>
+
+<pic-viewer [picList]="activityInfo.thumb" [picIdx]="picIdx"
+            [show]="isShowPic" (onClose)="onPicClose($event)"></pic-viewer>

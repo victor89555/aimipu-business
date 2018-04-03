@@ -42,6 +42,18 @@ export class TrialApplicationDetailsComponent implements OnInit {
     top: '20px'
   };
 
+  isShowPic:boolean = false
+  picIdx:number = 0
+  showPic(i){
+    console.log('show:'+i)
+    this.picIdx = i
+    this.isShowPic = true
+  }
+  onPicClose(res){
+    this.isShowPic = res
+  }
+
+
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private activityService: ActivityService,

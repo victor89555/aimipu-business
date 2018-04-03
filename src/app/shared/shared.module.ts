@@ -14,6 +14,7 @@ import {RebirthPermissionModule} from 'rebirth-permission';
 import {UploadQiniuComponent} from './upload-qiniu/upload-qiniu.component';
 import {CustomerInfoComponent} from '../modules/activity/customer-info/customer-info.component';
 import {TrialReportDetailCComponent} from '../modules/activity/trial-report-detail-c/trial-report-detail-c.component';
+import { PicViewerComponent } from './pic-viewer/pic-viewer.component';
 
 @NgModule({
   imports: [
@@ -42,10 +43,11 @@ import {TrialReportDetailCComponent} from '../modules/activity/trial-report-deta
     RebirthPermissionModule,
     UploadQiniuComponent,
     CustomerInfoComponent,
-    TrialReportDetailCComponent
+    TrialReportDetailCComponent,
+    PicViewerComponent
   ],
   entryComponents:[CustomerInfoComponent, TrialReportDetailCComponent],
-  declarations: [MyEditorComponent,ImageUploadComponent,UploadQiniuComponent,CustomerInfoComponent, TrialReportDetailCComponent],
+  declarations: [MyEditorComponent,ImageUploadComponent,UploadQiniuComponent,CustomerInfoComponent, TrialReportDetailCComponent, PicViewerComponent],
   providers:[
     ModalHelper
   ]
