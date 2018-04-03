@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.logout();
     this.currUserService.currUserChange.subscribe((currUserModel) => {
       this.currUser = currUserModel;
     });
@@ -54,7 +53,6 @@ export class LoginComponent implements OnInit{
         this.authorizationService.setCurrentUser(appInfo)
         this.getUserInfo()
         this.getShops()
-        this.router.navigate(['/auth-guard']);
       },error=>{
         this.isLoading = false;
         this.message.error("登录出错："+error.error.error);
@@ -66,10 +64,6 @@ export class LoginComponent implements OnInit{
     }
   }
 
-  logout(){
-    this.loginService.logout()
-  }
-
   getUserInfo(){
     console.log('getUserInfo()')
     this.userService.loadUserInfo().subscribe((user)=>{
@@ -77,7 +71,10 @@ export class LoginComponent implements OnInit{
       this.cacheService.setCurrUserInfo(user);
       let currUser = new CurrUserModel(user.id,user.name,user.phone);
       this.currUserService.setCurrUser(currUser);
+      this.router.navigate(['/auth-guard']);
       // this.message.error(res.message);
+    },error=>{
+
     })
   }
 
@@ -85,6 +82,8 @@ export class LoginComponent implements OnInit{
     console.log('getShops')
     this.shopService.getAllShops().subscribe((res)=>{
       this.cacheService.setShops(res.data);
+    },error=>{
+
     })
   }
 }
