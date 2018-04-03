@@ -4,6 +4,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {ActivityService} from '../share/service/activity.service';
 import {NzMessageService, NzModalService} from 'ng-zorro-antd';
 import {CacheService} from '../../../shared/service/cache.service';
+import {SHOP_ORIGIN} from '../../../constant/dictionary';
 
 @Component({
   selector: 'app-trial-application-details',
@@ -22,6 +23,8 @@ export class TrialApplicationDetailsComponent implements OnInit {
   isLoading:boolean = false
   validateForm: FormGroup
   allShop:any[]=[]
+
+  shopOrigin:any[] = SHOP_ORIGIN;
 
   applyId = null
   reason:string = ''

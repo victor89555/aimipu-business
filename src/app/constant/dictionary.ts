@@ -196,4 +196,8 @@ export const SHOP_ORIGIN = [
     value: '京东',
     key: 2
   },
+  {
+    value: '天猫',
+    key: 3
+  },
 ]

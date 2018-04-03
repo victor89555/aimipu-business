@@ -5,6 +5,7 @@ import {ActivityService} from '../share/service/activity.service';
 import {TrialReportDetailCComponent} from '../trial-report-detail-c/trial-report-detail-c.component';
 import {NzModalService} from 'ng-zorro-antd';
 import {CacheService} from '../../../shared/service/cache.service';
+import {SHOP_ORIGIN} from '../../../constant/dictionary';
 
 @Component({
   selector: 'app-trial-report-details',
@@ -24,6 +25,7 @@ export class TrialReportDetailsComponent implements OnInit {
   validateForm: FormGroup
   allShop:any[]=[]
 
+  shopOrigin:any[] = SHOP_ORIGIN;
   num_all:number = 0
   num_1:number = 0
   num_2:number = 0
@@ -88,6 +90,7 @@ export class TrialReportDetailsComponent implements OnInit {
       this.num_1 = this.totalData.groupApplys['1']?this.totalData.groupApplys['1'].length:0
       this.num_2 = this.totalData.groupApplys['2']?this.totalData.groupApplys['2'].length:0
       this.num_3 = this.totalData.groupApplys['3']?this.totalData.groupApplys['3'].length:0
+      this.num_4 = this.totalData.groupApplys['4']?this.totalData.groupApplys['4'].length:0
       this.num_5 = this.totalData.groupApplys['5']?this.totalData.groupApplys['5'].length:0
       this.num_0 = this.totalData.groupApplys['0']?this.totalData.groupApplys['0'].length:0
       this.selectTab(this.index)

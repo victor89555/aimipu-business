@@ -11,9 +11,9 @@
             <div nz-col [nzXs]="24">
               <h2>活动信息</h2>
               <ul>
-                <li><span class="title">商品来源：</span><span class="content">淘宝</span></li>
-                <li><span class="title">店铺名称：</span><span class="content">{{activityInfo.shop_id|dicsNamePipe:allShop:"id":"name"}}</span></li>
-                <li><span class="title">试用邮费：</span><span class="content">{{activityInfo.postage_type}}</span></li>
+                <li><span class="title">商品来源：</span><span class="content">{{totalData.shop.origin|dicsNamePipe:shopOrigin:"key":"value"}}</span></li>
+                <li><span class="title">店铺名称：</span><span class="content">{{totalData.shop.name}}</span></li>
+                <li><span class="title">试用邮费：</span><span class="content">{{activityInfo.postage_type==2?"自费":"包邮"}}</span></li>
                 <li><span class="title">试用数量：</span><span class="content">{{activityInfo.number_of}}</span></li>
                 <li><span class="title">奖励金币：</span><span class="content">{{activityInfo.golds}}</span></li>
                 <li><span class="title">结束时间：</span><span class="content">{{activityInfo.end_at}}</span></li>
@@ -22,6 +22,12 @@
             <div nz-col [nzXs]="24">
               <h2>商品信息</h2>
               <ul>
+                <li><span class="title">标题：</span><span class="content">
+                  <a href="https://item.taobao.com/item.htm?id={{activityInfo.taobao_id}}" *ngIf="totalData.shop.origin ==1" target="_blank">{{activityInfo.title}}</a>
+                  <a href="https://detail.tmall.com/item.htm?id={{activityInfo.taobao_id}}" *ngIf="totalData.shop.origin ==2" target="_blank">{{activityInfo.title}}</a>
+                  <a href="https://item.jd.com/{{activityInfo.taobao_id}}.html" *ngIf="totalData.shop.origin ==3" target="_blank">{{activityInfo.title}}</a>
+                </span></li>
+                <li><span class="title">图片：</span><span class="content"></span></li>
                 <li><span class="title">标题：</span><span class="content">{{activityInfo.title}}</span></li>
                 <li>
                   <span class="title">图片：</span>
@@ -32,7 +38,7 @@
                   </span>
                 </li>
                 <!--<li><span class="title">类型：</span><span class="content">XX类</span></li>-->
-                <li><span class="title">淘宝id：</span><span class="content">{{activityInfo.taobao_id}}</span></li>
+                <!--<li><span class="title">淘宝id：</span><span class="content">{{activityInfo.taobao_id}}</span></li>-->
                 <li><span class="title">价格：</span><span class="content">{{activityInfo.price}}元</span></li>
               </ul>
             </div>
