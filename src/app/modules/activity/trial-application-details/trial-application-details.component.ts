@@ -85,13 +85,13 @@ export class TrialApplicationDetailsComponent implements OnInit {
         this.nowData = this.totalData.applys?this.totalData.applys:[];
         break;
       case '1':
-        this.nowData = this.totalData.groupApplys['1']?this.totalData.groupApplys['1']:[];
+        this.nowData =this.totalData.groupApplys['1'];
         break;
       case '2':
-        this.nowData = this.totalData.groupApplys['2']?this.totalData.groupApplys['2']:[];
+        this.nowData = this.totalData.groupApplys['2'];
         break;
       case '6':
-        this.nowData = this.totalData.groupApplys['6']?this.totalData.groupApplys['6']:[];
+        this.nowData = this.totalData.groupApplys['6'];
         break;
     }
   }

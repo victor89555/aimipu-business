@@ -73,22 +73,22 @@ export class TrialReportDetailsComponent implements OnInit {
     //状态 0试用终止 1待审核 2待提交 3待修改 4待确认 5已完成6审核不通过
     switch (e){
       case 'all':
-        this.nowData = this.totalData.applys?this.totalData.applys:[];
+        this.nowData =this.totalData.applys;
         break;
       case '0':
-        this.nowData = this.totalData.groupApplys['0']?this.totalData.groupApplys['0']:[];
+        this.nowData = this.totalData.groupApplys['0'];
         break;
       case '2':
-        this.nowData = this.totalData.groupApplys['2']?this.totalData.groupApplys['2']:[];
+        this.nowData = this.totalData.groupApplys['2'];
         break;
       case '3':
-        this.nowData = this.totalData.groupApplys['3']?this.totalData.groupApplys['3']:[];
+        this.nowData = this.totalData.groupApplys['3'];
         break;
       case '4':
-        this.nowData = this.totalData.groupApplys['4']?this.totalData.groupApplys['4']:[];
+        this.nowData = this.totalData.groupApplys['4'];
         break;
       case '5':
-        this.nowData = this.totalData.groupApplys['5']?this.totalData.groupApplys['5']:[];
+        this.nowData = this.totalData.groupApplys['5'];
         break;
     }
   }
@@ -99,13 +99,24 @@ export class TrialReportDetailsComponent implements OnInit {
       this.totalData = res.data
       this.activityInfo = res.data.project
       this.shop = res.data.shop
-      this.num_all = this.totalData.applys?this.totalData.applys.length:0
-      this.num_1 = this.totalData.groupApplys['1']?this.totalData.groupApplys['1'].length:0
-      this.num_2 = this.totalData.groupApplys['2']?this.totalData.groupApplys['2'].length:0
-      this.num_3 = this.totalData.groupApplys['3']?this.totalData.groupApplys['3'].length:0
-      this.num_4 = this.totalData.groupApplys['4']?this.totalData.groupApplys['4'].length:0
-      this.num_5 = this.totalData.groupApplys['5']?this.totalData.groupApplys['5'].length:0
-      this.num_0 = this.totalData.groupApplys['0']?this.totalData.groupApplys['0'].length:0
+      //状态 0试用终止 1待审核 2待提交 3待修改 4待确认 5已完成6审核不通过
+      this.totalData.groupApplys['0']=this.totalData.groupApplys['0']?this.totalData.groupApplys['0']:[]
+      this.totalData.groupApplys['1']=this.totalData.groupApplys['1']?this.totalData.groupApplys['1']:[]
+      this.totalData.groupApplys['2']=this.totalData.groupApplys['2']?this.totalData.groupApplys['2']:[]
+      this.totalData.groupApplys['3']=this.totalData.groupApplys['3']?this.totalData.groupApplys['3']:[]
+      this.totalData.groupApplys['4']=this.totalData.groupApplys['4']?this.totalData.groupApplys['4']:[]
+      this.totalData.groupApplys['5']=this.totalData.groupApplys['5']?this.totalData.groupApplys['5']:[]
+      this.totalData.groupApplys['6']=this.totalData.groupApplys['6']?this.totalData.groupApplys['6']:[]
+      this.totalData.applys =[];
+      this.totalData.applys = this.totalData.applys.concat(this.totalData.groupApplys['0'],this.totalData.groupApplys['2'],this.totalData.groupApplys['3'],
+        this.totalData.groupApplys['4'],this.totalData.groupApplys['5'],);
+      this.num_all = this.totalData.applys.length
+      this.num_1 = this.totalData.groupApplys['1'].length
+      this.num_2 = this.totalData.groupApplys['2'].length
+      this.num_3 = this.totalData.groupApplys['3'].length
+      this.num_4 = this.totalData.groupApplys['4'].length
+      this.num_5 = this.totalData.groupApplys['5'].length
+      this.num_0 = this.totalData.groupApplys['0'].length
       this.selectTab(this.index)
       this.isLoading = false
     })
