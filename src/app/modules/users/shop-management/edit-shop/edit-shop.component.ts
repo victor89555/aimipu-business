@@ -76,9 +76,13 @@ export class EditShopComponent implements OnInit ,AfterViewChecked{
   }
 
   addShop(){
-    this.shopService.addShop(this.entity).subscribe((u)=>{
-      this.emitDataOutside();
-      this.isSaving = false;
+    this.shopService.addShop(this.entity).subscribe((resp)=>{
+      if(resp.status=="success"){
+        this.emitDataOutside();
+        this.isSaving = false;
+      }else {
+        this.message.warning(resp.message);
+      }
     },(error)=>{
       console.error('保存出错：',error);
       this.isSaving = false;
@@ -87,9 +91,13 @@ export class EditShopComponent implements OnInit ,AfterViewChecked{
     })
   }
   updateShop(){
-    this.shopService.updateShop(this.entity.id,this.entity).subscribe((u)=>{
-      this.emitDataOutside();
-      this.isSaving = false;
+    this.shopService.updateShop(this.entity.id,this.entity).subscribe((resp)=>{
+      if(resp.status=="success"){
+        this.emitDataOutside();
+        this.isSaving = false;
+      }else {
+        this.message.warning(resp.message);
+      }
     },(error)=>{
       console.error('保存出错：',error);
       this.isSaving = false;
