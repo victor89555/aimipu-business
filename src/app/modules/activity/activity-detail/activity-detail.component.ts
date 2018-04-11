@@ -104,10 +104,16 @@ export class ActivityDetailComponent implements OnInit {
   doEdit(){
     this.isLoading = true
     this.activityService.editActivityInfo(this.activityId,this.activityInfo).subscribe((res)=>{
-      console.log(res)
+      if(res.status=='success'){
+        this.message.success('修改成功')
+        this.router.navigateByUrl('/auth-guard/activity/activity-pending')
+      }else{
+        this.message.error(res.message)
+      }
+    },(err)=>{
+      console.log(err)
+    },()=>{
       this.isLoading = false
-      this.message.success('修改成功')
-      this.router.navigateByUrl('/auth-guard/activity/activity-pending')
     })
   }
 

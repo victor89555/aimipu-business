@@ -44,7 +44,14 @@ export class ActivityManagmentFailComponent implements OnInit {
     this.isLoading = true
     this.page.keyword = this.keyword
     this.activityService.getFailed(this.page).subscribe((res)=>{
-      this.page = res.data
+      if(res.status=='success'){
+        this.page = res.data
+      }else{
+        this.messageService.error(res.message)
+      }
+    },(err)=>{
+      console.log(err)
+    },()=>{
       this.isLoading = false
     })
   }
@@ -57,9 +64,15 @@ export class ActivityManagmentFailComponent implements OnInit {
 
   deleteActivity(id){
     this.activityService.deleteActivity(id).subscribe((res)=>{
-      this.messageService.success('删除成功！')
-      this.getFailedData()
-    })
+      if(res.status=='success'){
+        this.messageService.success('删除成功！')
+        this.getFailedData()
+      }else{
+        this.messageService.error(res.message)
+      }
+    },(err)=>{
+      console.log(err)
+    },()=>{})
   }
   cancel(){
     console.log('cancel')

@@ -133,25 +133,17 @@ export class TrialApplicationDetailsComponent implements OnInit {
 
 
   doPass(id){
-    var _this = this
-    this.modalService.open({
-      title   : '提示',
-      content : '确认通过？',
-      closable: false,
-      showConfirmLoading: true,
-      onOk() {
-        var content = {status:2}
-        _this.activityService.changeApplicationStatus(id,content).subscribe((res)=>{
-          return new Promise(() => {
-            _this.messageService.success('提交通过成功！')
-            _this.getActivityInfo()
-          });
-        })
-      },
-      onCancel() {
+    var content = {status:2}
+    this.activityService.changeApplicationStatus(id,content).subscribe((res)=>{
+      if(res.status='success'){
+        this.messageService.success('提交通过成功！')
+        this.getActivityInfo()
+      }else{
+        this.messageService.error(res.message)
       }
-    });
-
+    },(err)=>{
+      console.log(err)
+    },()=>{})
   }
   doNoPass(id){
     this.applyId = id
@@ -177,12 +169,18 @@ export class TrialApplicationDetailsComponent implements OnInit {
       this.activityService
         .changeApplicationStatus(this.applyId,{status:5,failed_reason:this.reason})
         .subscribe((res)=>{
-          _this.isConfirmLoading = false;
-          _this.messageService.info('不通过已提交！')
-          _this.applyId = null
-          _this.isVisible = false
-          _this.getActivityInfo()
-        })
+          if(res.status=='success'){
+            _this.isConfirmLoading = false;
+            _this.messageService.info('不通过已提交！')
+            _this.applyId = null
+            _this.isVisible = false
+            _this.getActivityInfo()
+          }else{
+            _this.messageService.error(res.message)
+          }
+        },(err)=>{
+          console.log(err)
+        },()=>{})
     }
   }
   handleCancel(e){

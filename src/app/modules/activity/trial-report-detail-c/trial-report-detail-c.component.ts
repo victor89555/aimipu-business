@@ -31,10 +31,15 @@ export class TrialReportDetailCComponent implements OnInit {
     this.activityService
       .changeApplicationStatus(this.data.id,content)
       .subscribe((res)=>{
-        console.log(res)
-        this.messageService.success('提交通过成功！')
-        this.emitDataOutside()
-    })
+        if(res.userStatusPipe =='success'){
+          this.messageService.success('提交通过成功！')
+          this.emitDataOutside()
+        }else{
+          this.messageService.error(res.message)
+        }
+      },(err)=>{
+        console.log(err)
+      },()=>{})
   }
   //提交修改
   doEdit(){
@@ -43,10 +48,15 @@ export class TrialReportDetailCComponent implements OnInit {
       this.activityService
         .changeApplicationStatus(this.data.id,content)
         .subscribe((res)=>{
-          console.log(res)
-          this.messageService.info('提交修改已提交！')
-          this.emitDataOutside()
-        })
+          if(res.userStatusPipe =='success'){
+            this.messageService.info('提交修改已提交！')
+            this.emitDataOutside()
+          }else{
+            this.messageService.error(res.message)
+          }
+        },(err)=>{
+          console.log(err)
+        },()=>{})
     }
   }
   //终止试用
@@ -56,10 +66,15 @@ export class TrialReportDetailCComponent implements OnInit {
       this.activityService
         .changeApplicationStatus(this.data.id,content)
         .subscribe((res)=>{
-          console.log(res)
-          this.messageService.info('终止试用已提交！')
-          this.emitDataOutside()
-        })
+          if(res.userStatusPipe =='success'){
+            this.messageService.info('终止试用已提交！')
+            this.emitDataOutside()
+          }else{
+            this.messageService.error(res.message)
+          }
+        },(err)=>{
+          console.log(err)
+        },()=>{})
     }
   }
 

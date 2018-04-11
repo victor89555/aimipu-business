@@ -45,7 +45,14 @@ export class ActivityManagementPendingComponent implements OnInit {
     this.isLoading = true
     this.page.keyword = this.keyword
     this.activityService.getPending(this.page).subscribe((res)=>{
-      this.page = res.data
+      if(res.status=='success'){
+        this.page = res.data
+      }else{
+        this.messageService.error(res.message)
+      }
+    },(err)=>{
+      console.log(err)
+    },()=>{
       this.isLoading = false
     })
   }
@@ -60,9 +67,15 @@ export class ActivityManagementPendingComponent implements OnInit {
   }
   deleteActivity(id){
     this.activityService.deleteActivity(id).subscribe((res)=>{
-      this.messageService.success('删除成功！')
-      this.getPendingData()
-    })
+      if(res.status=='success'){
+        this.messageService.success('删除成功！')
+        this.getPendingData()
+      }else{
+        this.messageService.error(res.message)
+      }
+    },(err)=>{
+      console.log(err)
+    },()=>{})
   }
   cancel(){
     console.log('cancel')

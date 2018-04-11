@@ -92,7 +92,9 @@
               <td nz-td>{{data.checked_at}}</td>
               <td nz-td>{{data.submitted_at}}</td>
               <td nz-td>
-                <button *ngIf="data.status == 1" nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" (click)="doPass(data.id)">通过</button>
+                <nz-popconfirm [nzTitle]="'确定要删除这个任务吗？'" (nzOnConfirm)="doPass(data.id)">
+                  <button *ngIf="data.status == 1" nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'">通过</button>
+                </nz-popconfirm>
                 <button *ngIf="data.status == 1" nz-button [nzType]="'primary'" [nzGhost]="true" [nzSize]="'small'" (click)="doNoPass(data.id)">不通过</button>
               </td>
             </tr>

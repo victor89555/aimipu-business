@@ -4,6 +4,7 @@ import {ActivityService} from '../share/service/activity.service';
 import {ACTIVITY_AUDITING_STATUS} from '../../../constant/dictionary';
 import {Router} from '@angular/router';
 import {CacheService} from '../../../shared/service/cache.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'activity-management-published',
@@ -24,7 +25,8 @@ export class ActivityManagementPublishedComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private activityService: ActivityService,
               private router: Router,
-              private cacheService: CacheService) {
+              private cacheService: CacheService,
+              private messageService:NzMessageService) {
   }
 
   _submitForm() {
@@ -43,7 +45,14 @@ export class ActivityManagementPublishedComponent implements OnInit {
     this.isLoading = true
     this.page.keyword = this.keyword
     this.activityService.getPublished(this.page).subscribe((res)=>{
-      this.page = res.data
+      if(res.status=='success'){
+        this.page = res.data
+      }else{
+        this.messageService.error(res.message)
+      }
+    },(err)=>{
+      console.log(err)
+    },()=>{
       this.isLoading = false
     })
   }

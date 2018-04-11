@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ACTIVITY_AUDITING_STATUS} from '../../../constant/dictionary';
 import {ActivityService} from '../share/service/activity.service';
 import {CacheService} from '../../../shared/service/cache.service';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'activity-management-over',
@@ -22,7 +23,8 @@ export class ActivityManagementOverComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private activityService: ActivityService,
-              private cacheService: CacheService) {
+              private cacheService: CacheService,
+              private messageService:NzMessageService) {
   }
 
   _submitForm() {
@@ -41,7 +43,14 @@ export class ActivityManagementOverComponent implements OnInit {
     this.isLoading = true
     this.page.keyword = this.keyword
     this.activityService.getDone(this.page).subscribe((res)=>{
-      this.page = res.data
+      if(res.status=='success'){
+        this.page = res.data
+      }else{
+        this.messageService.error(res.message)
+      }
+    },(err)=>{
+      console.log(err)
+    },()=>{
       this.isLoading = false
     })
   }
