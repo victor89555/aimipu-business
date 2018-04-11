@@ -37,8 +37,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.allShop = this.cacheService.getShops();
-    console.log(666666666666)
-    console.log(this.allShop)
     //获取首页统计信息
     this.getCountInfo()
 

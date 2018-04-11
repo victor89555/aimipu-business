@@ -90,7 +90,7 @@ export class CustomerInfoComponent implements OnInit,OnChanges {
   }
 
   toClose(e){
-    this.customer_id == 0;
+    this.customer_id = 0;
     this.close.emit(0);
   }
 }

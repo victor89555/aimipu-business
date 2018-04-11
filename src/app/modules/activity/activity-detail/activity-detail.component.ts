@@ -115,10 +115,19 @@ export class ActivityDetailComponent implements OnInit {
   getShops() {
     this.isLoading = true
     this.activityService.getShops().subscribe((res)=>{
-      console.log(res)
-      this.shops = res.data
-      this.activityInfo.shop_id = this.shops[0].id
-      this.isLoading = false
+      if(res.status == 'success'){
+        this.shops = res.data
+        if(this.shops.length==0){
+          this.message.error('暂无可用商铺，请至商铺管理添加')
+          this.router.navigateByUrl('/auth-guard/users/shop-ma',{ skipLocationChange: true })
+        }
+        this.activityInfo.shop_id = this.shops[0].id
+        this.isLoading = false
+      }else{
+        this.message.error(res.message)
+      }
+    },(error)=>{
+      console.log(error)
     })
   }
 
